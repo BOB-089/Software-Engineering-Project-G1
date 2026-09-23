@@ -1,0 +1,51 @@
+Customer book:
+4am list of all customers that can get a delivery
+name address phone number
+customer ids
+
+Order book:
+orders that the customers wish to be delivered
+
+Daily delivery Docket
+go through order book and creates deliver list
+each morning 24 dockets created
+broken up area into 24 distinct area
+
+delivery person receives docket
+7am
+store room fills their bag
+checks if item is in store room in stock
+delivery area
+
+Deliver
+tick off item to delivered to each house
+
+publications:
+stock of available items
+set or reset stock levels
+5 or less generate message to system
+
+customer has to know what publications are available
+doesn't need to order things not in stock
+
+special items delivered of different times (daily, weekly, monthly)
+on holiday do not deliver etc
+
+Bill:
+1st of each month, generate a bill for each customer in each delivery area
+start at first docket and work way down for every 
+lists every product, price and day delivered
+total, not delivered = not charged
+given to each delivery driver
+1 month to pay, doesn't pay = 1 month reminder (sent with next bill), 2 month = solicitor letter, reminder and cancelled subscription
+
+
+how does the delivery person interact with the system?
+how does the newsagent person interact with the system?
+customer agent cannot access system
+Newsagent login (function to update, create delete delivery person
+Delivery login can only print and update
+
+32 user stories per entity (8 entities) customer book, order book, deliver docket, delivery person, newsagent, bill, delivery area, publications
+
+
