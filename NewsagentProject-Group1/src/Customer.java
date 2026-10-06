@@ -45,18 +45,18 @@ public class Customer {
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
 
     public void verifyFirstName() { 
-		// TODO: Implement
+    	throw new RuntimeException("No Product Written Yet"); // TODO: Implement
 	}
 
 	public void verifysurname() { 
-		// TODO: Implement
+		throw new RuntimeException("No Product Written Yet"); // TODO: Implement
 	}
 
 	public void verifyAddress() { 
-		// TODO: Implement
+		throw new RuntimeException("No Product Written Yet"); // TODO: Implement
 	}
 	
 	public void verifyPhoneNumber() { 
-		// TODO: Implement
+		throw new RuntimeException("No Product Written Yet"); // TODO: Implement
 	}
 }
