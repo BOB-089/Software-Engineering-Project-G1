@@ -50,7 +50,7 @@ public class Customer {
     	throw new RuntimeException("No Product Written Yet"); // TODO: Implement
 	}
 
-	public boolean verifysurname(String surname) { 
+	public boolean verifySurname(String surname) { 
 		throw new RuntimeException("No Product Written Yet"); // TODO: Implement
 	}
 
