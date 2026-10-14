@@ -34,7 +34,8 @@ public class Customer {
     }
     
     public boolean verifyFirstName(String firstName) {
-        throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+    	if (firstName == null || firstName.trim().isEmpty()) { return false; }
+        return firstName.matches("^[A-Za-z'-]+$");
     }
 
     public boolean verifySurname(String surname) {
