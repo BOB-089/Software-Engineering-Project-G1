@@ -4,10 +4,10 @@ public class Customer {
     private String surname;
     private String address;
     private String phoneNumber;
-    private String areaCode;
-    private String id;
     private boolean onHoliday;
     private boolean publicationsAvailable;
+    private int areaCode;
+    private int id;
 
     public Customer() {}
 
@@ -17,8 +17,8 @@ public class Customer {
     public String getPhoneNumber() { return phoneNumber; }
     public boolean isOnHoliday() { return onHoliday; }
     public boolean isPublicationsAvailable() { return publicationsAvailable; }
-    public String getAreaCode() { return areaCode; }
-    public String getId() { return id; }
+    public int getAreaCode() { return areaCode; }
+    public int getId() { return id; }
 
     public void setFirstName(String firstName) { if (verifyFirstName(firstName)) this.firstName = firstName; }
     public void setSurname(String surname) { if (verifySurname(surname)) this.surname = surname; }
@@ -26,16 +26,10 @@ public class Customer {
     public void setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) this.phoneNumber = phoneNumber; }
     public void setOnHoliday(boolean onHoliday) { this.onHoliday = onHoliday; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    
+    public void setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) this.areaCode = areaCode; }
     public void setId() {
-    	String id = null; // TODO: create id
+    	int id = 0; // TODO: create id
         this.id = id;
-        throw new RuntimeException("Incomplete code");
-    }
-    
-    public void setAreaCode(String address) {
-    	String areaCode = null; // TODO: create area code off address
-        this.areaCode = areaCode;
         throw new RuntimeException("Incomplete code");
     }
     
@@ -54,16 +48,20 @@ public class Customer {
     public boolean verifyPhoneNumber(String phoneNumber) {
         throw new RuntimeException("No Product Written Yet"); // TODO: Implement
     }
+    
+    public boolean verifyAreaCode(int areaCode) {
+        throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+    }
 
-    public boolean createCustomer(String firstName, String surname, String address, String phoneNumber) {
+    public boolean createCustomer(String firstName, String surname, String address, String phoneNumber, int areaCode) {
         setFirstName(firstName);
         setSurname(surname);
         setAddress(address);
         setPhoneNumber(phoneNumber);
         setOnHoliday(false);
         setPublicationsAvailable(true);
+        setAreaCode(areaCode);
         setId();
-        setAreaCode(address);
 
         System.out.println("Product not complete Yet"); // TODO: Implement
         return true;

@@ -137,7 +137,7 @@ public class CustomerTest {
 
     // TC13
     // Test Objective: Verify address is accepted when 1 character
-    // Input(s): Address = "M"
+    // Input(s): Address = "B"
     // Expected Output(s): Address accepted
     @Test
     void validAddressMinBoundary_TC13() {
@@ -231,65 +231,168 @@ public class CustomerTest {
 
     //TC22
     //Test Objective: Verify phoneNumber is rejected when containing symbols
-    //Input(s): PhoneNumber = "085-123-4567"
+    //Input(s): PhoneNumber = "085@234567"
     //Expected Output(s): Error message: Invalid Phone Number
     @Test
     void invalidPhoneNumberSymbols_TC22() {
         Customer customer = new Customer();
         assertFalse(customer.verifyPhoneNumber("085@234567"));
     }
-
+    
 // ------------------------------------------------------------
-// 					Creation Tests (TC23–TC27)
+// 					AreaCode Tests (TC23–TC27)
 // ------------------------------------------------------------
 
-    // TC23
-    // Test Objective: Verify customer account is created when all details are valid
-    // Input(s): John, Smith, Main Street, 0871234567
-    // Expected Output(s): Customer account created successfully
+ // TC23
+    // Test Objective: Verify areaCode is accepted when within valid range
+    // Input(s): AreaCode = 12
+    // Expected Output(s): AreaCode accepted
     @Test
-    void createValidCustomerAccount_TC23() {
+    void validAreaCode_TC23() {
         Customer customer = new Customer();
-        assertTrue(customer.createCustomer("John","Smith","Main Street","0871234567"));
+        assertTrue(customer.verifyAreaCode(12));
     }
 
     // TC24
-    // Test Objective: Verify customer account creation fails with invalid first name
-    // Input(s): "", Smith, Main Street, 0871234567
-    // Expected Output(s): Customer account not created
+    // Test Objective: Verify areaCode is accepted at lower boundary
+    // Input(s): AreaCode = 1
+    // Expected Output(s): AreaCode accepted
     @Test
-    void createAccountInvalidFirstName_TC24() {
+    void validAreaCodeLowerBoundary_TC24() {
         Customer customer = new Customer();
-        assertFalse(customer.createCustomer("","Smith","Main Street","0871234567"));
+        assertTrue(customer.verifyAreaCode(1));
     }
 
     // TC25
-    // Test Objective: Verify customer account creation fails with invalid surname
-    // Input(s): John, "", Main Street, 0871234567
-    // Expected Output(s): Customer account not created
+    // Test Objective: Verify areaCode is accepted at upper boundary
+    // Input(s): AreaCode = 24
+    // Expected Output(s): AreaCode accepted
     @Test
-    void createAccountInvalidSurname_TC25() {
+    void validAreaCodeUpperBoundary_TC25() {
         Customer customer = new Customer();
-        assertFalse(customer.createCustomer("John","","Main Street","0871234567"));
+        assertTrue(customer.verifyAreaCode(24));
     }
 
     // TC26
-    // Test Objective: Verify customer account creation fails with invalid address
-    // Input(s): John, Smith, "", 0871234567
-    // Expected Output(s): Customer account not created
+    // Test Objective: Verify areaCode is rejected when below valid range
+    // Input(s): AreaCode = 0
+    // Expected Output(s): Error message: Invalid Area Code
     @Test
-    void createAccountInvalidAddress_TC26() {
+    void invalidAreaCodeTooLow_TC26() {
         Customer customer = new Customer();
-        assertFalse(customer.createCustomer("John","Smith","","0871234567"));
+        assertFalse(customer.verifyAreaCode(0));
     }
 
     // TC27
-    // Test Objective: Verify customer account creation fails with invalid phone number
-    // Input(s): John, Smith, Main Street, 087123456
+    // Test Objective: Verify areaCode is rejected when above valid range
+    // Input(s): AreaCode = 25
+    // Expected Output(s): Error message: Invalid Area Code
+    @Test
+    void invalidAreaCodeTooHigh_TC27() {
+        Customer customer = new Customer();
+        assertFalse(customer.verifyAreaCode(25));
+    }
+    
+// ------------------------------------------------------------
+// 					Creation Tests (TC28–TC33)
+// ------------------------------------------------------------
+
+    // TC28
+    // Test Objective: Verify customer account is created when all details are valid
+    // Input(s): John, Smith, Main Street, 0871234567, 12
+    // Expected Output(s): Customer account created successfully
+    @Test
+    void createValidCustomerAccount_TC28() {
+        Customer customer = new Customer();
+        assertTrue(customer.createCustomer("John","Smith","Main Street","0871234567", 12));
+    }
+
+    // TC29
+    // Test Objective: Verify customer account creation fails with invalid first name
+    // Input(s): "", Smith, Main Street, 0871234567, 12
     // Expected Output(s): Customer account not created
     @Test
-    void createAccountInvalidPhoneNumber_TC27() {
+    void createAccountInvalidFirstName_TC29() {
         Customer customer = new Customer();
-        assertFalse(customer.createCustomer("John","Smith","Main Street","087123456"));
+        assertFalse(customer.createCustomer("","Smith","Main Street","0871234567", 12));
+    }
+
+    // TC30
+    // Test Objective: Verify customer account creation fails with invalid surname
+    // Input(s): John, "", Main Street, 0871234567, 12
+    // Expected Output(s): Customer account not created
+    @Test
+    void createAccountInvalidSurname_TC30() {
+        Customer customer = new Customer();
+        assertFalse(customer.createCustomer("John","","Main Street","0871234567", 12));
+    }
+
+    // TC31
+    // Test Objective: Verify customer account creation fails with invalid address
+    // Input(s): John, Smith, "", 0871234567, 12
+    // Expected Output(s): Customer account not created
+    @Test
+    void createAccountInvalidAddress_TC31() {
+        Customer customer = new Customer();
+        assertFalse(customer.createCustomer("John","Smith","","0871234567", 12));
+    }
+
+    // TC32
+    // Test Objective: Verify customer account creation fails with invalid phone number
+    // Input(s): John, Smith, Main Street, 087123456, 12
+    // Expected Output(s): Customer account not created
+    @Test
+    void createAccountInvalidPhoneNumber_TC32() {
+        Customer customer = new Customer();
+        assertFalse(customer.createCustomer("John","Smith","Main Street","087123456", 12));
+    }
+    
+    // TC33
+    // Test Objective: Verify customer account creation fails with invalid area code
+    // Input(s): John, Smith, Main Street, 0871234567, 0
+    // Expected Output(s): Customer account not created
+    @Test
+    void createAccountInvalidAreaCode_TC33() {
+    	Customer customer = new Customer();
+    	assertFalse(customer.createCustomer("John","Smith","Main Street","0871234567", 0));
+    }
+    
+// ------------------------------------------------------------
+// 					ID Tests (TC34–TC36)
+//------------------------------------------------------------
+    
+    // TC34
+    // Test Objective: Verify ID is generated when customer account is created
+    // Input(s): John, Smith, Main Street, 0871234567, 12
+    // Expected Output(s): Customer ID generated
+    @Test
+    void idGenerated_TC34() {
+        Customer customer = new Customer();
+        customer.createCustomer("John","Smith","Main Street","0871234567", 12);
+        assertNotNull(customer.getId());
+    }
+
+    // TC35
+    // Test Objective: Verify generated ID follows the 5-digit no-zero format
+    // Input(s): John, Smith, Main Street, 0871234567, 12
+    // Expected Output(s): Customer ID matches required format
+    @Test
+    void idMatchesFormat_TC35() {
+        Customer customer = new Customer();
+        customer.createCustomer("John","Smith","Main Street","0871234567", 12);
+        assertTrue(String.valueOf(customer.getId()).matches("^[1-9]{5}$"));
+    }
+
+    // TC36
+    // Test Objective: Verify each created customer receives a unique ID
+    // Input(s): John, Smith, Main Street, 0871234567, 12 AND Mary, Kelly, High Street, 0879876543, 12
+    // Expected Output(s): Customer IDs are unique
+    @Test
+    void idUnique_TC36() {
+        Customer c1 = new Customer();
+        Customer c2 = new Customer();
+        c1.createCustomer("John","Smith","Main Street","0871234567", 12);
+        c2.createCustomer("Mary","Kelly","High Street","0879876543", 12);
+        assertNotEquals(c1.getId(), c2.getId());
     }
 }
