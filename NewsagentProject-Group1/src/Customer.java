@@ -1,5 +1,4 @@
 public class Customer {
-
     private String firstName;
     private String surname;
     private String address;
@@ -8,6 +7,7 @@ public class Customer {
     private boolean publicationsAvailable;
     private int areaCode;
     private int id;
+    private static int nextId = 10000;
 
     public Customer() {}
 
@@ -20,51 +20,48 @@ public class Customer {
     public int getAreaCode() { return areaCode; }
     public int getId() { return id; }
 
-    public void setFirstName(String firstName) { if (verifyFirstName(firstName)) this.firstName = firstName; }
-    public void setSurname(String surname) { if (verifySurname(surname)) this.surname = surname; }
-    public void setAddress(String address) { if (verifyAddress(address)) this.address = address; }
-    public void setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) this.phoneNumber = phoneNumber; }
+    public boolean setFirstName(String firstName) { if (verifyFirstName(firstName)) { this.firstName = firstName; return true; } else return false; }
+    public boolean setSurname(String surname) { if (verifySurname(surname)) { this.surname = surname; return true; } else return false; }
+    public boolean setAddress(String address) { if (verifyAddress(address)) { this.address = address; return true; } else return false; }
+    public boolean setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) { this.phoneNumber = phoneNumber; return true; } else return false; }
+    public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
     public void setOnHoliday(boolean onHoliday) { this.onHoliday = onHoliday; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    public void setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) this.areaCode = areaCode; }
-    public void setId() {
-    	int id = 0; // TODO: create id
-        this.id = id;
-        throw new RuntimeException("Incomplete code");
-    }
-    
+    public void setId() { this.id = nextId++; }
+
     public boolean verifyFirstName(String firstName) {
-    	if (firstName == null || firstName.trim().isEmpty()) { return false; }
+        if (firstName == null || firstName.trim().isEmpty()) { return false; }
         return firstName.matches("^[A-Za-z'-]+$");
     }
 
     public boolean verifySurname(String surname) {
-        throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+        if (surname == null || surname.trim().isEmpty()) { return false; }
+        return surname.matches("^[A-Za-z'-]+$");
     }
 
     public boolean verifyAddress(String address) {
-        throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+        if (address == null || address.trim().isEmpty()) { return false; }
+        return address.matches("^[A-Za-z0-9'\\- ]+$");
     }
 
     public boolean verifyPhoneNumber(String phoneNumber) {
-        throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+        if (phoneNumber == null) { return false; }
+        return phoneNumber.matches("^[0-9]{10}$");
     }
-    
+
     public boolean verifyAreaCode(int areaCode) {
-        throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+        return areaCode >= 1 && areaCode <= 24;
     }
 
     public boolean createCustomer(String firstName, String surname, String address, String phoneNumber, int areaCode) {
-        setFirstName(firstName);
-        setSurname(surname);
-        setAddress(address);
-        setPhoneNumber(phoneNumber);
+        if (!setFirstName(firstName)) return false;
+        if (!setSurname(surname)) return false;
+        if (!setAddress(address)) return false;
+        if (!setPhoneNumber(phoneNumber)) return false;
+        if (!setAreaCode(areaCode)) return false;
         setOnHoliday(false);
         setPublicationsAvailable(true);
-        setAreaCode(areaCode);
         setId();
-
-        System.out.println("Product not complete Yet"); // TODO: Implement
         return true;
     }
 }

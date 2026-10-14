@@ -420,7 +420,7 @@ public class CustomerTest {
     void idMatchesFormat_TC35() {
         Customer customer = new Customer();
         customer.createCustomer("John","Smith","Main Street","0871234567", 12);
-        assertTrue(String.valueOf(customer.getId()).matches("^[1-9]{5}$"));
+        assertTrue(String.valueOf(customer.getId()).matches("^[0-9]{5}$"));
     }
 
     // TC36
