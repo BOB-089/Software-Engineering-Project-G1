@@ -1,62 +1,62 @@
-
 public class Order {
     private String publicationName;
     private String customerID;
     private int day;
     private int month;
     private int year;
-
     private boolean publicationsAvailable;
+    private int OrderID;
+    private static int nextOrderID = 10000;
 
-    public Order(String publicationName, String customerID, int day, int month, int year) {
-        this.publicationName = publicationName;
-        this.customerID = customerID;
-        this.day = day;
-        this.month = month;
-        this.year = year;
-
-        this.publicationsAvailable = true;
-    }
+    public Order() {}
 
     public String getPublicationName() { return publicationName; }
-    public void setPublicationName(String publicationName) { this.publicationName = publicationName; }
-
     public String getCustomerID() { return customerID; }
-    public void setCustomerID(String customerID) { this.customerID = customerID; }
-
     public int getDay() { return day; }
-    public void setDay(int day) { this.day = day; }
-
     public int getMonth() { return month; }
-    public void setMonth(int month) { this.month = month; }
-
     public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
-
     public boolean isPublicationsAvailable() { return publicationsAvailable; }
+    public int getOrderID() { return OrderID; }
+
+    public void setPublicationName(String publicationName) { if (verifyPublicationName(publicationName)) { this.publicationName = publicationName; return true; } else return false; }
+    public void setCustomerID(String customerID) { if (verifyCustomerID(customerID)) { this.customerID = customerID; return true; } else return false; }
+    public void setDay(int day) { if (verifyDay(day)) { this.day = day; return true; } else return false; }
+    public void setMonth(int month) { if (verifyMonth(month)) { this.month = month; return true; } else return false; }
+    public void setYear(int year) { if (verifyYear(year)) { this.year = year; return true; } else return false; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
+    public void setOrderID() { this.OrderID = nextOrderID++; }
 
-    public boolean verifyPublicationName(String publicationName) { 
-    	throw new RuntimeException("No Product Written Yet"); // TODO: Implement
-    }
-
-    public boolean verifyCustomerID(String customerID) { 
-    	throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+    public boolean verifyPublicationName(String publicationName) {
+        if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
+        return publicationName.matches("^[A-Za-z'-]+$");
     }
 
-    public boolean verifyDay(int day) { 
-    	throw new RuntimeException("No Product Written Yet"); // TODO: Implement
-    }
-	
-    public boolean verifyMonth(int month) { 
-    	throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+    public boolean verifyCustomerID(String customerID) {
+	//todo
     }
 
-    public boolean verifyYear(int year) { 
-    	throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+    public boolean verifyDay(int day) {
+        if (day = null || day < 1 || day > 31) { return false; }
+        else {return true }
     }
-    
+
+    public boolean verifyMonth(int month) {
+        if (month = null || month < 1 || month > 12) { return false; }
+        else {return true }
+    }
+    public boolean verifyYear(int Year) {
+        if (year = null || year < 1980) { return false; }
+        else {return true }
+    }
+
     public boolean createOrder(String publicationName, String customerID, int day, int month, int year) {
-    	throw new RuntimeException("No Product Written Yet"); // TODO: Implement
+        if (!setPublicationName(publicationName)) return false;
+        if (!setcustomerID(customerID)) return false;
+        if (!setDay(day)) return false;
+        if (!setMonth(month)) return false;
+        if (!setYear(year)) return false;
+        setPublicationsAvailable(true);
+        setOrderID();
+        return true;
     }
 }
