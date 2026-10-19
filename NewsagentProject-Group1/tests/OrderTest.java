@@ -1,6 +1,10 @@
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 public class OrderTest {
 
@@ -10,7 +14,7 @@ public class OrderTest {
     // Expected Output(s): Publication name accepted
     @Test
     void validPublicationNameMinBoundary_TC01() {
-        Order order = new Order("A", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertTrue(order.verifyPublicationName("A"));
     }
 
@@ -20,7 +24,7 @@ public class OrderTest {
     // Expected Output(s): Publication name accepted
     @Test
     void validPublicationNameMaxBoundary_TC02() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertTrue(order.verifyPublicationName("A".repeat(49)));
     }
 
@@ -30,7 +34,7 @@ public class OrderTest {
     // Expected Output(s): Invalid Publication Name
     @Test
     void invalidPublicationNameBlank_TC03() {
-        Order order = new Order("", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertFalse(order.verifyPublicationName(""));
     }
 
@@ -40,48 +44,48 @@ public class OrderTest {
     // Expected Output(s): Invalid Publication Name
     @Test
     void invalidPublicationNameTooLong_TC04() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertFalse(order.verifyPublicationName("A".repeat(50)));
     }
 
     // TC05
     // Test Objective: Verify customer ID is accepted when exactly 5 characters long
-    // Input(s): Customer ID = "12345"
+    // Input(s): Customer ID = 12345
     // Expected Output(s): Customer ID accepted
     @Test
     void validCustomerID_TC05() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
-        assertTrue(order.verifyCustomerID("12345"));
+        Order order = new Order();
+        assertTrue(order.verifyCustomerID(12345));
     }
 
     // TC06
-    // Test Objective: Verify customer ID is rejected when blank
-    // Input(s): Customer ID = ""
+    // Test Objective: Verify customer ID is rejected when negative
+    // Input(s): Customer ID = -1
     // Expected Output(s): Invalid Customer ID
     @Test
     void invalidCustomerIDBlank_TC06() {
-        Order order = new Order("Daily News", "", 1, 1, 2026);
-        assertFalse(order.verifyCustomerID(""));
+        Order order = new Order();
+        assertFalse(order.verifyCustomerID(-1));
     }
 
     // TC07
     // Test Objective: Verify customer ID is rejected when fewer than 5 characters
-    // Input(s): Customer ID = "1234"
+    // Input(s): Customer ID = 1234
     // Expected Output(s): Invalid Customer ID
     @Test
     void invalidCustomerIDTooShort_TC07() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
-        assertFalse(order.verifyCustomerID("1234"));
+        Order order = new Order();
+        assertFalse(order.verifyCustomerID(1234));
     }
 
     // TC08
     // Test Objective: Verify customer ID is rejected when more than 5 characters
-    // Input(s): Customer ID = "123456"
+    // Input(s): Customer ID = 123456
     // Expected Output(s): Invalid Customer ID
     @Test
     void invalidCustomerIDTooLong_TC08() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
-        assertFalse(order.verifyCustomerID("123456"));
+        Order order = new Order();
+        assertFalse(order.verifyCustomerID(123456));
     }
 
     // TC09
@@ -90,7 +94,7 @@ public class OrderTest {
     // Expected Output(s): Day accepted
     @Test
     void validDayMinBoundary_TC09() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertTrue(order.verifyDay(1));
     }
 
@@ -100,7 +104,7 @@ public class OrderTest {
     // Expected Output(s): Day accepted
     @Test
     void validDayMaxBoundary_TC10() {
-        Order order = new Order("Daily News", "12345", 31, 1, 2026);
+        Order order = new Order();
         assertTrue(order.verifyDay(31));
     }
 
@@ -110,7 +114,7 @@ public class OrderTest {
     // Expected Output(s): Invalid Day
     @Test
     void invalidDayTooLow_TC11() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertFalse(order.verifyDay(0));
     }
 
@@ -120,7 +124,7 @@ public class OrderTest {
     // Expected Output(s): Invalid Day
     @Test
     void invalidDayTooHigh_TC12() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertFalse(order.verifyDay(32));
     }
 
@@ -130,7 +134,7 @@ public class OrderTest {
     // Expected Output(s): Month accepted
     @Test
     void validMonthMinBoundary_TC13() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertTrue(order.verifyMonth(1));
     }
 
@@ -140,7 +144,7 @@ public class OrderTest {
     // Expected Output(s): Month accepted
     @Test
     void validMonthMaxBoundary_TC14() {
-        Order order = new Order("Daily News", "12345", 1, 12, 2026);
+        Order order = new Order();
         assertTrue(order.verifyMonth(12));
     }
 
@@ -150,7 +154,7 @@ public class OrderTest {
     // Expected Output(s): Invalid Month
     @Test
     void invalidMonthTooLow_TC15() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertFalse(order.verifyMonth(0));
     }
 
@@ -160,7 +164,7 @@ public class OrderTest {
     // Expected Output(s): Invalid Month
     @Test
     void invalidMonthTooHigh_TC16() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertFalse(order.verifyMonth(13));
     }
 
@@ -170,7 +174,7 @@ public class OrderTest {
     // Expected Output(s): Year accepted
     @Test
     void validYear_TC17() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertTrue(order.verifyYear(2026));
     }
 
@@ -180,7 +184,7 @@ public class OrderTest {
     // Expected Output(s): Invalid Year
     @Test
     void invalidYearTooShort_TC18() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertFalse(order.verifyYear(999));
     }
 
@@ -190,21 +194,21 @@ public class OrderTest {
     // Expected Output(s): Invalid Year
     @Test
     void invalidYearTooLong_TC19() {
-        Order order = new Order("Daily News", "12345", 1, 1, 2026);
+        Order order = new Order();
         assertFalse(order.verifyYear(10000));
     }
 
     // TC20
     // Test Objective: Verify order is created when all details are valid
-    // Input(s): "Daily News", "12345", 12, 10, 2026
+    // Input(s): "Daily News", 12345, 12, 10, 2026
     // Expected Output(s): Order created successfully
     @Test
     void createValidOrder_TC20() {
-        Order order = new Order("Daily News", "12345", 12, 10, 2026);
+        Order order = new Order();
 
         assertTrue(order.createOrder(
             "Daily News",
-            "12345",
+            12345,
             12,
             10,
             2026
@@ -213,15 +217,15 @@ public class OrderTest {
 
     // TC21
     // Test Objective: Verify order creation fails with invalid publication name
-    // Input(s): "", "12345", 12, 10, 2026
+    // Input(s): "", 12345, 12, 10, 2026
     // Expected Output(s): Order not created
     @Test
     void createOrderInvalidPublicationName_TC21() {
-        Order order = new Order("Daily News", "12345", 12, 10, 2026);
+        Order order = new Order();
 
         assertFalse(order.createOrder(
             "",
-            "12345",
+            12345,
             12,
             10,
             2026
@@ -230,15 +234,15 @@ public class OrderTest {
 
     // TC22
     // Test Objective: Verify order creation fails with invalid customer ID
-    // Input(s): "Daily News", "1234", 12, 10, 2026
+    // Input(s): "Daily News", 1234, 12, 10, 2026
     // Expected Output(s): Order not created
     @Test
     void createOrderInvalidCustomerID_TC22() {
-        Order order = new Order("Daily News", "12345", 12, 10, 2026);
+        Order order = new Order();
 
         assertFalse(order.createOrder(
             "Daily News",
-            "1234",
+            1234,
             12,
             10,
             2026
@@ -247,15 +251,15 @@ public class OrderTest {
 
     // TC23
     // Test Objective: Verify order creation fails with invalid day
-    // Input(s): "Daily News", "12345", 0, 10, 2026
+    // Input(s): "Daily News", 12345, 0, 10, 2026
     // Expected Output(s): Order not created
     @Test
     void createOrderInvalidDay_TC23() {
-        Order order = new Order("Daily News", "12345", 12, 10, 2026);
+        Order order = new Order();
 
         assertFalse(order.createOrder(
             "Daily News",
-            "12345",
+            12345,
             0,
             10,
             2026
@@ -264,15 +268,15 @@ public class OrderTest {
 
     // TC24
     // Test Objective: Verify order creation fails with invalid month
-    // Input(s): "Daily News", "12345", 12, 13, 2026
+    // Input(s): "Daily News", 12345, 12, 13, 2026
     // Expected Output(s): Order not created
     @Test
     void createOrderInvalidMonth_TC24() {
-        Order order = new Order("Daily News", "12345", 12, 10, 2026);
+        Order order = new Order();
 
         assertFalse(order.createOrder(
             "Daily News",
-            "12345",
+            12345,
             12,
             13,
             2026
@@ -281,15 +285,15 @@ public class OrderTest {
 
     // TC25
     // Test Objective: Verify order creation fails with invalid year
-    // Input(s): "Daily News", "12345", 12, 10, 10000
+    // Input(s): "Daily News", 12345, 12, 10, 10000
     // Expected Output(s): Order not created
     @Test
     void createOrderInvalidYear_TC25() {
-        Order order = new Order("Daily News", "12345", 12, 10, 2026);
+        Order order = new Order();
 
         assertFalse(order.createOrder(
             "Daily News",
-            "12345",
+            12345,
             12,
             10,
             10000
