@@ -1,38 +1,38 @@
 public class Order {
     private String publicationName;
-    private int customerID;
+    private int customerId;
     private int day;
     private int month;
     private int year;
     private boolean publicationsAvailable;
     private int OrderID;
-    private static int nextOrderID = 10000;
+    private static int nextOrderId = 10000;
 
     public Order() {}
 
     public String getPublicationName() { return publicationName; }
-    public int getCustomerID() { return customerID; }
+    public int getCustomerId() { return customerId; }
     public int getDay() { return day; }
     public int getMonth() { return month; }
     public int getYear() { return year; }
     public boolean isPublicationsAvailable() { return publicationsAvailable; }
-    public int getOrderID() { return OrderID; }
+    public int getOrderId() { return OrderId; }
 
     public boolean setPublicationName(String publicationName) { if (verifyPublicationName(publicationName)) { this.publicationName = publicationName; return true; } else return false; }
-    public boolean setCustomerID(int customerID) { if (verifyCustomerID(customerID)) { this.customerID = customerID; return true; } else return false; }
+    public boolean setCustomerId(int customerId) { if (verifyCustomerId(customerId)) { this.customerId = customerId; return true; } else return false; }
     public boolean setDay(int day) { if (verifyDay(day)) { this.day = day; return true; } else return false; }
     public boolean setMonth(int month) { if (verifyMonth(month)) { this.month = month; return true; } else return false; }
     public boolean setYear(int year) { if (verifyYear(year)) { this.year = year; return true; } else return false; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    public void setOrderID() { this.OrderID = nextOrderID++; }
+    public void setOrderId() { this.OrderId = nextOrderId++; }
 
     public boolean verifyPublicationName(String publicationName) {
         if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
         return publicationName.matches("^[A-Za-z'-]+$");
     }
 
-    public boolean verifyCustomerID(int customerID) {
-		return customerID >= 1;
+    public boolean verifyCustomerId(int customerId) {
+		return customerId >= 1;
     }
 
     public boolean verifyDay(int day) {
@@ -51,12 +51,12 @@ public class Order {
 
     public boolean createOrder(String publicationName, int customerID, int day, int month, int year) {
         if (!setPublicationName(publicationName)) return false;
-        if (!setCustomerID(customerID)) return false;
+        if (!setCustomerId(customerId)) return false;
         if (!setDay(day)) return false;
         if (!setMonth(month)) return false;
         if (!setYear(year)) return false;
         setPublicationsAvailable(true);
-        setOrderID();
+        setOrderId();
         return true;
     }
 }
