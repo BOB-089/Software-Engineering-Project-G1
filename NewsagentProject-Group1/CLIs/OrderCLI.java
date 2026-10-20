@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class OrderCLI {
 
-	public static voId main(String[] args) {
+	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
 		

@@ -5,7 +5,7 @@ public class Order {
     private int month;
     private int year;
     private boolean publicationsAvailable;
-    private int OrderID;
+    private int orderId;
     private static int nextOrderId = 10000;
 
     public Order() {}
@@ -16,7 +16,7 @@ public class Order {
     public int getMonth() { return month; }
     public int getYear() { return year; }
     public boolean isPublicationsAvailable() { return publicationsAvailable; }
-    public int getOrderId() { return OrderId; }
+    public int getOrderId() { return orderId; }
 
     public boolean setPublicationName(String publicationName) { if (verifyPublicationName(publicationName)) { this.publicationName = publicationName; return true; } else return false; }
     public boolean setCustomerId(int customerId) { if (verifyCustomerId(customerId)) { this.customerId = customerId; return true; } else return false; }
@@ -24,7 +24,7 @@ public class Order {
     public boolean setMonth(int month) { if (verifyMonth(month)) { this.month = month; return true; } else return false; }
     public boolean setYear(int year) { if (verifyYear(year)) { this.year = year; return true; } else return false; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    public void setOrderId() { this.OrderId = nextOrderId++; }
+    public void setOrderId() { this.orderId = nextOrderId++; }
 
     public boolean verifyPublicationName(String publicationName) {
         if (publicationName == null || publicationName.trim().isEmpty()) { return false; }

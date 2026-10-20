@@ -55,7 +55,7 @@ public class OrderTest {
     @Test
     void validCustomerID_TC05() {
         Order order = new Order();
-        assertTrue(order.verifyCustomerID(12345));
+        assertTrue(order.verifyCustomerId(12345));
     }
 
     // TC06
@@ -65,7 +65,7 @@ public class OrderTest {
     @Test
     void invalidCustomerIDBlank_TC06() {
         Order order = new Order();
-        assertFalse(order.verifyCustomerID(-1));
+        assertFalse(order.verifyCustomerId(-1));
     }
 
     // TC07
@@ -75,7 +75,7 @@ public class OrderTest {
     @Test
     void invalidCustomerIDTooShort_TC07() {
         Order order = new Order();
-        assertFalse(order.verifyCustomerID(1234));
+        assertFalse(order.verifyCustomerId(1234));
     }
 
     // TC08
@@ -85,7 +85,7 @@ public class OrderTest {
     @Test
     void invalidCustomerIDTooLong_TC08() {
         Order order = new Order();
-        assertFalse(order.verifyCustomerID(123456));
+        assertFalse(order.verifyCustomerId(123456));
     }
 
     // TC09
