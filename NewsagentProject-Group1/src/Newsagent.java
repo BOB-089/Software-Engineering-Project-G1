@@ -3,20 +3,20 @@ public class Newsagent {
 	private String firstName;
     private String surname;
     private String phoneNumber;
-    private int id;
-    private static int nextId = 10000;
+    private int newsagentID;
     
     public Newsagent() {}
 
 	public String getFirstName() { return firstName; }
 	public String getSurname() { return surname; }
 	public String getPhoneNumber() { return phoneNumber; }
-	public int getId() { return id; }
+	public int getId() { return newsagentID; }
 
 	public boolean setFirstName(String firstName) { if (verifyFirstName(firstName)) { this.firstName = firstName; return true; } else return false; }
 	public boolean setSurname(String surname) { if (verifySurname(surname)) { this.surname = surname; return true; } else return false; }
 	public boolean setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) { this.phoneNumber = phoneNumber; return true; } else return false; }
-	public void setId() { this.id = nextId++; }
+	public void setId() { this.newsagentID = newsagentID++; }
+	public void setId(int newsagentID) { this.newsagentID = newsagentID; }
     
 	public boolean verifyFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()) { return false; }
