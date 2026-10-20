@@ -6,8 +6,8 @@ public class Customer {
     private boolean onHoliday;
     private boolean publicationsAvailable;
     private int areaCode;
-    private int id;
-    private static int nextId = 10000;
+    private int customerId;
+    private static int nextCustomerId = 10000;
 
     public Customer() {}
 
@@ -18,7 +18,7 @@ public class Customer {
     public boolean isOnHoliday() { return onHoliday; }
     public boolean isPublicationsAvailable() { return publicationsAvailable; }
     public int getAreaCode() { return areaCode; }
-    public int getId() { return id; }
+    public int getCustomerId() { return customerId; }
 
     public boolean setFirstName(String firstName) { if (verifyFirstName(firstName)) { this.firstName = firstName; return true; } else return false; }
     public boolean setSurname(String surname) { if (verifySurname(surname)) { this.surname = surname; return true; } else return false; }
@@ -27,7 +27,8 @@ public class Customer {
     public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
     public void setOnHoliday(boolean onHoliday) { this.onHoliday = onHoliday; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    public void setId() { this.id = nextId++; }
+    public void setCustomerId() { this.customerId = nextCustomerId++; }
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
 
     public boolean verifyFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()) { return false; }
@@ -61,7 +62,7 @@ public class Customer {
         if (!setAreaCode(areaCode)) return false;
         setOnHoliday(false);
         setPublicationsAvailable(true);
-        setId();
+        setCustomerId();
         return true;
     }
 }

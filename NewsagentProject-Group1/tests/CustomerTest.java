@@ -408,7 +408,7 @@ public class CustomerTest {
     void idGenerated_TC34() {
         Customer customer = new Customer();
         customer.createCustomer("John","Smith","Main Street","0871234567", 12);
-        assertNotNull(customer.getId());
+        assertNotNull(customer.getCustomerId());
     }
 
     // TC35
@@ -420,7 +420,7 @@ public class CustomerTest {
     void idMatchesFormat_TC35() {
         Customer customer = new Customer();
         customer.createCustomer("John","Smith","Main Street","0871234567", 12);
-        assertTrue(String.valueOf(customer.getId()).matches("^[0-9]{5}$"));
+        assertTrue(String.valueOf(customer.getCustomerId()).matches("^[0-9]{5}$"));
     }
 
     // TC36
@@ -434,6 +434,6 @@ public class CustomerTest {
         Customer c2 = new Customer();
         c1.createCustomer("John","Smith","Main Street","0871234567", 12);
         c2.createCustomer("Mary","Kelly","High Street","0879876543", 12);
-        assertNotEquals(c1.getId(), c2.getId());
+        assertNotEquals(c1.getCustomerId(), c2.getCustomerId());
     }
 }
