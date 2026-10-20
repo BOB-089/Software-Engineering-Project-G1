@@ -5,6 +5,6 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     public static Connection getConnection() throws SQLException
     {
-        return DriverManager.getConnection("jdbc:sqlite:myproject.db");
+        return DriverManager.getConnection("jdbc:sqlite:NewsagentProject.db");
     }
 }
