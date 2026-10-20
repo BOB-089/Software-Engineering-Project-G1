@@ -7,7 +7,6 @@ public class Customer {
     private boolean publicationsAvailable;
     private int areaCode;
     private int customerId;
-    private static int nextCustomerId = 10000;
 
     public Customer() {}
 
@@ -27,7 +26,7 @@ public class Customer {
     public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
     public void setOnHoliday(boolean onHoliday) { this.onHoliday = onHoliday; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    public void setCustomerId() { this.customerId = nextCustomerId++; }
+    public void setCustomerId() { this.customerId = customerId++; }
     public void setCustomerId(int customerId) { this.customerId = customerId; }
 
     public boolean verifyFirstName(String firstName) {
@@ -55,14 +54,16 @@ public class Customer {
     }
 
     public boolean createCustomer(String firstName, String surname, String address, String phoneNumber, int areaCode) {
-        if (!setFirstName(firstName)) return false;
-        if (!setSurname(surname)) return false;
-        if (!setAddress(address)) return false;
-        if (!setPhoneNumber(phoneNumber)) return false;
-        if (!setAreaCode(areaCode)) return false;
-        setOnHoliday(false);
-        setPublicationsAvailable(true);
-        setCustomerId();
+        try {
+        	if (!setFirstName(firstName)) return false;
+            if (!setSurname(surname)) return false;
+            if (!setAddress(address)) return false;
+            if (!setPhoneNumber(phoneNumber)) return false;
+            if (!setAreaCode(areaCode)) return false;
+            setOnHoliday(false);
+            setPublicationsAvailable(true);
+            setCustomerId();
+        } catch(Exception e) { System.out.println("Failed to create customer:"); e.printStackTrace(); }
         return true;
     }
 }
