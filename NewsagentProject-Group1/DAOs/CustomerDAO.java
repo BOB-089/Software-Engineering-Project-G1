@@ -2,20 +2,19 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CustomerDAO {
-	private static final String INSERT_CUSTOMER = 
-			"INSERT INTO CustomerTable " + "(firstName, surname, address, phoneNumber) " + "VALUES (?, ?, ?, ?)";
+	private static final String INSERT_CUSTOMER = "INSERT INTO CustomerTable " + 
+			"(firstName, surname, address, phoneNumber, onHoliday, publicationsAvailable, areaCode, customerId) " + 
+			"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-	private static final String SELECT_BY_ID = 
-			"SELECT * FROM CustomerTable WHERE customerId = ?";
+	private static final String SELECT_BY_ID = "SELECT * FROM CustomerTable WHERE customerId = ?";
 
-	private static final String SELECT_ALL = 
-			"SELECT * FROM CustomerTable";
+	private static final String SELECT_ALL = "SELECT * FROM CustomerTable";
 
-	private static final String UPDATE_CUSTOMER = 
-			"UPDATE CustomerTable " + "SET firstName=?, surname=?, address=?, phoneNumber=? " + "WHERE customerId=?";
+	private static final String UPDATE_CUSTOMER = "UPDATE CustomerTable " + 
+			"SET firstName=?, surname=?, address=?, phoneNumber=?, onHoliday=?, publicationsAvailable, areaCode " + 
+			"WHERE customerId=?";
 
-	private static final String DELETE_CUSTOMER = 
-			"DELETE FROM CustomerTable WHERE customerId=?";
+	private static final String DELETE_CUSTOMER = "DELETE FROM CustomerTable WHERE customerId=?";
 
 //		CREATE CUSTOMER
 	public boolean addCustomer(Customer customer) {
@@ -91,7 +90,6 @@ public class CustomerDAO {
 			stmt.setBoolean(5, customer.isOnHoliday());
 			stmt.setBoolean(6, customer.isPublicationsAvailable());
 			stmt.setInt(7, customer.getAreaCode());
-			stmt.setInt(8, customer.getCustomerId());
 			int rowsUpdated = stmt.executeUpdate();
 			return rowsUpdated > 0;
 
