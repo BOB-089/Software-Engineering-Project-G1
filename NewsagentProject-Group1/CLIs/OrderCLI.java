@@ -12,25 +12,19 @@ public class OrderCLI {
 		String publicationName = scanner.nextLine();
 		
 		System.out.print("Customer Id: ");
-		String customerID= scanner.nextLine();
+		int customerId = scanner.nextInt();
 		
 		System.out.print("Day: ");
-		int day = scanner.nextLine();
+		int day = scanner.nextInt();
 		
 		System.out.print("Month: ");
-		int month = scanner.nextLine();
+		int month = scanner.nextInt();
 		
 		System.out.print("Year: ");
-		intyear = scanner.nextLine();
+		int year = scanner.nextInt();
 		
-		
-		Order order =
-		new Order(
-		publicationName,
-		customerId,
-		day,
-		month,
-		year);
+		Order order = new Order();
+		order.createOrder(publicationName, customerId, day, month, year);
 		
 		OrderDAO orderDAO = new OrderDAO();
 		

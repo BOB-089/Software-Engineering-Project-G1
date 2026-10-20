@@ -49,7 +49,7 @@ public class Order {
         else {return true; }
     }
 
-    public boolean createOrder(String publicationName, int customerID, int day, int month, int year) {
+    public boolean createOrder(String publicationName, int customerId, int day, int month, int year) {
         if (!setPublicationName(publicationName)) return false;
         if (!setCustomerId(customerId)) return false;
         if (!setDay(day)) return false;
