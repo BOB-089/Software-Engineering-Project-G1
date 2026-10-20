@@ -7,7 +7,7 @@ public class CustomerDb
     {
         try
         {
-        	Connection conn = SQLiteConnection.getConnection();
+        	Connection conn = DatabaseConnection.getConnection();
 
             String sql = """
                 CREATE TABLE IF NOT EXISTS CustomerTable (
