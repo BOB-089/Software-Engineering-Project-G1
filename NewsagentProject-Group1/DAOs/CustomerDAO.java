@@ -25,6 +25,10 @@ public class CustomerDAO {
 			stmt.setString(2, customer.getSurname());
 			stmt.setString(3, customer.getAddress());
 			stmt.setString(4, customer.getPhoneNumber());
+			stmt.setBoolean(5, customer.isOnHoliday());
+			stmt.setBoolean(6, customer.isPublicationsAvailable());
+			stmt.setInt(7, customer.getAreaCode());
+			stmt.setInt(8, customer.getCustomerId());
 			int rowsInserted = stmt.executeUpdate();
 			return rowsInserted > 0;
 		} catch (SQLException e) { e.printStackTrace(); return false; }
@@ -39,11 +43,15 @@ public class CustomerDAO {
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				customer = new Customer();
-				customer.setCustomerId(rs.getInt("customerSId"));
+				customer.setCustomerId(rs.getInt("customerId"));
 				customer.setFirstName(rs.getString("firstName"));
 				customer.setSurname(rs.getString("surname"));
 				customer.setAddress(rs.getString("address"));
 				customer.setPhoneNumber(rs.getString("phoneNumber"));
+				customer.setOnHoliday(rs.getBoolean("onHoliday"));
+				customer.setPublicationsAvailable(rs.getBoolean("publicationsAvailable"));
+				customer.setAreaCode(rs.getInt("areaCode"));
+				customer.setCustomerId(rs.getInt("customerId"));
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
 		return customer;
@@ -62,6 +70,10 @@ public class CustomerDAO {
 				customer.setSurname(rs.getString("surname"));
 				customer.setAddress(rs.getString("address"));
 				customer.setPhoneNumber(rs.getString("phoneNumber"));
+				customer.setOnHoliday(rs.getBoolean("onHoliday"));
+				customer.setPublicationsAvailable(rs.getBoolean("publicationsAvailable"));
+				customer.setAreaCode(rs.getInt("areaCode"));
+				customer.setCustomerId(rs.getInt("customerId"));
 				customers.add(customer);
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -76,14 +88,14 @@ public class CustomerDAO {
 			stmt.setString(2, customer.getSurname());
 			stmt.setString(3, customer.getAddress());
 			stmt.setString(4, customer.getPhoneNumber());
-			stmt.setInt(5, customer.getCustomerId());
+			stmt.setBoolean(5, customer.isOnHoliday());
+			stmt.setBoolean(6, customer.isPublicationsAvailable());
+			stmt.setInt(7, customer.getAreaCode());
+			stmt.setInt(8, customer.getCustomerId());
 			int rowsUpdated = stmt.executeUpdate();
 			return rowsUpdated > 0;
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
+		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 
 //		DELETE CUSTOMER
