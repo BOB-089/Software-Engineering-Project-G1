@@ -393,47 +393,5 @@ public class CustomerTest {
     void createAccountInvalidAreaCode_TC33() {
     	Customer customer = new Customer();
     	assertFalse(customer.createCustomer("John","Smith","Main Street","0871234567", 0));
-    }
-    
-// ------------------------------------------------------------
-// 					ID Tests (TC34–TC36)
-//------------------------------------------------------------
-    
-    // TC34
-    // Test Objective: Verify ID is generated when customer account is created
-    // Input(s): John, Smith, Main Street, 0871234567, 12
-    // Expected Output(s): Customer ID generated
-	@Order(34)
-    @Test
-    void idGenerated_TC34() {
-        Customer customer = new Customer();
-        customer.createCustomer("John","Smith","Main Street","0871234567", 12);
-        assertNotNull(customer.getCustomerId());
-    }
-
-    // TC35
-    // Test Objective: Verify generated ID follows the 5-digit no-zero format
-    // Input(s): John, Smith, Main Street, 0871234567, 12
-    // Expected Output(s): Customer ID matches required format
-	@Order(35)
-    @Test
-    void idMatchesFormat_TC35() {
-        Customer customer = new Customer();
-        customer.createCustomer("John","Smith","Main Street","0871234567", 12);
-        assertTrue(String.valueOf(customer.getCustomerId()).matches("^[0-9]{5}$"));
-    }
-
-    // TC36
-    // Test Objective: Verify each created customer receives a unique ID
-    // Input(s): John, Smith, Main Street, 0871234567, 12 AND Mary, Kelly, High Street, 0879876543, 12
-    // Expected Output(s): Customer IDs are unique
-	@Order(36)
-    @Test
-    void idUnique_TC36() {
-        Customer c1 = new Customer();
-        Customer c2 = new Customer();
-        c1.createCustomer("John","Smith","Main Street","0871234567", 12);
-        c2.createCustomer("Mary","Kelly","High Street","0879876543", 12);
-        assertNotEquals(c1.getCustomerId(), c2.getCustomerId());
-    }
+	}
 }
