@@ -8,23 +8,22 @@ public class OrderDAO
 		"INSERT INTO OrderTable " +
 		"(publicationName, customerId, day, month, year) " +
 		"VALUES (?, ?, ?, ?, ?)";
+	
+	private static final String SELECT_BY_ID = "SELECT * FROM OrderTable WHERE orderId = ?";
+
+	private static final String SELECT_ALL = "SELECT * FROM OrderTable";
 		
-	public boolean addOrder(Order order) 
-	{
+//	CREATE ORDER
+	public boolean addOrder(Order order) {
 		try (Connection conn = DatabaseConnection.getConnection();
-		PreparedStatement stmt = conn.prepareStatement(INSERT_ORDER)) 
-		{
-//			stmt.setString(1, customer.getPublicationName());
-//			stmt.setString(2, customer.getCustomerId());
-//			stmt.setString(3, customer.getDay());
-//			stmt.setString(4, customer.getMonth());
-//			stmt.setString(5, customer.getYear());
-//			int rowsInserted = stmt.executeUpdate();
-//			return rowsInserted > 0;
-			return false;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
+		PreparedStatement stmt = conn.prepareStatement(INSERT_ORDER)) {
+			stmt.setString(1, order.getPublicationName());
+			stmt.setInt(2, order.getCustomerId());
+			stmt.setInt(3, order.getDay());
+			stmt.setInt(4, order.getMonth());
+			stmt.setInt(5, order.getYear());
+			int rowsInserted = stmt.executeUpdate();
+			return rowsInserted > 0;
+		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 }

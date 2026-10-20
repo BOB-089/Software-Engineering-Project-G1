@@ -6,7 +6,6 @@ public class Order {
     private int year;
     private boolean publicationsAvailable;
     private int orderId;
-    private static int nextOrderId = 10000;
 
     public Order() {}
 
@@ -24,7 +23,7 @@ public class Order {
     public boolean setMonth(int month) { if (verifyMonth(month)) { this.month = month; return true; } else return false; }
     public boolean setYear(int year) { if (verifyYear(year)) { this.year = year; return true; } else return false; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    public void setOrderId() { this.orderId = nextOrderId++; }
+    public void setOrderId() { this.orderId = orderId++; }
 
     public boolean verifyPublicationName(String publicationName) {
         if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
@@ -32,7 +31,8 @@ public class Order {
     }
 
     public boolean verifyCustomerId(int customerId) {
-		return customerId >= 1;
+		if (customerId < 1) { return false; }
+		else { return true; }
     }
 
     public boolean verifyDay(int day) {
