@@ -6,8 +6,8 @@ public class OrderDAO
 {
 	private static final String INSERT_ORDER =
 		"INSERT INTO OrderTable " +
-		"(publicationName, customerId, day, month, year) " +
-		"VALUES (?, ?, ?, ?, ?)";
+		"(publicationName, customerId, day, month, year, publicationsAvailable) " +
+		"VALUES (?, ?, ?, ?, ?, ?)";
 	
 	private static final String SELECT_BY_ID = "SELECT * FROM OrderTable WHERE orderId = ?";
 
@@ -22,6 +22,7 @@ public class OrderDAO
 			stmt.setInt(3, order.getDay());
 			stmt.setInt(4, order.getMonth());
 			stmt.setInt(5, order.getYear());
+			stmt.setBoolean(6, order.isPublicationsAvailable());
 			int rowsInserted = stmt.executeUpdate();
 			return rowsInserted > 0;
 		} catch (SQLException e) { e.printStackTrace(); return false; }
