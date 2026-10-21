@@ -2,9 +2,7 @@ import java.util.Scanner;
 
 public class OrderCLI {
 
-	public static void main(String[] args) {
-		
-		Scanner scanner = new Scanner(System.in);
+	public static void run(Scanner scanner) {
 		
 		System.out.println("=== Create New Order ===");
 		
@@ -35,7 +33,5 @@ public class OrderCLI {
 			System.out.println(
 			"Failed to save order.");
 		}
-		
-		scanner.close();
 	}
 }

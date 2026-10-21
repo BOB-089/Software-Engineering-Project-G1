@@ -1,11 +1,9 @@
-import java.util.Scanner;
+import java.util.Scanner; 
 
 public class CustomerCLI {
-
-	public static void main(String[] args) {
-
-		Scanner scanner = new Scanner(System.in);
-
+	
+	public static void run(Scanner scanner) {
+		
 		System.out.println("=== Create New Customer ===");
 
 		System.out.print("First Name: ");
@@ -33,7 +31,5 @@ public class CustomerCLI {
 		} else {
 			System.out.println("Failed to save customer.");
 		}
-
-		scanner.close();
 	}
 }
