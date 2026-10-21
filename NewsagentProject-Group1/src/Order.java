@@ -24,6 +24,7 @@ public class Order {
     public boolean setYear(int year) { if (verifyYear(year)) { this.year = year; return true; } else return false; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
     public void setOrderId() { this.orderId = orderId++; }
+    public void setOrderId(int orderId) { this.orderId = orderId; }
 
     public boolean verifyPublicationName(String publicationName) {
         if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
