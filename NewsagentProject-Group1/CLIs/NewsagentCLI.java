@@ -23,7 +23,7 @@ public class NewsagentCLI {
 		NewsagentDAO newsagentDAO = new NewsagentDAO();
 
 		if (newsagentDAO.addNewsagent(newsagent)) {
-			System.out.println("Customer saved successfully.");
+			System.out.println("Newsagent saved successfully.");
 		} else {
 			System.out.println("Failed to save customer.");
 		}
