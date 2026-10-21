@@ -45,8 +45,8 @@ public class Order {
         if (month < 1 || month > 12) { return false; }
         else {return true; }
     }
-    public boolean verifyYear(int Year) {
-        if (year < 1980) { return false; }
+    public boolean verifyYear(int year) {
+        if (year < 1900) { return false; }
         else {return true; }
     }
 
