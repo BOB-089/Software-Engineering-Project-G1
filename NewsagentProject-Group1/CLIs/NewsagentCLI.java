@@ -2,9 +2,7 @@ import java.util.Scanner;
 
 public class NewsagentCLI {
 
-	public static void main(String[] args) {
-
-		Scanner scanner = new Scanner(System.in);
+	public static void run(Scanner scanner) {
 
 		System.out.println("=== Create New Newsagent ===");
 
@@ -25,9 +23,7 @@ public class NewsagentCLI {
 		if (newsagentDAO.addNewsagent(newsagent)) {
 			System.out.println("Newsagent saved successfully.");
 		} else {
-			System.out.println("Failed to save customer.");
+			System.out.println("Failed to save newsagent.");
 		}
-
-		scanner.close();
 	}
 }

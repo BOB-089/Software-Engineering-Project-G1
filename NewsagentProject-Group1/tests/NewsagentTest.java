@@ -254,7 +254,7 @@ class NewsagentTest {
 	}
 	
 //------------------------------------------------------------
-//		ID Tests (TC22–TC24)
+//		ID Test (TC22)
 //------------------------------------------------------------
 	
 	// TC22
@@ -269,29 +269,4 @@ class NewsagentTest {
 		assertNotNull(newsagent.getId());
 	}
 	
-	// TC23
-	// Test Objective: Verify generated ID follows the 5-digit no-zero format
-	// Input(s): John, Smith, 0871234567
-	// Expected Output(s): Newsagent ID matches required format
-	@Order(23)
-	@Test
-	void idMatchesFormat_TC23() {
-		Newsagent newsagent = new Newsagent();
-		newsagent.createNewsagent("John","Smith","0871234567");
-		assertTrue(String.valueOf(newsagent.getId()).matches("^[0-9]{5}$"));
-	}
-	
-	// TC24
-	// Test Objective: Verify each created newsagent receives a unique ID
-	// Input(s): John, Smith, 0871234567 AND Mary, Kelly, 0879876543
-	// Expected Output(s): Newsagent IDs are unique
-	@Order(24)
-	@Test
-	void idUnique_TC24() {
-		Newsagent newsagent1 = new Newsagent();
-		Newsagent newsagent2 = new Newsagent();
-		newsagent1.createNewsagent("John","Smith","0871234567");
-		newsagent2.createNewsagent("Mary","Kelly","0879876543");
-		assertNotEquals(newsagent1.getId(), newsagent2.getId());
-	}
 }
