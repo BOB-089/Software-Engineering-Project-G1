@@ -18,3 +18,17 @@ James Michael Joseph Luke
 
 ## Week 5:
 - Based on Team Project Plan.
+
+# Week 6:
+
+# Week 7:
+
+# Week 8:
+
+# Week 9:
+
+# Week 10:
+
+# Week 11:
+
+# Week 12:
