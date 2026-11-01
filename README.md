@@ -21,14 +21,21 @@ James Michael Joseph Luke
 
 # Week 6:
 
+
 # Week 7:
 
+
 # Week 8:
+- Reading Week Work
 
 # Week 9:
 
+
 # Week 10:
+
 
 # Week 11:
 
+
 # Week 12:
+
