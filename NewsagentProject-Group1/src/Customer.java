@@ -26,7 +26,6 @@ public class Customer {
     public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
     public void setOnHoliday(boolean onHoliday) { this.onHoliday = onHoliday; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    public void setCustomerId() { this.customerId = customerId++; }
     public void setCustomerId(int customerId) { this.customerId = customerId; }
 
     public boolean verifyFirstName(String firstName) {
@@ -62,7 +61,6 @@ public class Customer {
             if (!setAreaCode(areaCode)) return false;
             setOnHoliday(false);
             setPublicationsAvailable(true);
-            setCustomerId();
         } catch(Exception e) { System.out.println("Failed to create customer:"); e.printStackTrace(); }
         return true;
     }

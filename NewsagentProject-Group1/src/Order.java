@@ -23,7 +23,6 @@ public class Order {
     public boolean setMonth(int month) { if (verifyMonth(month)) { this.month = month; return true; } else return false; }
     public boolean setYear(int year) { if (verifyYear(year)) { this.year = year; return true; } else return false; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
-    public void setOrderId() { this.orderId = orderId++; }
     public void setOrderId(int orderId) { this.orderId = orderId; }
 
     public boolean verifyPublicationName(String publicationName) {
@@ -57,7 +56,6 @@ public class Order {
         if (!setMonth(month)) return false;
         if (!setYear(year)) return false;
         setPublicationsAvailable(true);
-        setOrderId();
         return true;
     }
 }

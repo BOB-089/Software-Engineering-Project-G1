@@ -114,7 +114,7 @@ public class CustomerCLI {
 				}
 				if (!validEntry) { System.out.println("Invalid value entered."); }
 			}
-			customerDAO.updateCustomer(customer); // fails to update with incorrect details silently
+			customerDAO.updateCustomer(customer);
 			System.out.println("Customer updated");
 		} catch (Exception e) { System.out.println("Failed to update customer"); }
 	}

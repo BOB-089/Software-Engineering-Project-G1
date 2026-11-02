@@ -15,7 +15,6 @@ public class Newsagent {
 	public boolean setFirstName(String firstName) { if (verifyFirstName(firstName)) { this.firstName = firstName; return true; } else return false; }
 	public boolean setSurname(String surname) { if (verifySurname(surname)) { this.surname = surname; return true; } else return false; }
 	public boolean setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) { this.phoneNumber = phoneNumber; return true; } else return false; }
-	public void setId() { this.newsagentID = newsagentID++; }
 	public void setId(int newsagentID) { this.newsagentID = newsagentID; }
     
 	public boolean verifyFirstName(String firstName) {
@@ -37,7 +36,6 @@ public class Newsagent {
         if (!setFirstName(firstName)) return false;
         if (!setSurname(surname)) return false;
         if (!setPhoneNumber(phoneNumber)) return false;
-        setId();
         return true;
     }
 }
