@@ -47,23 +47,69 @@ public class OrderCLI {
 	}
 
 	private static void readOrder(Scanner scanner) {
-		System.out.println("=== FindOrder ===");
+		System.out.println("=== Find Order ===");
 		System.out.print("Order Id: ");
 		int id = scanner.nextInt();
+		scanner.nextLine();
 		OrderDAO orderDAO = new OrderDAO();
-		Order order = orderDAO.findOrderById(id);
-
-		System.out.print(order);
+		Order order = orderDAO.findOrderById(id); 
+		if (order == null) { System.out.println("Order with id " + id + " could not be found"); return; }
+		System.out.println("Publication name: " + order.getPublicationName() + 
+						 "\nCustomer ID: " + order.getCustomerId() +
+						 "\nDay: " + order.getDay() + 
+						 "\nMonth: " + order.getMonth() + 
+						 "\nYear: " + order.getYear());
 	}
 
 	private static void updateOrder(Scanner scanner) {
 		System.out.println("=== Find Order ===");
 		System.out.print("Order Id: ");
 		int id = scanner.nextInt();
-		OrderDAO  OrderDAO = new OrderDAO();
-		Order order = OrderDAO.findOrderById(id);
-		// updateCustomer
-		OrderDAO.updateOrder(order);
+		scanner.nextLine();
+		OrderDAO orderDAO = new OrderDAO();
+		Order order = orderDAO.findOrderById(id);
+		if (order == null) { System.out.println("Order with id " + id + " could not be found"); return; }
+		System.out.println("=== Update Order ===");
+		try {
+			boolean updating = true;
+			while (updating) {
+				System.out.print("What would you like to update:\n" + "1 Publication name\n" + "2 Customer ID\n"
+						+ "3 Day\n" + "4 Month\n" + "5 Year\n" + "6 Complete\n" + "Enter 1-6: ");
+				String choice = scanner.nextLine();
+				boolean validEntry = true;
+				switch (choice) {
+				case "1":
+					System.out.print("Publication Name: ");
+					validEntry = order.setPublicationName(scanner.nextLine());
+					break;
+				case "2":
+					System.out.print("Customer ID: ");
+					validEntry = order.setCustomerId(scanner.nextInt());
+					break;
+				case "3":
+					System.out.print("Day: ");
+					validEntry = order.setDay(scanner.nextInt());
+					break;
+				case "4":
+					System.out.print("Month: ");
+					validEntry = order.setMonth(scanner.nextInt());
+					break;
+				case "5":
+					System.out.print("Year: ");
+					validEntry = order.setYear(scanner.nextInt());
+					scanner.nextLine();
+					break;
+				case "6":
+					updating = false;
+					break;
+				default:
+					System.out.println("Entry Invalid. Please enter 1-6");
+				}
+				if (!validEntry) { System.out.println("Invalid value entered."); }
+			}
+			orderDAO.updateOrder(order);
+			System.out.println("Order updated");
+		} catch (Exception e) { System.out.println("Failed to update order"); }
 	}
 
 	private static void deleteOrder(Scanner scanner) {

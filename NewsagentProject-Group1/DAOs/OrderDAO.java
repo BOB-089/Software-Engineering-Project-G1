@@ -58,7 +58,7 @@ public class OrderDAO
 	}
 	
 //	GET ALL ORDERS
-	public ArrayList<Order> getAllOrderss() {
+	public ArrayList<Order> getAllOrders() {
 		ArrayList<Order> orders = new ArrayList<>();
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
@@ -89,13 +89,14 @@ public class OrderDAO
 			stmt.setInt(4, order.getMonth());
 			stmt.setInt(5, order.getYear());
 			stmt.setBoolean(6, order.isPublicationsAvailable());
+			stmt.setInt(7, order.getOrderId());
 			int rowsUpdated = stmt.executeUpdate();
 			return rowsUpdated > 0;
 
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 	
-//	DELETE CUSTOMER
+//	DELETE ORDER
 	public boolean deleteOrder(int orderId) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(DELETE_ORDER)) {
