@@ -10,7 +10,7 @@ public class PublicationsDAO {
 			"(publicationName, publicationStock) " +
 			"VALUES (?, ?)";
 		
-		private static final String SELECT_BY_ID = "SELECT * FROM PublicationTable WHERE PublicationId = ?";
+		private static final String SELECT_BY_ID = "SELECT * FROM PublicationTable WHERE publicationId = ?";
 
 		private static final String SELECT_ALL = "SELECT * FROM PublicationTable";
 		
