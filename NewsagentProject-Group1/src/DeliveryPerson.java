@@ -13,11 +13,37 @@ public class DeliveryPerson {
     public int getAreaCode() { return areaCode; }
     public int getDeliveryPersonId() { return deliveryPersonId; }
 
-    public boolean setFirstName(String firstName) { if (verifyFirstName(firstName)) { this.firstName = firstName; return true; } else return false; }
-    public boolean setSurname(String surname) { if (verifySurname(surname)) { this.surname = surname; return true; } else return false; }
-    public boolean setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) { this.phoneNumber = phoneNumber; return true; } else return false; }
-    public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
-    public void setDeliveryPersonId(int deliveryPersonId) { this.deliveryPersonId = deliveryPersonId; }
+    public boolean setFirstName(String firstName) { 
+        if (verifyFirstName(firstName)) { 
+            this.firstName = firstName; 
+            return true; 
+        } else return false; 
+    }
+    
+    public boolean setSurname(String surname) { 
+        if (verifySurname(surname)) { 
+            this.surname = surname; 
+            return true; 
+        } else return false; 
+    }
+    
+    public boolean setPhoneNumber(String phoneNumber) { 
+        if (verifyPhoneNumber(phoneNumber)) { 
+            this.phoneNumber = phoneNumber; 
+            return true; 
+        } else return false; 
+    }
+    
+    public boolean setAreaCode(int areaCode) { 
+        if (verifyAreaCode(areaCode)) { 
+            this.areaCode = areaCode; 
+            return true; 
+        } else return false; 
+    }
+    
+    public void setDeliveryPersonId(int deliveryPersonId) { 
+        this.deliveryPersonId = deliveryPersonId; 
+    }
 
     public boolean verifyFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()) { return false; }

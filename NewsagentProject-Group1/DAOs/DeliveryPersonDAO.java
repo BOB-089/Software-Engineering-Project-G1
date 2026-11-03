@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeliveryPersonDAO {
-    // Simulated database storage (replace or connect with your actual database/storage logic)
     private static List<DeliveryPerson> deliveryPersons = new ArrayList<>();
     private static int nextId = 1;
 
@@ -29,7 +28,6 @@ public class DeliveryPersonDAO {
     public boolean updateDeliveryPerson(DeliveryPerson deliveryPerson) {
         DeliveryPerson existing = findDeliveryPersonById(deliveryPerson.getDeliveryPersonId());
         if (existing != null) {
-            // Update fields if needed, or reference is already pointing to the mutable object
             return true;
         }
         return false;
