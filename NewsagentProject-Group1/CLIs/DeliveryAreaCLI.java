@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class DeliveryAreaCLI {
+	private static final DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
+	
     public static void run(Scanner scanner) {
         boolean running = true;
         while (running) {
@@ -24,7 +26,7 @@ public class DeliveryAreaCLI {
                 running = false;
                 break;
             default:
-                System.out.println("Entry Invalid. Please enter 1-5");
+                System.out.println("Entry Invalid. Please enter 1-5.");
             }
         }
     }
@@ -32,14 +34,14 @@ public class DeliveryAreaCLI {
     private static void createDeliveryArea(Scanner scanner) {
         System.out.println("=== Create New Delivery Area ===");
         System.out.print("Area Code: ");
-        int areaCode = scanner.nextInt();
-        scanner.nextLine();
-        DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
-        if (deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode) != null) { System.out.println("Area with code " + areaCode + " already exists"); return; }
+        int areaCode;
+        try { areaCode = Integer.parseInt(scanner.nextLine()); }
+        catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
+        if (deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode) != null) { System.out.println("Area with code " + areaCode + " already exists."); return; }
         System.out.print("Area Name: ");
         String name = scanner.nextLine();
         DeliveryArea deliveryArea = new DeliveryArea();
-        deliveryArea.createDeliveryArea(areaCode, name);
+        if (!deliveryArea.createDeliveryArea(areaCode, name)) { System.out.println("Invalid delivery area details."); return; }
         if (deliveryAreaDAO.addDeliveryArea(deliveryArea)) {
             System.out.println("Delivery area saved successfully.");
         } else {
@@ -50,38 +52,38 @@ public class DeliveryAreaCLI {
     private static void readDeliveryArea(Scanner scanner) {
         System.out.println("=== Find Delivery Area ===");
         System.out.print("Area Code: ");
-        int areaCode = scanner.nextInt();
-        scanner.nextLine();
-        DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
+        int areaCode;
+        try { areaCode = Integer.parseInt(scanner.nextLine()); }
+        catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
         DeliveryArea deliveryArea = deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode);
-        if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found"); return; }
-        System.out.println("Name: " + deliveryArea.getName() + 
-        				   "\nCustomers: " + deliveryArea.getCustomers().size());
+        if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found."); return; }
+        System.out.println("Name: " + deliveryArea.getName() + "\nCustomers: " + deliveryArea.getCustomers().size());
     }
 
     private static void updateDeliveryArea(Scanner scanner) {
         System.out.println("=== Find Delivery Area ===");
         System.out.print("Area Code: ");
-        int areaCode = scanner.nextInt();
-        scanner.nextLine();
-        DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
+        int areaCode;
+        try { areaCode = Integer.parseInt(scanner.nextLine()); }
+        catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
         DeliveryArea deliveryArea = deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode);
-        if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found"); return; }
+        if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found."); return; }
         System.out.println("=== Update Delivery Area ===");
-        try {
-            System.out.print("New name: ");
-            if (!deliveryArea.setName(scanner.nextLine())) { System.out.println("Invalid value entered."); }
-            deliveryAreaDAO.updateDeliveryArea(deliveryArea);
-            System.out.println("Delivery area updated");
-        } catch (Exception e) { System.out.println("Failed to update delivery area"); }
+        System.out.print("New name: ");
+        if (!deliveryArea.setName(scanner.nextLine())) { System.out.println("Invalid value entered."); return; }
+        if (deliveryAreaDAO.updateDeliveryArea(deliveryArea)) {
+            System.out.println("Delivery area updated.");
+        } else {
+            System.out.println("Failed to update delivery area.");
+        }
     }
 
     private static void deleteDeliveryArea(Scanner scanner) {
         System.out.println("=== Delete Delivery Area ===");
         System.out.print("Area Code: ");
-        int areaCode = scanner.nextInt();
-        scanner.nextLine();
-        DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
+        int areaCode;
+        try { areaCode = Integer.parseInt(scanner.nextLine()); }
+        catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
         if (deliveryAreaDAO.deleteDeliveryArea(areaCode)) {
             System.out.println("Delivery area deleted successfully.");
         } else {
