@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class PublicationsCLI {
-
 	public static void run(Scanner scanner) {
 		System.out.print("What would you like to do:\n" + "1 Create publication\n" + "2 Read publication\n"
 				+ "3 Update publication\n" + "4 Delete publication\n" + "Enter 1-4: ");
@@ -49,7 +48,7 @@ public class PublicationsCLI {
 		Publications publication = publicationDAO.findPublicationById(id); 
 		if (publication == null) { System.out.println("Publication with id " + id + " could not be found"); return; }
 		System.out.println("Publication name: " + publication.getPublicationName() + 
-						 "\nPublication stock: " + publication.getPublicationStock());
+						   "\nPublication stock: " + publication.getPublicationStock());
 	}
 	
 	private static void updatePublication(Scanner scanner) {
@@ -101,11 +100,4 @@ public class PublicationsCLI {
 			System.out.println("Failed to delete Publication.");
 		}
 	}
-	
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-	    run(scanner);
-	    scanner.close();
-	}
 }
-

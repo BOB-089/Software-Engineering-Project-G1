@@ -57,7 +57,8 @@ public class NewsagentCLI {
 		Newsagent newsagent = newsagentDAO.findNewsagentByID(id); 
 		if (newsagent == null) { System.out.println("Newsagent with id " + id + " could not be found"); return; }
 		System.out.println("First Name: " + newsagent.getFirstName() + 
-				"\nSurname: " + newsagent.getSurname() + "\nPhone Number: " + newsagent.getPhoneNumber());
+						   "\nSurname: " + newsagent.getSurname() + 
+						   "\nPhone Number: " + newsagent.getPhoneNumber());
 	}
 	
 	private static void updateNewsagent(Scanner scanner) {

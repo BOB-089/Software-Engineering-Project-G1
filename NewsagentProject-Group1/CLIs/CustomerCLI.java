@@ -3,8 +3,7 @@ import java.util.Scanner;
 public class CustomerCLI {
 	public static void run(Scanner scanner) {
 		boolean running = true;
-		while (running)
-		{
+		while (running) {
 			System.out.print("What would you like to do:\n" + "1 Create customer\n" + "2 Read customer\n"
 					+ "3 Update customer\n" + "4 Delete customer\n" + "5 Return\n" + "Enter 1-5: ");
 			String choice = scanner.nextLine();
@@ -62,10 +61,10 @@ public class CustomerCLI {
 		Customer customer = customerDAO.findCustomerById(id); 
 		if (customer == null) { System.out.println("Customer with id " + id + " could not be found"); return; }
 		System.out.println("First Name: " + customer.getFirstName() + 
-						 "\nSurname: " + customer.getSurname() +
-						 "\nAddress: " + customer.getAddress() + 
-						 "\nPhone Number: " + customer.getPhoneNumber() + 
-						 "\nArea Code: " + customer.getAreaCode());
+						   "\nSurname: " + customer.getSurname() +
+						   "\nAddress: " + customer.getAddress() + 
+						   "\nPhone Number: " + customer.getPhoneNumber() + 
+						   "\nArea Code: " + customer.getAreaCode());
 	}
 
 	private static void updateCustomer(Scanner scanner) {
