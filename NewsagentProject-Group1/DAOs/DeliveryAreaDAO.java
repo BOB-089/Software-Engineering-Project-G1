@@ -12,7 +12,7 @@ public class DeliveryAreaDAO {
 
 	private static final String DELETE_DELIVERYAREA = "DELETE FROM DeliveryAreaTable WHERE areaCode=?";
 
-//		CREATE DELIVERYAREA
+//		CREATE DELIVERY AREA
 	public boolean addDeliveryArea(DeliveryArea deliveryArea) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(INSERT_DELIVERYAREA)) {
@@ -23,7 +23,7 @@ public class DeliveryAreaDAO {
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 
-//		FIND DELIVERYAREA BY AREACODE
+//		FIND DELIVERY AREA BY AREA CODE
 	public DeliveryArea findDeliveryAreaByAreaCode(int areaCode) {
 		DeliveryArea deliveryArea = null;
 		try (Connection conn = DatabaseConnection.getConnection();
@@ -39,7 +39,7 @@ public class DeliveryAreaDAO {
 		return deliveryArea;
 	}
 
-//		GET ALL DELIVERYAREAS
+//		GET ALL DELIVERY AREAS
 	public ArrayList<DeliveryArea> getAllDeliveryAreas() {
 		ArrayList<DeliveryArea> deliveryAreas = new ArrayList<>();
 		try (Connection conn = DatabaseConnection.getConnection();
@@ -55,7 +55,7 @@ public class DeliveryAreaDAO {
 		return deliveryAreas;
 	}
 
-//		UPDATE DELIVERYAREA
+//		UPDATE DELIVERY AREA
 	public boolean updateDeliveryArea(DeliveryArea deliveryArea) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(UPDATE_DELIVERYAREA)) {
@@ -66,7 +66,7 @@ public class DeliveryAreaDAO {
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 
-//		DELETE DELIVERYAREA
+//		DELETE DELIVERY AREA
 	public boolean deleteDeliveryArea(int areaCode) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(DELETE_DELIVERYAREA)) {

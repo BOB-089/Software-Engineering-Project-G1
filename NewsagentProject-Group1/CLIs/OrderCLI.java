@@ -55,10 +55,10 @@ public class OrderCLI {
 		Order order = orderDAO.findOrderById(id); 
 		if (order == null) { System.out.println("Order with id " + id + " could not be found"); return; }
 		System.out.println("Publication name: " + order.getPublicationName() + 
-						 "\nCustomer ID: " + order.getCustomerId() +
-						 "\nDay: " + order.getDay() + 
-						 "\nMonth: " + order.getMonth() + 
-						 "\nYear: " + order.getYear());
+						   "\nCustomer ID: " + order.getCustomerId() +
+						   "\nDay: " + order.getDay() + 
+						   "\nMonth: " + order.getMonth() + 
+						   "\nYear: " + order.getYear());
 	}
 
 	private static void updateOrder(Scanner scanner) {
@@ -122,11 +122,5 @@ public class OrderCLI {
 		} else {
 			System.out.println("Failed to delete Order.");
 		}
-	}
-	
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-	    run(scanner);
-	    scanner.close();
 	}
 }

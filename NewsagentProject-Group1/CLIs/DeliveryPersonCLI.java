@@ -67,9 +67,9 @@ public class DeliveryPersonCLI {
             return; 
         }
         System.out.println("First Name: " + deliveryPerson.getFirstName() + 
-                         "\nSurname: " + deliveryPerson.getSurname() +
-                         "\nPhone Number: " + deliveryPerson.getPhoneNumber() + 
-                         "\nArea Code: " + deliveryPerson.getAreaCode());
+                           "\nSurname: " + deliveryPerson.getSurname() +
+                           "\nPhone Number: " + deliveryPerson.getPhoneNumber() + 
+                           "\nArea Code: " + deliveryPerson.getAreaCode());
     }
 
     private static void updateDeliveryPerson(Scanner scanner) {
