@@ -2,22 +2,30 @@ import java.util.Scanner;
 
 public class PublicationsCLI {
 	public static void run(Scanner scanner) {
-		System.out.print("What would you like to do:\n" + "1 Create publication\n" + "2 Read publication\n"
-				+ "3 Update publication\n" + "4 Delete publication\n" + "Enter 1-4: ");
-		String choice = scanner.nextLine();
-		switch (choice) {
-		case "1":
-			createPublication(scanner);
-			break;
-		case "2":
-			readPublication(scanner);
-			break;
-		case "3":
-			updatePublication(scanner);
-			break;
-		case "4":
-			deletePublication(scanner);
-			break;
+		boolean running = true;
+		while (running) {
+			System.out.print("What would you like to do:\n" + "1 Create publication\n" + "2 Read publication\n"
+					+ "3 Update publication\n" + "4 Delete publication\n" + "5 Return\n" + "Enter 1-5: ");
+			String choice = scanner.nextLine();
+			switch (choice) {
+			case "1":
+				createPublication(scanner);
+				break;
+			case "2":
+				readPublication(scanner);
+				break;
+			case "3":
+				updatePublication(scanner);
+				break;
+			case "4":
+				deletePublication(scanner);
+				break;
+			case "5":
+				running = false;
+				break;
+			default:
+				System.out.println("Entry Invalid. Please enter 1-5");
+			}
 		}
 	}
 	

@@ -3,22 +3,30 @@ import java.util.Scanner;
 
 public class OrderCLI {
 	public static void run(Scanner scanner) {
-		System.out.print("What would you like to do:\n" + "1 Create order\n" + "2 Read order\n"
-				+ "3 Update order\n" + "4 Delete order\n" + "Enter 1-4: ");
-		String choice = scanner.nextLine();
-		switch (choice) {
-		case "1":
-			createOrder(scanner);
-			break;
-		case "2":
-			readOrder(scanner);
-			break;
-		case "3":
-			updateOrder(scanner);
-			break;
-		case "4":
-			deleteOrder(scanner);
-			break;
+		boolean running = true;
+		while (running) {
+			System.out.print("What would you like to do:\n" + "1 Create order\n" + "2 Read order\n"
+					+ "3 Update order\n" + "4 Delete order\n" + "5 Return\n" + "Enter 1-5: ");
+			String choice = scanner.nextLine();
+			switch (choice) {
+			case "1":
+				createOrder(scanner);
+				break;
+			case "2":
+				readOrder(scanner);
+				break;
+			case "3":
+				updateOrder(scanner);
+				break;
+			case "4":
+				deleteOrder(scanner);
+				break;
+			case "5":
+				running = false;
+				break;
+			default:
+				System.out.println("Entry Invalid. Please enter 1-5");
+			}
 		}
 	}
 
