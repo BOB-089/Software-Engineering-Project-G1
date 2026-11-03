@@ -4,14 +4,13 @@ public class DeliveryArea {
 	private int areaCode;
 	private String name;
 	private CustomerDAO customerDAO = new CustomerDAO();
-	private DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
 	
 	public DeliveryArea() {}
 
     public int getAreaCode() { return areaCode; }
     public String getName() { return name; }
     
-    public ArrayList<Customer> getCustomers() { // Consider moving to a DAO
+    public ArrayList<Customer> getCustomers() {
     	ArrayList<Customer> customers = new ArrayList<>();
     	ArrayList<Customer> allCustomers = customerDAO.getAllCustomers();
     	for (Customer customer : allCustomers) {
@@ -25,7 +24,6 @@ public class DeliveryArea {
     
     public boolean verifyAreaCode(int areaCode) {
         return areaCode >= 1 && areaCode <= 24;
-        //return deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode) == null; // move to CLI
     }
     
     public boolean verifyName(String name) {

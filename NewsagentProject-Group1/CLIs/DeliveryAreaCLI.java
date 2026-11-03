@@ -34,11 +34,12 @@ public class DeliveryAreaCLI {
         System.out.print("Area Code: ");
         int areaCode = scanner.nextInt();
         scanner.nextLine();
+        DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
+        if (deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode) != null) { System.out.println("Area with code " + areaCode + " already exists"); return; }
         System.out.print("Area Name: ");
         String name = scanner.nextLine();
         DeliveryArea deliveryArea = new DeliveryArea();
         deliveryArea.createDeliveryArea(areaCode, name);
-        DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
         if (deliveryAreaDAO.addDeliveryArea(deliveryArea)) {
             System.out.println("Delivery area saved successfully.");
         } else {
@@ -54,8 +55,7 @@ public class DeliveryAreaCLI {
         DeliveryAreaDAO deliveryAreaDAO = new DeliveryAreaDAO();
         DeliveryArea deliveryArea = deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode);
         if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found"); return; }
-        System.out.println("Area Code: " + deliveryArea.getAreaCode() + 
-        				   "\nName: " + deliveryArea.getName() + 
+        System.out.println("Name: " + deliveryArea.getName() + 
         				   "\nCustomers: " + deliveryArea.getCustomers().size());
     }
 
