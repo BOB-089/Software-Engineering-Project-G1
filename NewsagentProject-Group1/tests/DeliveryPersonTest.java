@@ -249,11 +249,7 @@ public class DeliveryPersonTest {
     // Expected Output(s): Error message: Invalid Area Code
 	@Order(21)
     @Test
-<<<<<<< Updated upstream
+
     void invalidAreaCodeTooLow_TC21() { 
 		}
-=======
-    void invalidAreaCodeTooLow_TC21() {
-	}
->>>>>>> Stashed changes
-	}
+}
