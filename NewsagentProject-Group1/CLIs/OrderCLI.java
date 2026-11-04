@@ -2,6 +2,8 @@
 import java.util.Scanner;
 
 public class OrderCLI {
+	private static final OrderDAO orderDAO = new OrderDAO();
+	
 	public static void run(Scanner scanner) {
 		boolean running = true;
 		while (running) {
@@ -25,26 +27,33 @@ public class OrderCLI {
 				running = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-5");
+				System.out.println("Entry Invalid. Please enter 1-5.");
 			}
 		}
 	}
 
 	private static void createOrder(Scanner scanner) {
 		System.out.println("=== Create New Order ===");
-		System.out.print("Publication Name: ");
+		System.out.print("Publication name: ");
 		String publicationName = scanner.nextLine();
 		System.out.print("Customer Id: ");
-		int customerId = scanner.nextInt();
+		int customerId;
+		try { customerId = Integer.parseInt(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
 		System.out.print("Day: ");
-		int day = scanner.nextInt();
+		int day;
+		try { day = Integer.parseInt(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Day must be a whole number."); return; }
 		System.out.print("Month: ");
-		int month = scanner.nextInt();
+		int month;
+		try { month = Integer.parseInt(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Month must be a whole number."); return; }
 		System.out.print("Year: ");
-		int year = scanner.nextInt();
+		int year;
+		try { year = Integer.parseInt(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Year must be a whole number."); return; }
 		Order order = new Order();
-		order.createOrder(publicationName, customerId, day, month, year);
-		OrderDAO orderDAO = new OrderDAO();
+		if (!order.createOrder(publicationName, customerId, day, month, year)) { System.out.println("Invalid order details."); return; }
 		if (orderDAO.addOrder(order)) {
 			System.out.println(
 			"Order saved successfully.");
@@ -57,13 +66,13 @@ public class OrderCLI {
 	private static void readOrder(Scanner scanner) {
 		System.out.println("=== Find Order ===");
 		System.out.print("Order Id: ");
-		int id = scanner.nextInt();
-		scanner.nextLine();
-		OrderDAO orderDAO = new OrderDAO();
-		Order order = orderDAO.findOrderById(id); 
-		if (order == null) { System.out.println("Order with id " + id + " could not be found"); return; }
+		int orderId;
+		try { orderId = Integer.parseInt(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Order Id must be a whole number."); return; }
+		Order order = orderDAO.findOrderById(orderId); 
+		if (order == null) { System.out.println("Order with Id " + orderId + " could not be found."); return; }
 		System.out.println("Publication name: " + order.getPublicationName() + 
-						   "\nCustomer ID: " + order.getCustomerId() +
+						   "\nCustomer Id: " + order.getCustomerId() +
 						   "\nDay: " + order.getDay() + 
 						   "\nMonth: " + order.getMonth() + 
 						   "\nYear: " + order.getYear());
@@ -72,63 +81,76 @@ public class OrderCLI {
 	private static void updateOrder(Scanner scanner) {
 		System.out.println("=== Find Order ===");
 		System.out.print("Order Id: ");
-		int id = scanner.nextInt();
-		scanner.nextLine();
-		OrderDAO orderDAO = new OrderDAO();
-		Order order = orderDAO.findOrderById(id);
-		if (order == null) { System.out.println("Order with id " + id + " could not be found"); return; }
+		int orderId;
+		try { orderId = Integer.parseInt(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Order Id must be a whole number."); return; }
+		Order order = orderDAO.findOrderById(orderId);
+		if (order == null) { System.out.println("Order with Id " + orderId + " could not be found."); return; }
 		System.out.println("=== Update Order ===");
-		try {
-			boolean updating = true;
-			while (updating) {
-				System.out.print("What would you like to update:\n" + "1 Publication name\n" + "2 Customer ID\n"
-						+ "3 Day\n" + "4 Month\n" + "5 Year\n" + "6 Complete\n" + "Enter 1-6: ");
-				String choice = scanner.nextLine();
-				boolean validEntry = true;
-				switch (choice) {
-				case "1":
-					System.out.print("Publication Name: ");
-					validEntry = order.setPublicationName(scanner.nextLine());
-					break;
-				case "2":
-					System.out.print("Customer ID: ");
-					validEntry = order.setCustomerId(scanner.nextInt());
-					break;
-				case "3":
-					System.out.print("Day: ");
-					validEntry = order.setDay(scanner.nextInt());
-					break;
-				case "4":
-					System.out.print("Month: ");
-					validEntry = order.setMonth(scanner.nextInt());
-					break;
-				case "5":
-					System.out.print("Year: ");
-					validEntry = order.setYear(scanner.nextInt());
-					scanner.nextLine();
-					break;
-				case "6":
-					updating = false;
-					break;
-				default:
-					System.out.println("Entry Invalid. Please enter 1-6");
-				}
-				if (!validEntry) { System.out.println("Invalid value entered."); }
+		boolean updating = true;
+		while (updating) {
+			System.out.print("What would you like to update:\n" + "1 Publication name\n" + "2 Customer Id\n"
+					+ "3 Day\n" + "4 Month\n" + "5 Year\n" + "6 Complete\n" + "Enter 1-6: ");
+			String choice = scanner.nextLine();
+			boolean validEntry = true;
+			switch (choice) {
+			case "1":
+				System.out.print("Publication name: ");
+				validEntry = order.setPublicationName(scanner.nextLine());
+				break;
+			case "2":
+				System.out.print("Customer Id: ");
+				int customerId;
+			    try { customerId = Integer.parseInt(scanner.nextLine()); }
+			    catch (NumberFormatException e) { validEntry = false; break; }
+			    validEntry = order.setCustomerId(customerId);
+				break;
+			case "3":
+				System.out.print("Day: ");
+				int day;
+			    try { day = Integer.parseInt(scanner.nextLine()); }
+			    catch (NumberFormatException e) { validEntry = false; break; }
+			    validEntry = order.setDay(day);
+				break;
+			case "4":
+				System.out.print("Month: ");
+				int month;
+			    try { month = Integer.parseInt(scanner.nextLine()); }
+			    catch (NumberFormatException e) { validEntry = false; break; }
+			    validEntry = order.setMonth(month);
+				break;
+			case "5":
+				System.out.print("Year: ");
+				int year;
+			    try { year = Integer.parseInt(scanner.nextLine()); }
+			    catch (NumberFormatException e) { validEntry = false; break; }
+			    validEntry = order.setYear(year);
+				break;
+			case "6":
+				updating = false;
+				break;
+			default:
+				System.out.println("Entry Invalid. Please enter 1-6.");
 			}
-			orderDAO.updateOrder(order);
-			System.out.println("Order updated");
-		} catch (Exception e) { System.out.println("Failed to update order"); }
+			if (!validEntry) { System.out.println("Invalid value entered."); }
+		}
+		if (orderDAO.updateOrder(order)) {
+			System.out.println("Order updated.");
+		} else {
+			System.out.println("Failed to update order.");
+		}
 	}
 
 	private static void deleteOrder(Scanner scanner) {
 		System.out.println("=== Delete Order ===");
 		System.out.print("Order Id: ");
-		int id = scanner.nextInt();
-		OrderDAO OrderDAO = new OrderDAO();
-		if (OrderDAO.deleteOrder(id)) {
+		int orderId;
+		try { orderId = Integer.parseInt(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Order Id must be a whole number."); return; }
+		if (orderDAO.deleteOrder(orderId)) {
 			System.out.println("Order deleted successfully.");
 		} else {
-			System.out.println("Failed to delete Order.");
+			System.out.println("Failed to delete order.");
 		}
 	}
 }

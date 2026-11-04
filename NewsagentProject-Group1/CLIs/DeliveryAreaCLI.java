@@ -33,12 +33,12 @@ public class DeliveryAreaCLI {
 
     private static void createDeliveryArea(Scanner scanner) {
         System.out.println("=== Create New Delivery Area ===");
-        System.out.print("Area Code: ");
+        System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
         if (deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode) != null) { System.out.println("Area with code " + areaCode + " already exists."); return; }
-        System.out.print("Area Name: ");
+        System.out.print("Area name: ");
         String name = scanner.nextLine();
         DeliveryArea deliveryArea = new DeliveryArea();
         if (!deliveryArea.createDeliveryArea(areaCode, name)) { System.out.println("Invalid delivery area details."); return; }
@@ -51,7 +51,7 @@ public class DeliveryAreaCLI {
 
     private static void readDeliveryArea(Scanner scanner) {
         System.out.println("=== Find Delivery Area ===");
-        System.out.print("Area Code: ");
+        System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
@@ -62,7 +62,7 @@ public class DeliveryAreaCLI {
 
     private static void updateDeliveryArea(Scanner scanner) {
         System.out.println("=== Find Delivery Area ===");
-        System.out.print("Area Code: ");
+        System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
@@ -80,7 +80,7 @@ public class DeliveryAreaCLI {
 
     private static void deleteDeliveryArea(Scanner scanner) {
         System.out.println("=== Delete Delivery Area ===");
-        System.out.print("Area Code: ");
+        System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }

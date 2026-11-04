@@ -33,15 +33,15 @@ public class CustomerCLI {
 
 	private static void createCustomer(Scanner scanner) {
 		System.out.println("=== Create New Customer ===");
-		System.out.print("First Name: ");
+		System.out.print("First name: ");
 		String firstName = scanner.nextLine();
 		System.out.print("Surname: ");
 		String surname = scanner.nextLine();
 		System.out.print("Address: ");
 		String address = scanner.nextLine();
-		System.out.print("Phone Number: ");
+		System.out.print("Phone number: ");
 		String phoneNumber = scanner.nextLine();
-		System.out.print("Area Code: ");
+		System.out.print("Area code: ");
 		int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
@@ -61,12 +61,12 @@ public class CustomerCLI {
         try { id = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
 		Customer customer = customerDAO.findCustomerById(id); 
-		if (customer == null) { System.out.println("Customer with id " + id + " could not be found."); return; }
-		System.out.println("First Name: " + customer.getFirstName() + 
+		if (customer == null) { System.out.println("Customer with Id " + id + " could not be found."); return; }
+		System.out.println("First name: " + customer.getFirstName() + 
 						   "\nSurname: " + customer.getSurname() +
 						   "\nAddress: " + customer.getAddress() + 
-						   "\nPhone Number: " + customer.getPhoneNumber() + 
-						   "\nArea Code: " + customer.getAreaCode());
+						   "\nPhone number: " + customer.getPhoneNumber() + 
+						   "\nArea code: " + customer.getAreaCode());
 	}
 
 	private static void updateCustomer(Scanner scanner) {
@@ -76,17 +76,17 @@ public class CustomerCLI {
         try { id = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
 		Customer customer = customerDAO.findCustomerById(id);
-		if (customer == null) { System.out.println("Customer with id " + id + " could not be found."); return; }
+		if (customer == null) { System.out.println("Customer with Id " + id + " could not be found."); return; }
 		System.out.println("=== Update Customer ===");
 		boolean updating = true;
 		while (updating) {
-			System.out.print("What would you like to update:\n" + "1 First Name\n" + "2 Surname\n"
-					+ "3 Address\n" + "4 Phone Number\n" + "5 Area Code\n" + "6 Complete\n" + "Enter 1-6: ");
+			System.out.print("What would you like to update:\n" + "1 First name\n" + "2 Surname\n"
+					+ "3 Address\n" + "4 Phone number\n" + "5 Area code\n" + "6 Complete\n" + "Enter 1-6: ");
 			String choice = scanner.nextLine();
 			boolean validEntry = true;
 			switch (choice) {
 			case "1":
-				System.out.print("First Name: ");
+				System.out.print("First name: ");
 				validEntry = customer.setFirstName(scanner.nextLine());
 				break;
 			case "2":
@@ -98,11 +98,11 @@ public class CustomerCLI {
 				validEntry = customer.setAddress(scanner.nextLine());
 				break;
 			case "4":
-				System.out.print("Phone Number: ");
+				System.out.print("Phone number: ");
 				validEntry = customer.setPhoneNumber(scanner.nextLine());
 				break;
 			case "5":
-			    System.out.print("Area Code: ");
+			    System.out.print("Area code: ");
 			    int areaCode;
 			    try { areaCode = Integer.parseInt(scanner.nextLine()); }
 			    catch (NumberFormatException e) { validEntry = false; break; }
