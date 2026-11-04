@@ -57,11 +57,11 @@ public class CustomerCLI {
 	private static void readCustomer(Scanner scanner) {
 		System.out.println("=== Find Customer ===");
 		System.out.print("Customer Id: ");
-		int id;
-        try { id = Integer.parseInt(scanner.nextLine()); }
+		int customerId;
+        try { customerId = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
-		Customer customer = customerDAO.findCustomerById(id); 
-		if (customer == null) { System.out.println("Customer with Id " + id + " could not be found."); return; }
+		Customer customer = customerDAO.findCustomerById(customerId); 
+		if (customer == null) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
 		System.out.println("First name: " + customer.getFirstName() + 
 						   "\nSurname: " + customer.getSurname() +
 						   "\nAddress: " + customer.getAddress() + 
@@ -72,11 +72,11 @@ public class CustomerCLI {
 	private static void updateCustomer(Scanner scanner) {
 		System.out.println("=== Find Customer ===");
 		System.out.print("Customer Id: ");
-		int id;
-        try { id = Integer.parseInt(scanner.nextLine()); }
+		int customerId;
+        try { customerId = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
-		Customer customer = customerDAO.findCustomerById(id);
-		if (customer == null) { System.out.println("Customer with Id " + id + " could not be found."); return; }
+		Customer customer = customerDAO.findCustomerById(customerId);
+		if (customer == null) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
 		System.out.println("=== Update Customer ===");
 		boolean updating = true;
 		while (updating) {
@@ -126,10 +126,10 @@ public class CustomerCLI {
 	private static void deleteCustomer(Scanner scanner) {
 		System.out.println("=== Delete Customer ===");
 		System.out.print("Customer Id: ");
-		int id;
-        try { id = Integer.parseInt(scanner.nextLine()); }
+		int customerId;
+        try { customerId = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
-		if (customerDAO.deleteCustomer(id)) {
+		if (customerDAO.deleteCustomer(customerId)) {
 			System.out.println("Customer deleted successfully.");
 		} else {
 			System.out.println("Failed to delete customer.");
