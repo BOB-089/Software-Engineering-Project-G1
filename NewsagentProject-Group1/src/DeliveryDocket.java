@@ -9,7 +9,6 @@ public class DeliveryDocket {
 	
     public DeliveryDocket() {}
     
-    
     public int getAreaCode() { return areaCode; }
     public boolean isDeliverySuccessful() { return deliverySuccessful; }
     public int getOrderID() { return orderID; }
@@ -50,6 +49,4 @@ public class DeliveryDocket {
 		if (!setPublicationsID(publicationsID)) return false;
         return true;
     }
-
-    
 }
