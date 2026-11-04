@@ -6,7 +6,7 @@ public class DeliveryAreaCLI {
     public static void run(Scanner scanner) {
         boolean running = true;
         while (running) {
-            System.out.print( "What would you like to do:\n" + "1 Create delivery area\n" + "2 Read delivery area\n" +
+            System.out.print("What would you like to do:\n" + "1 Create delivery area\n" + "2 Read delivery area\n" +
                     "3 Update delivery area\n" + "4 Delete delivery area\n" + "5 Return\n" + "Enter 1-5: ");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -84,10 +84,18 @@ public class DeliveryAreaCLI {
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
-        if (deliveryAreaDAO.deleteDeliveryArea(areaCode)) {
-            System.out.println("Delivery area deleted successfully.");
+        DeliveryArea deliveryArea = deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode);
+        if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found."); return; }
+        System.out.print("Are you sure you want to delete this delivery area from the database? (yes/no): ");
+        String confirmation = scanner.nextLine().trim();
+        if (confirmation.equalsIgnoreCase("yes")) {
+        	if (deliveryAreaDAO.deleteDeliveryArea(areaCode)) {
+        		System.out.println("Delivery area deleted successfully.");
+        	} else {
+        		System.out.println("Failed to delete delivery area.");
+        	}
         } else {
-            System.out.println("Failed to delete delivery area.");
+        	System.out.println("Deletion cancelled. Returning to system home page.");
         }
     }
 }

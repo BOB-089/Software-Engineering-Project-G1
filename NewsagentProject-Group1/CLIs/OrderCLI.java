@@ -147,10 +147,18 @@ public class OrderCLI {
 		int orderId;
 		try { orderId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Order Id must be a whole number."); return; }
-		if (orderDAO.deleteOrder(orderId)) {
-			System.out.println("Order deleted successfully.");
+		Order order = orderDAO.findOrderById(orderId);
+		if (order == null) { System.out.println("Order with Id " + orderId + " could not be found."); return; }
+		System.out.print("Are you sure you want to delete this order from the database? (yes/no): ");
+		String confirmation = scanner.nextLine().trim();
+		if (confirmation.equalsIgnoreCase("yes")) {
+			if (orderDAO.deleteOrder(orderId)) {
+				System.out.println("Order deleted successfully.");
+			} else {
+				System.out.println("Failed to delete order.");
+			}
 		} else {
-			System.out.println("Failed to delete order.");
+			System.out.println("Deletion cancelled. Returning to system home page.");
 		}
 	}
 }

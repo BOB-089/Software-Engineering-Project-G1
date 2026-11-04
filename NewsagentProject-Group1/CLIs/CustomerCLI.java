@@ -59,7 +59,7 @@ public class CustomerCLI {
 		System.out.print("Customer Id: ");
 		int customerId;
         try { customerId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
+        catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
 		Customer customer = customerDAO.findCustomerById(customerId); 
 		if (customer == null) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
 		System.out.println("First name: " + customer.getFirstName() + 
@@ -74,7 +74,7 @@ public class CustomerCLI {
 		System.out.print("Customer Id: ");
 		int customerId;
         try { customerId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
+        catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
 		Customer customer = customerDAO.findCustomerById(customerId);
 		if (customer == null) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
 		System.out.println("=== Update Customer ===");
@@ -128,11 +128,19 @@ public class CustomerCLI {
 		System.out.print("Customer Id: ");
 		int customerId;
         try { customerId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
-		if (customerDAO.deleteCustomer(customerId)) {
-			System.out.println("Customer deleted successfully.");
-		} else {
-			System.out.println("Failed to delete customer.");
-		}
+        catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
+        Customer customer = customerDAO.findCustomerById(customerId);
+        if (customer == null) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
+        System.out.print("Are you sure you want to delete this customer from the database? (yes/no): ");
+        String confirmation = scanner.nextLine().trim();
+        if (confirmation.equalsIgnoreCase("yes")) { 
+        	if (customerDAO.deleteCustomer(customerId)) {
+        		System.out.println("Customer deleted successfully.");
+        	} else {
+        		System.out.println("Failed to delete customer.");
+        	}
+        } else {
+        	System.out.println("Deletion cancelled. Returning to system home page.");
+        }
 	}
 }

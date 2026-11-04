@@ -53,7 +53,7 @@ public class NewsagentCLI {
 		System.out.print("Newsagent Id: ");
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
+		catch (NumberFormatException e) { System.out.println("Newsagent Id must be a whole number."); return; }
 		Newsagent newsagent = newsagentDAO.findNewsagentByID(newsagentId); 
 		if (newsagent == null) { System.out.println("Newsagent with Id " + newsagentId + " could not be found."); return; }
 		System.out.println("First name: " + newsagent.getFirstName() + 
@@ -66,7 +66,7 @@ public class NewsagentCLI {
 		System.out.print("Newsagent Id: ");
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
+		catch (NumberFormatException e) { System.out.println("Newsagent Id must be a whole number."); return; }
 		Newsagent newsagent = newsagentDAO.findNewsagentByID(newsagentId);
 		if (newsagent == null) { System.out.println("Newsagent with Id " + newsagentId + " could not be found."); return; }
 		System.out.println("=== Update Newsagent ===");
@@ -109,11 +109,19 @@ public class NewsagentCLI {
 		System.out.print("Newsagent Id: ");
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Id must be a whole number."); return; }
-		if (newsagentDAO.deleteNewsagent(newsagentId)) {
-			System.out.println("Newsagent deleted successfully.");
+		catch (NumberFormatException e) { System.out.println("Newsagent Id must be a whole number."); return; }
+		Newsagent newsagent = newsagentDAO.findNewsagentByID(newsagentId);
+		if (newsagent == null) { System.out.println("Newsagent with Id " + newsagentId + " could not be found."); return; }
+		System.out.print("Are you sure you want to delete this newsagent from the database? (yes/no): ");
+		String confirmation = scanner.nextLine().trim();
+		if (confirmation.equalsIgnoreCase("yes")) {
+			if (newsagentDAO.deleteNewsagent(newsagentId)) {
+				System.out.println("Newsagent deleted successfully.");
+			} else {
+				System.out.println("Failed to delete newsagent.");
+			}
 		} else {
-			System.out.println("Failed to delete newsagent.");
+			System.out.println("Deletion cancelled. Returning to system home page.");
 		}
 	}
 }

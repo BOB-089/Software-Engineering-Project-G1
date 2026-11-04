@@ -107,10 +107,18 @@ public class PublicationsCLI {
 		int publicationId;
 		try { publicationId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Publication Id must be a whole number."); return; }
-		if (publicationsDAO.deletePublication(publicationId)) {
-			System.out.println("Publication deleted successfully.");
+		Publications publication = publicationsDAO.findPublicationById(publicationId);
+		if (publication == null) { System.out.println("Publication with Id " + publicationId + " could not be found."); return; }
+		System.out.print("Are you sure you want to delete this publication from the database? (yes/no): ");
+		String confirmation = scanner.nextLine().trim();
+		if (confirmation.equalsIgnoreCase("yes")) {
+			if (publicationsDAO.deletePublication(publicationId)) {
+				System.out.println("Publication deleted successfully.");
+			} else {
+				System.out.println("Failed to delete publication.");
+			}
 		} else {
-			System.out.println("Failed to delete publication.");
+			System.out.println("Deletion cancelled. Returning to system home page.");
 		}
 	}
 }
