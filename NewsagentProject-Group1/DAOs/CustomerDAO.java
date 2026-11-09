@@ -3,16 +3,14 @@ import java.util.ArrayList;
 
 public class CustomerDAO {
 	private static final String INSERT_CUSTOMER = "INSERT INTO CustomerTable " +
-		    "(firstName, surname, address, phoneNumber, onHoliday, publicationsAvailable, areaCode) " +
-		    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		    "(firstName, surname, address, phoneNumber, onHoliday, publicationsAvailable, areaCode) " + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 	private static final String SELECT_BY_ID = "SELECT * FROM CustomerTable WHERE customerId = ?";
 
 	private static final String SELECT_ALL = "SELECT * FROM CustomerTable";
 
 	private static final String UPDATE_CUSTOMER = "UPDATE CustomerTable " + 
-			"SET firstName=?, surname=?, address=?, phoneNumber=?, onHoliday=?, publicationsAvailable=?, areaCode=? " + 
-			"WHERE customerId=?";
+			"SET firstName=?, surname=?, address=?, phoneNumber=?, onHoliday=?, publicationsAvailable=?, areaCode=? " + "WHERE customerId=?";
 
 	private static final String DELETE_CUSTOMER = "DELETE FROM CustomerTable WHERE customerId=?";
 

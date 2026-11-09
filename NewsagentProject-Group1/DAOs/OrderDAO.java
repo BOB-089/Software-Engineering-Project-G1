@@ -1,27 +1,18 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
-public class OrderDAO 
-{
-	private static final String INSERT_ORDER =
-		"INSERT INTO OrderTable " +
-		"(publicationName, customerId, day, month, year, publicationsAvailable) " +
-		"VALUES (?, ?, ?, ?, ?, ?)";
+public class OrderDAO {
+	private static final String INSERT_ORDER = "INSERT INTO OrderTable " + "(publicationName, customerId, day, month, year, publicationsAvailable) " + "VALUES (?, ?, ?, ?, ?, ?)";
 	
 	private static final String SELECT_BY_ID = "SELECT * FROM OrderTable WHERE orderId = ?";
 
 	private static final String SELECT_ALL = "SELECT * FROM OrderTable";
 	
-	private static final String UPDATE_ORDER = "UPDATE OrderTable " + 
-			"SET publicationName=?, customerId=?, day=?, month=?, year=?, publicationsAvailable=? " + 
-			"WHERE orderId=?";
+	private static final String UPDATE_ORDER = "UPDATE OrderTable " +  "SET publicationName=?, customerId=?, day=?, month=?, year=?, publicationsAvailable=? " + "WHERE orderId=?";
 	
 	private static final String DELETE_ORDER = "DELETE FROM OrderTable WHERE orderId=?";
 		
-//	CREATE ORDER
+//		CREATE ORDER
 	public boolean addOrder(Order order) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(INSERT_ORDER)) {
@@ -36,7 +27,7 @@ public class OrderDAO
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 	
-//	FIND CUSTOMER BY ID
+//		FIND ORDER BY ID
 	public Order findOrderById(int orderId) {
 		Order order = null;
 		try (Connection conn = DatabaseConnection.getConnection();
@@ -57,7 +48,7 @@ public class OrderDAO
 		return order;
 	}
 	
-//	GET ALL ORDERS
+//		GET ALL ORDERS
 	public ArrayList<Order> getAllOrders() {
 		ArrayList<Order> orders = new ArrayList<>();
 		try (Connection conn = DatabaseConnection.getConnection();
@@ -65,7 +56,7 @@ public class OrderDAO
 		ResultSet rs = stmt.executeQuery()) {
 			while (rs.next()) {
 				Order order = new Order();
-				order.setCustomerId(rs.getInt("customerId"));
+				order.setOrderId(rs.getInt("orderId"));
 				order.setPublicationName(rs.getString("publicationName"));
 				order.setCustomerId(rs.getInt("customerId"));
 				order.setDay(rs.getInt("day"));
@@ -79,7 +70,7 @@ public class OrderDAO
 	}
 	
 	
-// UPDATE ORDER
+//		UPDATE ORDER
 	public boolean updateOrder(Order order) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(UPDATE_ORDER)) {
@@ -96,7 +87,7 @@ public class OrderDAO
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 	
-//	DELETE ORDER
+//		DELETE ORDER
 	public boolean deleteOrder(int orderId) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(DELETE_ORDER)) {

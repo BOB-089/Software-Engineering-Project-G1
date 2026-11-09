@@ -2,20 +2,17 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class NewsagentDAO {
-	private static final String INSERT_NEWSAGENT = "INSERT INTO NewsagentTable " +
-		    "(firstName, surname, phoneNumber) " + "VALUES (?, ?, ?)";
+	private static final String INSERT_NEWSAGENT = "INSERT INTO NewsagentTable " + "(firstName, surname, phoneNumber) " + "VALUES (?, ?, ?)";
 	
 	private static final String SELECT_BY_ID = "SELECT * FROM NewsagentTable WHERE newsagentID = ?";
 	
 	private static final String SELECT_ALL = "SELECT * FROM NewsagentTable";
 	
-	private static final String UPDATE_NEWSAGENT = "UPDATE NewsagentTable " + 
-			"SET firstName=?, surname=?, phoneNumber=? " + "WHERE newsagentID=?";
+	private static final String UPDATE_NEWSAGENT = "UPDATE NewsagentTable " + "SET firstName=?, surname=?, phoneNumber=? " + "WHERE newsagentID=?";
 	
 	private static final String DELETE_NEWSAGENT = "DELETE FROM NewsagentTable WHERE newsagentID=?";
 	
-	
-//	CREATE NEWSAGENT
+//		CREATE NEWSAGENT
 	public boolean addNewsagent(Newsagent newsagent) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(INSERT_NEWSAGENT)) {
@@ -27,7 +24,7 @@ public class NewsagentDAO {
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 	
-//	FIND NEWSAGENT BY ID
+//		FIND NEWSAGENT BY ID
 	public Newsagent findNewsagentByID(int newsagentID) {
 		Newsagent newsagent = null;
 		try (Connection conn = DatabaseConnection.getConnection();
@@ -45,7 +42,7 @@ public class NewsagentDAO {
 		return newsagent;
 	}
 	
-	//	GET ALL NEWSAGENTS
+//		GET ALL NEWSAGENTS
 	public ArrayList<Newsagent> getAllNewsagents() {
 		ArrayList<Newsagent> newsagents = new ArrayList<>();
 		try (Connection conn = DatabaseConnection.getConnection();
@@ -63,7 +60,7 @@ public class NewsagentDAO {
 		return newsagents;
 	}	
 	
-	//	UPDATE NEWSAGENT
+//		UPDATE NEWSAGENT
 	public boolean updateNewsagent(Newsagent newsagent) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(UPDATE_NEWSAGENT)) {
@@ -77,7 +74,7 @@ public class NewsagentDAO {
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 	
-	//	DELETE NEWSAGENT
+//		DELETE NEWSAGENT
 	public boolean deleteNewsagent(int newsagentID) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(DELETE_NEWSAGENT)) {
