@@ -1,3 +1,4 @@
+
 public class DeliveryPerson {
     private String firstName;
     private String surname;
@@ -13,37 +14,11 @@ public class DeliveryPerson {
     public int getAreaCode() { return areaCode; }
     public int getDeliveryPersonId() { return deliveryPersonId; }
 
-    public boolean setFirstName(String firstName) { 
-        if (verifyFirstName(firstName)) { 
-            this.firstName = firstName; 
-            return true; 
-        } else return false; 
-    }
-    
-    public boolean setSurname(String surname) { 
-        if (verifySurname(surname)) { 
-            this.surname = surname; 
-            return true; 
-        } else return false; 
-    }
-    
-    public boolean setPhoneNumber(String phoneNumber) { 
-        if (verifyPhoneNumber(phoneNumber)) { 
-            this.phoneNumber = phoneNumber; 
-            return true; 
-        } else return false; 
-    }
-    
-    public boolean setAreaCode(int areaCode) { 
-        if (verifyAreaCode(areaCode)) { 
-            this.areaCode = areaCode; 
-            return true; 
-        } else return false; 
-    }
-    
-    public void setDeliveryPersonId(int deliveryPersonId) { 
-        this.deliveryPersonId = deliveryPersonId; 
-    }
+    public boolean setFirstName(String firstName) { if (verifyFirstName(firstName)) { this.firstName = firstName; return true; } else return false; }
+    public boolean setSurname(String surname) { if (verifySurname(surname)) { this.surname = surname; return true; } else return false; }
+    public boolean setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) { this.phoneNumber = phoneNumber; return true; } else return false; }
+    public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
+    public void setDeliveryPersonId(int deliveryPersonId) { this.deliveryPersonId = deliveryPersonId; }
 
     public boolean verifyFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()) { return false; }
@@ -60,21 +35,13 @@ public class DeliveryPerson {
         return phoneNumber.matches("^[0-9]{10}$");
     }
 
-    public boolean verifyAreaCode(int areaCode) {
-        return areaCode >= 1 && areaCode <= 24;
-    }
+    public boolean verifyAreaCode(int areaCode) { return areaCode >= 1 && areaCode <= 24; }
 
     public boolean createDeliveryPerson(String firstName, String surname, String phoneNumber, int areaCode) {
-        try {
-            if (!setFirstName(firstName)) return false;
-            if (!setSurname(surname)) return false;
-            if (!setPhoneNumber(phoneNumber)) return false;
-            if (!setAreaCode(areaCode)) return false;
-        } catch(Exception e) { 
-            System.out.println("Failed to create delivery person:"); 
-            e.printStackTrace(); 
-            return false;
-        }
+    	if (!setFirstName(firstName)) return false;
+        if (!setSurname(surname)) return false;
+        if (!setPhoneNumber(phoneNumber)) return false;
+        if (!setAreaCode(areaCode)) return false;
         return true;
     }
 }

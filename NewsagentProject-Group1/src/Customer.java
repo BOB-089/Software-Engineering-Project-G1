@@ -1,3 +1,4 @@
+
 public class Customer {
     private String firstName;
     private String surname;
@@ -48,9 +49,7 @@ public class Customer {
         return phoneNumber.matches("^[0-9]{10}$");
     }
 
-    public boolean verifyAreaCode(int areaCode) {
-        return areaCode >= 1 && areaCode <= 24;
-    }
+    public boolean verifyAreaCode(int areaCode) { return areaCode >= 1 && areaCode <= 24; }
 
     public boolean createCustomer(String firstName, String surname, String address, String phoneNumber, int areaCode) {
         try {

@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 public class Order {
     private String publicationName;
     private int customerId;
@@ -14,6 +17,7 @@ public class Order {
     public int getDay() { return day; }
     public int getMonth() { return month; }
     public int getYear() { return year; }
+    public String getDate() { return day + "/" + month + "/" + year; }
     public boolean isPublicationsAvailable() { return publicationsAvailable; }
     public int getOrderId() { return orderId; }
 
@@ -35,19 +39,16 @@ public class Order {
 		else { return true; }
     }
 
-    public boolean verifyDay(int day) {
-        if (day < 1 || day > 31) { return false; }
-        else {return true; }
-    }
-
-    public boolean verifyMonth(int month) {
-        if (month < 1 || month > 12) { return false; }
-        else {return true; }
-    }
-    public boolean verifyYear(int year) {
-        if (year < 1900) { return false; }
-        else {return true; }
-    }
+    public boolean verifyDay(int day) { return day >= 1 && day <= 31; }
+    
+	public boolean verifyMonth(int month) { return month >= 1 && month <= 12; }
+	
+	public boolean verifyYear(int year) { return year >= 1900; }
+	
+	public boolean verifyDate(int day, int month, int year) { // TODO RELATED TESTS
+	    try { LocalDate.of(year, month, day); return true; } 
+	    catch (DateTimeException e) { return false; }
+	}
 
     public boolean createOrder(String publicationName, int customerId, int day, int month, int year) {
         if (!setPublicationName(publicationName)) return false;
