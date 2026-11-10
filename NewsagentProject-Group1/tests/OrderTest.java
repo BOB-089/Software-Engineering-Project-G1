@@ -170,9 +170,7 @@ public class OrderTest {
 	@Test
 	void createValidOrder_TC20() {
 		Order order = new Order();
-		assertTrue(order.createOrder("DailyNews", 12345, 12, 10, 2026
-
-		));
+		assertTrue(order.createOrder("DailyNews", 12345, 12, 10, 2026));
 	}
 
 	// TC17
