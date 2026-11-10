@@ -37,9 +37,9 @@ public class Order {
         if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
         else {
 			try (Connection conn = DatabaseConnection.getConnection();
-		            PreparedStatement pstmt = conn.prepareStatement(publicationNameQuery)) {
-		            pstmt.setString(1, publicationName);
-		            ResultSet rs = pstmt.executeQuery();
+		            PreparedStatement stmt = conn.prepareStatement(publicationNameQuery)) {
+		            stmt.setString(1, publicationName);
+		            ResultSet rs = stmt.executeQuery();
 		            if (rs.next()) {
 		                int count = rs.getInt(1);
 		                if (count > 0) {
