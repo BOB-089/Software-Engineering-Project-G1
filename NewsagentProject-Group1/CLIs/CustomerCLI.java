@@ -132,7 +132,7 @@ public class CustomerCLI {
         Customer customer = customerDAO.findCustomerById(customerId);
         if (customer == null) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
         System.out.print("Are you sure you want to delete this customer from the database? (yes/no): ");
-        String confirmation = scanner.nextLine().trim();
+        String confirmation = scanner.nextLine().trim().toLowerCase();
         if (confirmation.equalsIgnoreCase("yes")) { 
         	if (customerDAO.deleteCustomer(customerId)) {
         		System.out.println("Customer deleted successfully.");
