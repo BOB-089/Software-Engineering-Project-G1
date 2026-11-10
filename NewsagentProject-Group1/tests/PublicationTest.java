@@ -1,15 +1,20 @@
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Order;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 public class PublicationTest {
+// -----------------------------------------------------------
+//		PublicationName Tests (TC01–TC07)
+//------------------------------------------------------------
+
 	// TC01
 	// Test Objective: Verify publication name is accepted when containing only
 	// letters
 	// Input(s): Publication Name = "DailyNews"
 	// Expected Output(s): Publication name accepted
+	@Order(1)
 	@Test
 	void validPublicationName_TC01() {
 		Publication publication = new Publication();
@@ -20,6 +25,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication name is accepted when containing a hyphen
 	// Input(s): Publication Name = "Daily-News"
 	// Expected Output(s): Publication name accepted
+	@Order(2)
 	@Test
 	void validPublicationNameHyphen_TC02() {
 		Publication publication = new Publication();
@@ -31,6 +37,7 @@ public class PublicationTest {
 	// apostrophe
 	// Input(s): Publication Name = "The'Times"
 	// Expected Output(s): Publication name accepted
+	@Order(3)
 	@Test
 	void validPublicationNameApostrophe_TC03() {
 		Publication publication = new Publication();
@@ -41,6 +48,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication name is rejected when blank
 	// Input(s): Publication Name = ""
 	// Expected Output(s): Invalid Publication Name
+	@Order(4)
 	@Test
 	void invalidPublicationNameBlank_TC04() {
 		Publication publication = new Publication();
@@ -51,6 +59,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication name is rejected when null
 	// Input(s): Publication Name = null
 	// Expected Output(s): Invalid Publication Name
+	@Order(5)
 	@Test
 	void invalidPublicationNameNull_TC05() {
 		Publication publication = new Publication();
@@ -61,6 +70,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication name is rejected when containing numbers
 	// Input(s): Publication Name = "Daily123"
 	// Expected Output(s): Invalid Publication Name
+	@Order(6)
 	@Test
 	void invalidPublicationNameNumbers_TC06() {
 		Publication publication = new Publication();
@@ -71,16 +81,22 @@ public class PublicationTest {
 	// Test Objective: Verify publication name is rejected when containing spaces
 	// Input(s): Publication Name = "Daily News"
 	// Expected Output(s): Invalid Publication Name
+	@Order(7)
 	@Test
 	void invalidPublicationNameSpaces_TC07() {
 		Publication publication = new Publication();
 		assertFalse(publication.verifyPublicationName("Daily News"));
 	}
-
+	
+// -----------------------------------------------------------
+//	PublicationStock Tests (TC08–TC012)
+//------------------------------------------------------------
+	
 	// TC08
 	// Test Objective: Verify publication stock is accepted when greater than 1
 	// Input(s): Publication Stock = 2
 	// Expected Output(s): Publication stock accepted
+	@Order(8)
 	@Test
 	void validPublicationStockMinBoundary_TC08() {
 		Publication publication = new Publication();
@@ -91,6 +107,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication stock is accepted when greater than 2
 	// Input(s): Publication Stock = 100
 	// Expected Output(s): Publication stock accepted
+	@Order(9)
 	@Test
 	void validPublicationStock_TC09() {
 		Publication publication = new Publication();
@@ -101,6 +118,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication stock is rejected when equal to 1
 	// Input(s): Publication Stock = 1
 	// Expected Output(s): Invalid Publication Stock
+	@Order(10)
 	@Test
 	void invalidPublicationStockBoundary_TC10() {
 		Publication publication = new Publication();
@@ -111,6 +129,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication stock is rejected when equal to 0
 	// Input(s): Publication Stock = 0
 	// Expected Output(s): Invalid Publication Stock
+	@Order(11)
 	@Test
 	void invalidPublicationStockZero_TC11() {
 		Publication publication = new Publication();
@@ -121,16 +140,22 @@ public class PublicationTest {
 	// Test Objective: Verify publication stock is rejected when negative
 	// Input(s): Publication Stock = -1
 	// Expected Output(s): Invalid Publication Stock
+	@Order(12)
 	@Test
 	void invalidPublicationStockNegative_TC12() {
 		Publication publication = new Publication();
 		assertFalse(publication.verifyPublicationStock(-1));
 	}
-
+	
+// -----------------------------------------------------------
+//	PublicationName Set Tests (TC013–TC014)
+//------------------------------------------------------------
+	
 	// TC13
 	// Test Objective: Verify publication name is successfully set
 	// Input(s): Publication Name = "DailyNews"
 	// Expected Output(s): Publication name set successfully
+	@Order(13)
 	@Test
 	void setValidPublicationName_TC13() {
 		Publication publication = new Publication();
@@ -142,17 +167,23 @@ public class PublicationTest {
 	// Test Objective: Verify publication name is not set when invalid
 	// Input(s): Publication Name = ""
 	// Expected Output(s): Publication name not set
+	@Order(14)
 	@Test
 	void setInvalidPublicationName_TC14() {
 		Publication publication = new Publication();
 		assertFalse(publication.setPublicationName(""));
 		assertNull(publication.getPublicationName());
 	}
-
+	
+// -----------------------------------------------------------
+//		PublicationStock Set Tests (TC015–TC016)
+//------------------------------------------------------------
+		
 	// TC15
 	// Test Objective: Verify publication stock is successfully set
 	// Input(s): Publication Stock = 10
 	// Expected Output(s): Publication stock set successfully
+	@Order(15)
 	@Test
 	void setValidPublicationStock_TC15() {
 		Publication publication = new Publication();
@@ -164,6 +195,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication stock is not set when invalid
 	// Input(s): Publication Stock = 1
 	// Expected Output(s): Publication stock not set
+	@Order(16)
 	@Test
 	void setInvalidPublicationStock_TC16() {
 		Publication publication = new Publication();
@@ -171,10 +203,15 @@ public class PublicationTest {
 		assertEquals(0, publication.getPublicationStock());
 	}
 
+// ------------------------------------------------------------
+//		Creation Tests (TC28–TC33)
+//------------------------------------------------------------
+
 	// TC17
 	// Test Objective: Verify publication ID is successfully set
 	// Input(s): Publication ID = 12345
 	// Expected Output(s): Publication ID set successfully
+	@Order(17)
 	@Test
 	void setPublicationId_TC17() {
 		Publication publication = new Publication();
@@ -186,6 +223,7 @@ public class PublicationTest {
 	// Test Objective: Verify publication is created when all details are valid
 	// Input(s): "DailyNews", 100
 	// Expected Output(s): Publication created successfully
+	@Order(18)
 	@Test
 	void createValidPublication_TC18() {
 		Publication publication = new Publication();
@@ -199,6 +237,7 @@ public class PublicationTest {
 	// name
 	// Input(s): "", 100
 	// Expected Output(s): Publication not created
+	@Order(19)
 	@Test
 	void createPublicationInvalidName_TC19() {
 		Publication publication = new Publication();
@@ -210,6 +249,7 @@ public class PublicationTest {
 	// stock
 	// Input(s): "DailyNews", 1
 	// Expected Output(s): Publication not created
+	@Order(20)
 	@Test
 	void createPublicationInvalidStock_TC20() {
 		Publication publication = new Publication();

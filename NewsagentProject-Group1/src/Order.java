@@ -1,4 +1,5 @@
 import java.time.DateTimeException;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class Order {
@@ -11,6 +12,9 @@ public class Order {
     private int orderId;
 
     public Order() {}
+    
+    public String publicationNameQuery = "SELECT COUNT(*) FROM PublicationTable WHERE publicationName = ?";
+    public String customerIdQuery = "SELECT COUNT(*) FROM CustomerTable WHERE customerId = ?";
 
     public String getPublicationName() { return publicationName; }
     public int getCustomerId() { return customerId; }
@@ -31,12 +35,46 @@ public class Order {
 
     public boolean verifyPublicationName(String publicationName) {
         if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
+        else {
+			try (Connection conn = DatabaseConnection.getConnection();
+		            PreparedStatement pstmt = conn.prepareStatement(publicationNameQuery)) {
+		            pstmt.setString(1, publicationName);
+		            ResultSet rs = pstmt.executeQuery();
+		            if (rs.next()) {
+		                int count = rs.getInt(1);
+		                if (count > 0) {
+		                    return true;
+		                } else {
+		                    return false;
+		                }
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        } 
+			}
         return publicationName.matches("^[A-Za-z'-]+$");
     }
 
     public boolean verifyCustomerId(int customerId) {
 		if (customerId < 1) { return false; }
-		else { return true; }
+		else {
+			try (Connection conn = DatabaseConnection.getConnection();
+		             PreparedStatement pstmt = conn.prepareStatement(customerIdQuery)) {
+		            pstmt.setInt(1, customerId);
+		            ResultSet rs = pstmt.executeQuery();
+		            if (rs.next()) {
+		                int count = rs.getInt(1);
+		                if (count > 0) {
+		                    return true;
+		                } else {
+		                    return false;
+		                }
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        } 
+			}
+		return publicationsAvailable;
     }
 
     public boolean verifyDay(int day) { return day >= 1 && day <= 31; }

@@ -5,11 +5,17 @@ import org.junit.jupiter.api.*;
 
 public class OrderTest {
 
+// ------------------------------------------------------------
+//		PublicationName Tests (TC01–TC03)
+//------------------------------------------------------------
+	
+
 	// TC01
 	// Test Objective: Verify publication name is accepted when exactly 1 character
 	// long
 	// Input(s): Publication Name = "A"
 	// Expected Output(s): Publication name accepted
+
 	@Test
 	void validPublicationNameMinBoundary_TC01() {
 		Order order = new Order();
