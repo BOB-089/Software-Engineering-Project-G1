@@ -6,9 +6,10 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class NewsagentTest {
+
 // ------------------------------------------------------------
-//		FirstName Tests (TC01–TC06)
-//------------------------------------------------------------
+// 					FirstName Tests (TC01–TC06)
+// ------------------------------------------------------------
 
 	// TC01
 	// Test Objective: Verify firstName is accepted when 1 character
@@ -76,9 +77,9 @@ public class NewsagentTest {
 		assertTrue(newsagent.verifyFirstName("'-"));
 	}
 
-	// ------------------------------------------------------------
-	// SURNAME Tests (TC07–TC12)
-	// ------------------------------------------------------------
+// ------------------------------------------------------------
+// 					Surname Tests (TC07–TC12)
+// ------------------------------------------------------------
 
 	// TC07
 	// Test Objective: Verify surname is accepted when 1 character
@@ -147,8 +148,8 @@ public class NewsagentTest {
 	}
 
 // ------------------------------------------------------------
-//		Phone Number Tests (TC13–TC17)
-//------------------------------------------------------------
+// 					Phone Number Tests (TC13–TC17)
+// ------------------------------------------------------------
 
 	// TC13
 	// Test Objective: Verify phone number is accepted when 10 digits
@@ -206,62 +207,59 @@ public class NewsagentTest {
 	}
 
 // ------------------------------------------------------------
-//		Creation Tests (TC18–TC21)
-//------------------------------------------------------------
+// 					Creation Tests (TC18–TC21)
+// ------------------------------------------------------------
 
 	// TC18
-	// Test Objective: Verify newsagent account is created when all details are
-	// valid
+	// Test Objective: Verify newsagent is created when all details are valid
 	// Input(s): John, Smith, 0871234567
-	// Expected Output(s): Newsagent account created successfully
+	// Expected Output(s): Newsagent created successfully
 	@Order(18)
 	@Test
-	void createValidCustomerAccount_TC18() {
+	void createValidNewsagent_TC18() {
 		Newsagent newsagent = new Newsagent();
 		assertTrue(newsagent.createNewsagent("John", "Smith", "0871234567"));
 	}
 
 	// TC19
-	// Test Objective: Verify newsagent account creation fails with invalid first
-	// name
+	// Test Objective: Verify newsagent creation fails with invalid first name
 	// Input(s): "", Smith, 0871234567
-	// Expected Output(s): Newsagent account not created
+	// Expected Output(s): Newsagent not created
 	@Order(19)
 	@Test
-	void createAccountInvalidFirstName_TC19() {
+	void createNewsagentInvalidFirstName_TC19() {
 		Newsagent newsagent = new Newsagent();
 		assertFalse(newsagent.createNewsagent("", "Smith", "0871234567"));
 	}
 
 	// TC20
-	// Test Objective: Verify newsagent account creation fails with invalid surname
+	// Test Objective: Verify newsagent creation fails with invalid surname
 	// Input(s): John, "", 0871234567
-	// Expected Output(s): Newsagent account not created
+	// Expected Output(s): Newsagent not created
 	@Order(20)
 	@Test
-	void createAccountInvalidSurname_TC20() {
+	void createNewsagentInvalidSurname_TC20() {
 		Newsagent newsagent = new Newsagent();
 		assertFalse(newsagent.createNewsagent("John", "", "0871234567"));
 	}
 
-	// TC20
-	// Test Objective: Verify newsagent account creation fails with invalid phone
-	// number
+	// TC21
+	// Test Objective: Verify newsagent creation fails with invalid phone number
 	// Input(s): John, Smith, 087123456
-	// Expected Output(s): Newsagent account not created
+	// Expected Output(s): Newsagent not created
 	@Order(21)
 	@Test
-	void createAccountInvalidPhoneNumber_TC21() {
+	void createNewsagentInvalidPhoneNumber_TC21() {
 		Newsagent newsagent = new Newsagent();
 		assertFalse(newsagent.createNewsagent("John", "Smith", "087123456"));
 	}
 
-//------------------------------------------------------------
-//		ID Test (TC22)
-//------------------------------------------------------------
+// ------------------------------------------------------------
+// 					ID Test (TC22)
+// ------------------------------------------------------------
 
 	// TC22
-	// Test Objective: Verify ID is generated when newsagent account is created
+	// Test Objective: Verify ID is generated when newsagent is created
 	// Input(s): John, Smith, 0871234567
 	// Expected Output(s): Newsagent ID generated
 	@Order(22)
