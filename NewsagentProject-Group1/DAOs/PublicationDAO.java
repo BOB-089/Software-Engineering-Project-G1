@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.ArrayList;
 
-public class PublicationsDAO {
+public class PublicationDAO {
 	private static final String INSERT_PUBLICATION = "INSERT INTO PublicationTable " + "(publicationName, publicationStock) " + "VALUES (?, ?)";
 
 	private static final String SELECT_BY_ID = "SELECT * FROM PublicationTable WHERE publicationId = ?";
@@ -13,7 +13,7 @@ public class PublicationsDAO {
 	private static final String DELETE_PUBLICATION = "DELETE FROM PublicationTable WHERE publicationId=?";
 
 //		CREATE PUBLICATION
-	public boolean addPublication(Publications publication) {
+	public boolean addPublication(Publication publication) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(INSERT_PUBLICATION)) {
 			stmt.setString(1, publication.getPublicationName());
@@ -24,14 +24,14 @@ public class PublicationsDAO {
 	}
 
 //		FIND PUBLICATION BY ID
-	public Publications findPublicationById(int publicationId) {
-		Publications publication = null;
+	public Publication findPublicationById(int publicationId) {
+		Publication publication = null;
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID)) {
 			stmt.setInt(1, publicationId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
-				publication = new Publications();
+				publication = new Publication();
 				publication.setPublicationId(rs.getInt("publicationId"));
 				publication.setPublicationName(rs.getString("publicationName"));
 				publication.setPublicationStock(rs.getInt("publicationStock"));
@@ -41,13 +41,13 @@ public class PublicationsDAO {
 	}
 
 //		GET ALL PUBLICATIONS
-	public ArrayList<Publications> getAllPublications() {
-		ArrayList<Publications> publications = new ArrayList<>();
+	public ArrayList<Publication> getAllPublications() {
+		ArrayList<Publication> publications = new ArrayList<>();
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
 		ResultSet rs = stmt.executeQuery()) {
 			while (rs.next()) {
-				Publications publication = new Publications();
+				Publication publication = new Publication();
 				publication.setPublicationId(rs.getInt("publicationId"));
 				publication.setPublicationName(rs.getString("publicationName"));
 				publication.setPublicationStock(rs.getInt("publicationStock"));
@@ -58,7 +58,7 @@ public class PublicationsDAO {
 	}
 
 //		UPDATE PUBLICATION
-	public boolean updatePublication(Publications publication) {
+	public boolean updatePublication(Publication publication) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(UPDATE_PUBLICATION)) {
 			stmt.setString(1, publication.getPublicationName());

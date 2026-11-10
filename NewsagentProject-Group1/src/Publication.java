@@ -1,10 +1,10 @@
 
-public class Publications {
+public class Publication {
 	private String publicationName;
 	private int publicationStock;
 	private int publicationId;
 	
-	public Publications() {}
+	public Publication() {}
 	
 	public String getPublicationName() { return publicationName; }
     public int getPublicationStock() { return publicationStock; }

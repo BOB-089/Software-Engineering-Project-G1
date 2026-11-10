@@ -14,7 +14,7 @@ public class DeliveryDocket {
     public DeliveryDocket() {}
     
     public int getAreaCode() { return areaCode; }
-    public int getDeliveryDocketID() { return deliveryDocketId; }
+    public int getDeliveryDocketId() { return deliveryDocketId; }
     public int getDay() { return day; }
     public int getMonth() { return month; }
     public int getYear() { return year; }

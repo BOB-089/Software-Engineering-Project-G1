@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-public class PublicationsCLI {
-	private static final PublicationsDAO publicationsDAO = new PublicationsDAO();
+public class PublicationCLI {
+	private static final PublicationDAO publicationDAO = new PublicationDAO();
 	
 	public static void run(Scanner scanner) {
 		boolean running = true;
@@ -39,9 +39,9 @@ public class PublicationsCLI {
 		int publicationStock;
 		try { publicationStock = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Publication stock must be a whole number."); return; }
-		Publications publication = new Publications();
+		Publication publication = new Publication();
 		if (!publication.createPublication(publicationName, publicationStock)) { System.out.println("Invalid publication details."); return; }
-		if (publicationsDAO.addPublication(publication)) {
+		if (publicationDAO.addPublication(publication)) {
 			System.out.println("Publication saved successfully.");
 		} else {
 			System.out.println("Failed to save publication.");
@@ -54,7 +54,7 @@ public class PublicationsCLI {
 		int publicationId;
 		try { publicationId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Publication Id must be a whole number."); return; }
-		Publications publication = publicationsDAO.findPublicationById(publicationId); 
+		Publication publication = publicationDAO.findPublicationById(publicationId); 
 		if (publication == null) { System.out.println("Publication with Id " + publicationId + " could not be found."); return; }
 		System.out.println("Publication name: " + publication.getPublicationName() + 
 						   "\nPublication stock: " + publication.getPublicationStock());
@@ -66,7 +66,7 @@ public class PublicationsCLI {
 		int publicationId;
 		try { publicationId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Publication Id must be a whole number."); return; }
-		Publications publication = publicationsDAO.findPublicationById(publicationId);
+		Publication publication = publicationDAO.findPublicationById(publicationId);
 		if (publication == null) { System.out.println("Publication with Id " + publicationId + " could not be found."); return; }
 		System.out.println("=== Update Publication ===");
 		boolean updating = true;
@@ -94,7 +94,7 @@ public class PublicationsCLI {
 			}
 			if (!validEntry) { System.out.println("Invalid value entered."); }
 		}
-		if (publicationsDAO.updatePublication(publication)) {
+		if (publicationDAO.updatePublication(publication)) {
 		    System.out.println("Publication updated.");
 		} else {
 		    System.out.println("Failed to update publication.");
@@ -107,12 +107,12 @@ public class PublicationsCLI {
 		int publicationId;
 		try { publicationId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Publication Id must be a whole number."); return; }
-		Publications publication = publicationsDAO.findPublicationById(publicationId);
+		Publication publication = publicationDAO.findPublicationById(publicationId);
 		if (publication == null) { System.out.println("Publication with Id " + publicationId + " could not be found."); return; }
 		System.out.print("Are you sure you want to delete this publication from the database? (yes/no): ");
 		String confirmation = scanner.nextLine().trim();
 		if (confirmation.equalsIgnoreCase("yes")) {
-			if (publicationsDAO.deletePublication(publicationId)) {
+			if (publicationDAO.deletePublication(publicationId)) {
 				System.out.println("Publication deleted successfully.");
 			} else {
 				System.out.println("Failed to delete publication.");

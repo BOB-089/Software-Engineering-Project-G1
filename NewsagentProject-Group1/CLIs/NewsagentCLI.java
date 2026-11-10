@@ -54,7 +54,7 @@ public class NewsagentCLI {
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Newsagent Id must be a whole number."); return; }
-		Newsagent newsagent = newsagentDAO.findNewsagentByID(newsagentId); 
+		Newsagent newsagent = newsagentDAO.findNewsagentById(newsagentId); 
 		if (newsagent == null) { System.out.println("Newsagent with Id " + newsagentId + " could not be found."); return; }
 		System.out.println("First name: " + newsagent.getFirstName() + 
 						   "\nSurname: " + newsagent.getSurname() + 
@@ -67,7 +67,7 @@ public class NewsagentCLI {
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Newsagent Id must be a whole number."); return; }
-		Newsagent newsagent = newsagentDAO.findNewsagentByID(newsagentId);
+		Newsagent newsagent = newsagentDAO.findNewsagentById(newsagentId);
 		if (newsagent == null) { System.out.println("Newsagent with Id " + newsagentId + " could not be found."); return; }
 		System.out.println("=== Update Newsagent ===");
 		boolean updating = true;
@@ -110,7 +110,7 @@ public class NewsagentCLI {
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Newsagent Id must be a whole number."); return; }
-		Newsagent newsagent = newsagentDAO.findNewsagentByID(newsagentId);
+		Newsagent newsagent = newsagentDAO.findNewsagentById(newsagentId);
 		if (newsagent == null) { System.out.println("Newsagent with Id " + newsagentId + " could not be found."); return; }
 		System.out.print("Are you sure you want to delete this newsagent from the database? (yes/no): ");
 		String confirmation = scanner.nextLine().trim();

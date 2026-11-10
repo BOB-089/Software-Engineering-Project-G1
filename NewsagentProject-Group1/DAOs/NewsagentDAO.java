@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class NewsagentDAO {
 	private static final String INSERT_NEWSAGENT = "INSERT INTO NewsagentTable " + "(firstName, surname, phoneNumber) " + "VALUES (?, ?, ?)";
 	
-	private static final String SELECT_BY_ID = "SELECT * FROM NewsagentTable WHERE newsagentID = ?";
+	private static final String SELECT_BY_ID = "SELECT * FROM NewsagentTable WHERE newsagentId = ?";
 	
 	private static final String SELECT_ALL = "SELECT * FROM NewsagentTable";
 	
@@ -25,15 +25,15 @@ public class NewsagentDAO {
 	}
 	
 //		FIND NEWSAGENT BY ID
-	public Newsagent findNewsagentByID(int newsagentID) {
+	public Newsagent findNewsagentById(int newsagentId) {
 		Newsagent newsagent = null;
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID)) {
-			stmt.setInt(1, newsagentID);
+			stmt.setInt(1, newsagentId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				newsagent = new Newsagent();
-				newsagent.setId(rs.getInt("newsagentID"));
+				newsagent.setId(rs.getInt("newsagentId"));
 				newsagent.setFirstName(rs.getString("firstName"));
 				newsagent.setSurname(rs.getString("surname"));
 				newsagent.setPhoneNumber(rs.getString("phoneNumber"));
@@ -70,7 +70,6 @@ public class NewsagentDAO {
 			stmt.setInt(4, newsagent.getId());
 			int rowsUpdated = stmt.executeUpdate();
 			return rowsUpdated > 0;
-	
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 	

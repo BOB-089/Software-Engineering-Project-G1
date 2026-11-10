@@ -28,7 +28,7 @@ public class MainCLI {
 				OrderCLI.run(scanner);
 				break;
 			case "4": 
-				PublicationsCLI.run(scanner);
+				PublicationCLI.run(scanner);
 				break;
 			case "5": 
 				DeliveryAreaCLI.run(scanner);

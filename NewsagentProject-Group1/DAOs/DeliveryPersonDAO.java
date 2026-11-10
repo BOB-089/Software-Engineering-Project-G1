@@ -15,7 +15,7 @@ public class DeliveryPersonDAO {
 //		CREATE DELIVERY PERSON
 	public boolean addDeliveryPerson(DeliveryPerson deliveryPerson) {
 		try (Connection conn = DatabaseConnection.getConnection();
-		PreparedStatement stmt = conn.prepareStatement(INSERT_DELIVERYPERSON, Statement.RETURN_GENERATED_KEYS)) {
+		PreparedStatement stmt = conn.prepareStatement(INSERT_DELIVERYPERSON)) {
 			stmt.setString(1, deliveryPerson.getFirstName());
 			stmt.setString(2, deliveryPerson.getSurname());
 			stmt.setString(3, deliveryPerson.getPhoneNumber());
