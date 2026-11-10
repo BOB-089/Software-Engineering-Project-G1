@@ -6,13 +6,14 @@ import org.junit.jupiter.api.*;
 
 public class PublicationsTest {
 	// TC01
-	// Test Objective: Verify publication name is accepted when containing only letters
+	// Test Objective: Verify publication name is accepted when containing only
+	// letters
 	// Input(s): Publication Name = "DailyNews"
 	// Expected Output(s): Publication name accepted
 	@Test
 	void validPublicationName_TC01() {
-	    Publications publication = new Publications();
-	    assertTrue(publication.verifyPublicationName("DailyNews"));
+		Publications publication = new Publications();
+		assertTrue(publication.verifyPublicationName("DailyNews"));
 	}
 
 	// TC02
@@ -21,18 +22,19 @@ public class PublicationsTest {
 	// Expected Output(s): Publication name accepted
 	@Test
 	void validPublicationNameHyphen_TC02() {
-	    Publications publication = new Publications();
-	    assertTrue(publication.verifyPublicationName("Daily-News"));
+		Publications publication = new Publications();
+		assertTrue(publication.verifyPublicationName("Daily-News"));
 	}
 
 	// TC03
-	// Test Objective: Verify publication name is accepted when containing an apostrophe
+	// Test Objective: Verify publication name is accepted when containing an
+	// apostrophe
 	// Input(s): Publication Name = "The'Times"
 	// Expected Output(s): Publication name accepted
 	@Test
 	void validPublicationNameApostrophe_TC03() {
-	    Publications publication = new Publications();
-	    assertTrue(publication.verifyPublicationName("The'Times"));
+		Publications publication = new Publications();
+		assertTrue(publication.verifyPublicationName("The'Times"));
 	}
 
 	// TC04
@@ -41,8 +43,8 @@ public class PublicationsTest {
 	// Expected Output(s): Invalid Publication Name
 	@Test
 	void invalidPublicationNameBlank_TC04() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.verifyPublicationName(""));
+		Publications publication = new Publications();
+		assertFalse(publication.verifyPublicationName(""));
 	}
 
 	// TC05
@@ -51,8 +53,8 @@ public class PublicationsTest {
 	// Expected Output(s): Invalid Publication Name
 	@Test
 	void invalidPublicationNameNull_TC05() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.verifyPublicationName(null));
+		Publications publication = new Publications();
+		assertFalse(publication.verifyPublicationName(null));
 	}
 
 	// TC06
@@ -61,8 +63,8 @@ public class PublicationsTest {
 	// Expected Output(s): Invalid Publication Name
 	@Test
 	void invalidPublicationNameNumbers_TC06() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.verifyPublicationName("Daily123"));
+		Publications publication = new Publications();
+		assertFalse(publication.verifyPublicationName("Daily123"));
 	}
 
 	// TC07
@@ -71,8 +73,8 @@ public class PublicationsTest {
 	// Expected Output(s): Invalid Publication Name
 	@Test
 	void invalidPublicationNameSpaces_TC07() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.verifyPublicationName("Daily News"));
+		Publications publication = new Publications();
+		assertFalse(publication.verifyPublicationName("Daily News"));
 	}
 
 	// TC08
@@ -81,8 +83,8 @@ public class PublicationsTest {
 	// Expected Output(s): Publication stock accepted
 	@Test
 	void validPublicationStockMinBoundary_TC08() {
-	    Publications publication = new Publications();
-	    assertTrue(publication.verifyPublicationStock(2));
+		Publications publication = new Publications();
+		assertTrue(publication.verifyPublicationStock(2));
 	}
 
 	// TC09
@@ -91,8 +93,8 @@ public class PublicationsTest {
 	// Expected Output(s): Publication stock accepted
 	@Test
 	void validPublicationStock_TC09() {
-	    Publications publication = new Publications();
-	    assertTrue(publication.verifyPublicationStock(100));
+		Publications publication = new Publications();
+		assertTrue(publication.verifyPublicationStock(100));
 	}
 
 	// TC10
@@ -101,8 +103,8 @@ public class PublicationsTest {
 	// Expected Output(s): Invalid Publication Stock
 	@Test
 	void invalidPublicationStockBoundary_TC10() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.verifyPublicationStock(1));
+		Publications publication = new Publications();
+		assertFalse(publication.verifyPublicationStock(1));
 	}
 
 	// TC11
@@ -111,8 +113,8 @@ public class PublicationsTest {
 	// Expected Output(s): Invalid Publication Stock
 	@Test
 	void invalidPublicationStockZero_TC11() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.verifyPublicationStock(0));
+		Publications publication = new Publications();
+		assertFalse(publication.verifyPublicationStock(0));
 	}
 
 	// TC12
@@ -121,8 +123,8 @@ public class PublicationsTest {
 	// Expected Output(s): Invalid Publication Stock
 	@Test
 	void invalidPublicationStockNegative_TC12() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.verifyPublicationStock(-1));
+		Publications publication = new Publications();
+		assertFalse(publication.verifyPublicationStock(-1));
 	}
 
 	// TC13
@@ -131,9 +133,9 @@ public class PublicationsTest {
 	// Expected Output(s): Publication name set successfully
 	@Test
 	void setValidPublicationName_TC13() {
-	    Publications publication = new Publications();
-	    assertTrue(publication.setPublicationName("DailyNews"));
-	    assertEquals("DailyNews", publication.getPublicationName());
+		Publications publication = new Publications();
+		assertTrue(publication.setPublicationName("DailyNews"));
+		assertEquals("DailyNews", publication.getPublicationName());
 	}
 
 	// TC14
@@ -142,9 +144,9 @@ public class PublicationsTest {
 	// Expected Output(s): Publication name not set
 	@Test
 	void setInvalidPublicationName_TC14() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.setPublicationName(""));
-	    assertNull(publication.getPublicationName());
+		Publications publication = new Publications();
+		assertFalse(publication.setPublicationName(""));
+		assertNull(publication.getPublicationName());
 	}
 
 	// TC15
@@ -153,9 +155,9 @@ public class PublicationsTest {
 	// Expected Output(s): Publication stock set successfully
 	@Test
 	void setValidPublicationStock_TC15() {
-	    Publications publication = new Publications();
-	    assertTrue(publication.setPublicationStock(10));
-	    assertEquals(10, publication.getPublicationStock());
+		Publications publication = new Publications();
+		assertTrue(publication.setPublicationStock(10));
+		assertEquals(10, publication.getPublicationStock());
 	}
 
 	// TC16
@@ -164,9 +166,9 @@ public class PublicationsTest {
 	// Expected Output(s): Publication stock not set
 	@Test
 	void setInvalidPublicationStock_TC16() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.setPublicationStock(1));
-	    assertEquals(0, publication.getPublicationStock());
+		Publications publication = new Publications();
+		assertFalse(publication.setPublicationStock(1));
+		assertEquals(0, publication.getPublicationStock());
 	}
 
 	// TC17
@@ -175,9 +177,9 @@ public class PublicationsTest {
 	// Expected Output(s): Publication ID set successfully
 	@Test
 	void setPublicationId_TC17() {
-	    Publications publication = new Publications();
-	    publication.setPublicationId(12345);
-	    assertEquals(12345, publication.getPublicationId());
+		Publications publication = new Publications();
+		publication.setPublicationId(12345);
+		assertEquals(12345, publication.getPublicationId());
 	}
 
 	// TC18
@@ -186,38 +188,31 @@ public class PublicationsTest {
 	// Expected Output(s): Publication created successfully
 	@Test
 	void createValidPublication_TC18() {
-	    Publications publication = new Publications();
-	    assertTrue(publication.createPublication(
-	        "DailyNews",
-	        100
-	    ));
-	    assertEquals("DailyNews", publication.getPublicationName());
-	    assertEquals(100, publication.getPublicationStock());
+		Publications publication = new Publications();
+		assertTrue(publication.createPublication("DailyNews", 100));
+		assertEquals("DailyNews", publication.getPublicationName());
+		assertEquals(100, publication.getPublicationStock());
 	}
 
 	// TC19
-	// Test Objective: Verify publication creation fails with invalid publication name
+	// Test Objective: Verify publication creation fails with invalid publication
+	// name
 	// Input(s): "", 100
 	// Expected Output(s): Publication not created
 	@Test
 	void createPublicationInvalidName_TC19() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.createPublication(
-	        "",
-	        100
-	    ));
+		Publications publication = new Publications();
+		assertFalse(publication.createPublication("", 100));
 	}
 
 	// TC20
-	// Test Objective: Verify publication creation fails with invalid publication stock
+	// Test Objective: Verify publication creation fails with invalid publication
+	// stock
 	// Input(s): "DailyNews", 1
 	// Expected Output(s): Publication not created
 	@Test
 	void createPublicationInvalidStock_TC20() {
-	    Publications publication = new Publications();
-	    assertFalse(publication.createPublication(
-	        "DailyNews",
-	        1
-	    ));
+		Publications publication = new Publications();
+		assertFalse(publication.createPublication("DailyNews", 1));
 	}
 }
