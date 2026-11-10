@@ -59,9 +59,9 @@ public class Order {
 		if (customerId < 1) { return false; }
 		else {
 			try (Connection conn = DatabaseConnection.getConnection();
-		             PreparedStatement pstmt = conn.prepareStatement(customerIdQuery)) {
-		            pstmt.setInt(1, customerId);
-		            ResultSet rs = pstmt.executeQuery();
+		             PreparedStatement stmt = conn.prepareStatement(customerIdQuery)) {
+		            stmt.setInt(1, customerId);
+		            ResultSet rs = stmt.executeQuery();
 		            if (rs.next()) {
 		                int count = rs.getInt(1);
 		                if (count > 0) {
