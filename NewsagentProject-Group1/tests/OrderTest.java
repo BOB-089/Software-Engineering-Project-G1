@@ -13,26 +13,26 @@ public class OrderTest {
 	
 
 	// TC01
-	// Test Objective: Verify publication name is accepted when exactly 1 character
+	// Test Objective: Verify publication name is rejected when the publication is not on the SQL database
 	// long
 	// Input(s): Publication Name = "A"
-	// Expected Output(s): Publication name accepted
+	// Expected Output(s): Invalid Publication Name
 	@org.junit.jupiter.api.Order(1)
 	@Test
-	void validPublicationNameMinBoundary_TC01() {
+	void validPublicationNameNotOnTable_TC01() {
 		Order order = new Order();
-		assertTrue(order.verifyPublicationName("A"));
+		assertFalse(order.verifyPublicationName("A"));
 	}
 
 	// TC02
-	// Test Objective: Verify publication name is accepted when 49 characters long
-	// Input(s): Publication Name = 49 characters
+	// Test Objective: Verify publication name is accepted when the publication is on the SQL database
+	// Input(s): Publication Name = "Daily-News"
 	// Expected Output(s): Publication name accepted
 	@org.junit.jupiter.api.Order(2)
 	@Test
-	void validPublicationNameMaxBoundary_TC02() {
+	void validPublicationNameOnTable_TC02() {
 		Order order = new Order();
-		assertTrue(order.verifyPublicationName("A".repeat(49)));
+		assertTrue(order.verifyPublicationName("Daily-News"));
 	}
 
 	// TC03
@@ -47,8 +47,8 @@ public class OrderTest {
 	}
 
 	// TC04
-	// Test Objective: Verify customer ID is accepted when greater than or equal to
-	// one
+	// Test Objective: Verify customer ID is accepted when on the Customer
+	// table SQL database
 	// Input(s): Customer ID = 1
 	// Expected Output(s): Customer ID accepted
 	@org.junit.jupiter.api.Order(4)
@@ -59,8 +59,8 @@ public class OrderTest {
 	}
 
 	// TC05
-	// Test Objective: Verify customer ID is rejected when less than one
-	// Input(s): Customer ID = -1
+	// Test Objective: Verify customer ID is rejected when on the Customer table
+	// Input(s): Customer ID = 0
 	// Expected Output(s): Invalid Customer ID
 	@org.junit.jupiter.api.Order(5)
 	@Test
@@ -181,13 +181,13 @@ public class OrderTest {
 
 	// TC16
 	// Test Objective: Verify order is created when all details are valid
-	// Input(s): "Daily News", 12345, 12, 10, 2026
+	// Input(s): "Daily-News", 12345, 12, 10, 2026
 	// Expected Output(s): Order created successfully
 	@org.junit.jupiter.api.Order(16)
 	@Test
 	void createValidOrder_TC16() {
 		Order order = new Order();
-		assertTrue(order.createOrder("DailyNews", 12345, 12, 10, 2026));
+		assertTrue(order.createOrder("Daily-News", 1, 12, 10, 2026));
 	}
 
 	// TC17
