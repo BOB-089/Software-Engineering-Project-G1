@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class DeliveryDocketCLI {
 	private static final DeliveryDocketDAO deliveryDocketDAO = new DeliveryDocketDAO();
@@ -70,6 +71,18 @@ public class DeliveryDocketCLI {
 						   "\nDay: " + docket.getDay() +
 						   "\nMonth: " + docket.getMonth() + 
 						   "\nYear: " + docket.getYear());
+		ArrayList<Order> orders = deliveryDocketDAO.getOrdersForDocket(docket);
+		System.out.println("\n=== Orders for Delivery ===");
+		if (orders.isEmpty()) {
+			System.out.println("No orders found for this docket.");
+		} else {
+			for (Order order : orders) {
+				System.out.println("Order ID: " + order.getOrderId() +
+			            "\nCustomer ID: " + order.getCustomerId() +
+			            "\nPublication: " + order.getPublicationName() +
+			            "\n---------------------------");
+			}
+		}
 	}
 	
 	private static void updateDeliveryDocket(Scanner scanner) {

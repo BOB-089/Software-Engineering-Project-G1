@@ -34,8 +34,7 @@ public class MainCLI {
 				DeliveryAreaCLI.run(scanner);
 				break;
 			case "6": 
-				System.out.println("Incomplete");
-				//DeliveryDocketCLI.run(scanner);
+				DeliveryDocketCLI.run(scanner);
 				break;
 			case "7": 
 				DeliveryPersonCLI.run(scanner);
