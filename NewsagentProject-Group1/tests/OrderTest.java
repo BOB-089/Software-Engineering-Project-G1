@@ -45,6 +45,10 @@ public class OrderTest {
 		Order order = new Order();
 		assertFalse(order.verifyPublicationName(""));
 	}
+	
+// ------------------------------------------------------------
+//	CustomerId Tests (TC04–TC05)
+//------------------------------------------------------------
 
 	// TC04
 	// Test Objective: Verify customer ID is accepted when on the Customer
@@ -68,6 +72,10 @@ public class OrderTest {
 		Order order = new Order();
 		assertFalse(order.verifyCustomerId(0));
 	}
+	
+// ------------------------------------------------------------
+//	Day month and year tests (TC06–TC15)
+//------------------------------------------------------------
 
 	// TC06
 	// Test Objective: Verify day is accepted at the minimum boundary
@@ -179,6 +187,10 @@ public class OrderTest {
 		assertFalse(order.verifyYear(999));
 	}
 
+// ------------------------------------------------------------
+//	Creation Tests (TC16–TC21)
+//------------------------------------------------------------
+	
 	// TC16
 	// Test Objective: Verify order is created when all details are valid
 	// Input(s): "Daily-News", 12345, 12, 10, 2026
@@ -245,6 +257,10 @@ public class OrderTest {
 		assertFalse(order.createOrder("Daily News", 12345, 12, 10, 10000));
 	}
 
+// ------------------------------------------------------------
+//	Date Tests (TC22–TC23)
+//------------------------------------------------------------
+	
 	// TC22
 	// Test Objective: Verify date is accepted when valid
 	// Input(s): 28, 2, 2026
