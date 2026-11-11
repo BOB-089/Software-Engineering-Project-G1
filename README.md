@@ -65,18 +65,17 @@ Group - James Michael Joseph Luke
 
 # Week 10:
 -	(10) Finish all CRUD Methods for Bill – Luke, Michael
--	(10) Start a basic GUI and base login system for Newsagent who can now manage any entity with its database with buttons and other actions on the GUI – Joseph
 -	(10) Implement the order list for the delivery person who receives a new list of all publications to be delivered each day to each address and a system to check off if they have successfully delivered that publication – James
 -	(10) For the Newsagent, create a summary list of what publications each customer successfully received that day – Luke
 -	(10) Create and implement a stock system where it checks what items are in stock, send a message to the Newsagent when inventory of a certain item becomes low – Luke, Michael
 
-# Week 11:
+# Week 11 (Final Week):
 -	(11) Implement the calculated bill for a certain customer for that month and make sure the bill is included for the delivery person to deliver along side their publications – Joseph, James
 -	(11) Implement where the customer will not be charged for the time they are away or put any publications on their deliver list if they are on holiday/away – Luke, Michael
 -	(11) Implement a warning and reminder system for a scenario where the customer hasn’t paid their monthly bill and is sent the message along side their bill – James
+- (11) Make sure if a delivery is failed, it is added to the next day delivery docket – Luke
+-	(11) Perform an entire review and testing (for bugs etc) of the Project and reflect on how it meets the speciation’s of the project – ALL
 
 # Week 12:
 - Submission of Project, Each Person writes an individual reflection of the project on how they performed, what they would of done differently, how they worked as a team, what they learned, etc
--	(Week 12) Create a notification for the Customer if a publication they ordered is not available/can’t be delivered – Joseph
-- (Week 12) Make sure if a delivery is failed, it is added to the next day delivery docket – Luke
--	(Week 11-12) Perform an entire review and testing (for bugs etc) of the Project and reflect on how it meets the speciation’s of the project – ALL
+- Also demo the Project in action.
