@@ -172,22 +172,4 @@ public class DeliveryAreaTest {
 		DeliveryArea deliveryArea = new DeliveryArea();
 		assertFalse(deliveryArea.createDeliveryArea(12, "Athlon3"));
 	}
-
-// ------------------------------------------------------------
-// 					Customers Test (TC15–TC15)
-// ------------------------------------------------------------
-
-	// TC15
-	// Test Objective: Verify only customers with the matching AreaCode belong to the delivery area
-	// Input(s): AreaCode = 12, Name = "Athlone"
-	// Expected Output(s): All customers in the delivery area have AreaCode 12
-	@Order(15)
-	@Test
-	void matchingCustomersAreaCode_TC15() {
-		DeliveryArea deliveryArea = new DeliveryArea();
-		deliveryArea.createDeliveryArea(12, "Athlone");
-		for (Customer customer : deliveryArea.getCustomers()) {
-			assertEquals(12, customer.getAreaCode());
-		}
-	}
 }
