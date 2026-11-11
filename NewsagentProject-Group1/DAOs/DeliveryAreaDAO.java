@@ -12,6 +12,35 @@ public class DeliveryAreaDAO {
 
 	private static final String DELETE_DELIVERYAREA = "DELETE FROM DeliveryAreaTable WHERE areaCode=?";
 
+//  GET CUSTOMERS FOR DELIVERY AREA
+	public ArrayList<Customer> getCustomersByAreaCode(int areaCode) {
+		ArrayList<Customer> customers = new ArrayList<>();
+		String sql = """
+				SELECT *
+				FROM CustomerTable
+				WHERE areaCode = ?
+				""";
+		try (Connection conn = DatabaseConnection.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setInt(1, areaCode);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					Customer customer = new Customer();
+					customer.setCustomerId(rs.getInt("customerId"));
+					customer.setFirstName(rs.getString("firstName"));
+					customer.setSurname(rs.getString("surname"));
+					customer.setAddress(rs.getString("address"));
+					customer.setPhoneNumber(rs.getString("phoneNumber"));
+					customer.setOnHoliday(rs.getBoolean("onHoliday"));
+					customer.setPublicationsAvailable(rs.getBoolean("publicationsAvailable"));
+					customer.setAreaCode(rs.getInt("areaCode"));
+					customers.add(customer);
+				}
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+		return customers;
+	}
+
 //		CREATE DELIVERY AREA
 	public boolean addDeliveryArea(DeliveryArea deliveryArea) {
 		try (Connection conn = DatabaseConnection.getConnection();

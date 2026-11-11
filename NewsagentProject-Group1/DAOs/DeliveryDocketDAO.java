@@ -46,9 +46,7 @@ public class DeliveryDocketDAO {
 	                orders.add(order);
 	            }
 	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+	    } catch (SQLException e) { e.printStackTrace(); }
 	    return orders;
 	}
 	
@@ -63,10 +61,7 @@ public class DeliveryDocketDAO {
 	        stmt.setInt(1, docketId);
 	        stmt.setInt(2, orderId);
 	        return stmt.executeUpdate() > 0;
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+	    } catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 
 //		CREATE DELIVERY DOCKET

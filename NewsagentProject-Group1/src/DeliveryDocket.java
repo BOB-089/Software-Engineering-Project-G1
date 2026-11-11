@@ -7,8 +7,6 @@ public class DeliveryDocket {
     private int day;
     private int month;
     private int year;
-//    private final OrderDAO orderDAO = new OrderDAO();
-//    private final CustomerDAO customerDAO = new CustomerDAO();
 	
     public DeliveryDocket() {}
     
@@ -18,16 +16,6 @@ public class DeliveryDocket {
     public int getMonth() { return month; }
     public int getYear() { return year; }
     public String getDate() { return day + "/" + month + "/" + year; }
-    
-//    public ArrayList<Order> getOrders() { // Consider moving to DAO layer
-//        ArrayList<Order> orders = new ArrayList<>();
-//        ArrayList<Order> allOrders = orderDAO.getAllOrders();
-//        for (Order order : allOrders) {
-//        	Customer orderCustomer = customerDAO.findCustomerById(order.getCustomerId());
-//            if (order.getDate().equals(getDate()) && orderCustomer.getAreaCode() == areaCode) { orders.add(order); }
-//        }
-//        return orders;
-//    }
 
     public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
 	public void setDeliveryDocketId(int deliveryDocketId) { this.deliveryDocketId = deliveryDocketId; }

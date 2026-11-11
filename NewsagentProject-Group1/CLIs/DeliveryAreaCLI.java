@@ -57,7 +57,13 @@ public class DeliveryAreaCLI {
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
         DeliveryArea deliveryArea = deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode);
         if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found."); return; }
-        System.out.println("Name: " + deliveryArea.getName() + "\nCustomers: " + deliveryArea.getCustomers().size());
+        System.out.println("Name: " + deliveryArea.getName() + "\nCustomers: " + deliveryAreaDAO.getCustomersByAreaCode(areaCode).size());
+        for (Customer customer : deliveryAreaDAO.getCustomersByAreaCode(areaCode)) {
+        	System.out.println("First name: " + customer.getFirstName() + 
+					   		   "\nSurname: " + customer.getSurname() +
+					   		   "\nAddress: " + customer.getAddress() + 
+					   		   "\nPhone number: " + customer.getPhoneNumber());
+        }
     }
 
     private static void updateDeliveryArea(Scanner scanner) {
