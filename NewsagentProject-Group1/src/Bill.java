@@ -15,7 +15,7 @@ public class Bill {
     private int customerId;
     private int month;
     private int year;
-
+    private boolean hasPaid;
     private int billId;
 
     public Bill() {}
@@ -27,7 +27,8 @@ public class Bill {
     public int getMonth() { return month; }
     public int getYear() { return year; }
     public String getDate() { return month + "/" + year; }
-    public int getOrderId() { return billId; }
+    
+    public int getBillId() { return billId; }
 
     public boolean setCustomerId(int customerId) { if (verifyCustomerId(customerId)) { this.customerId = customerId; return true; } else return false; }
     public boolean setMonth(int month) { if (verifyMonth(month)) { this.month = month; return true; } else return false; }
