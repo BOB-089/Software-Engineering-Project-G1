@@ -1,32 +1,35 @@
 
 public class Publication {
-	private String publicationName;
-	private int publicationStock;
+	private String name;
+	private int stock;
+	private double price;
 	private int publicationId;
 	
 	public Publication() {}
 	
-	public String getPublicationName() { return publicationName; }
-    public int getPublicationStock() { return publicationStock; }
+	public String getName() { return name; }
+    public int getStock() { return stock; }
+    public double getPrice() { return price; }
     public int getPublicationId() { return publicationId; }
     
-    public boolean setPublicationName(String publicationName) { if (verifyPublicationName(publicationName)) { this.publicationName = publicationName; return true; } else return false; }
-    public boolean setPublicationStock(int publicationStock) { if (verifyPublicationStock(publicationStock)) { this.publicationStock = publicationStock; return true; } else return false; }
+    public boolean setName(String name) { if (verifyName(name)) { this.name = name; return true; } else return false; }
+    public boolean setStock(int stock) { if (verifyStock(stock)) { this.stock = stock; return true; } else return false; }
+    public boolean setPrice(double price) { if (verifyPrice(price)) { this.price = price; return true; } else return false; }
     public void setPublicationId(int publicationId) { this.publicationId = publicationId; }
     
-    public boolean verifyPublicationName(String publicationName) {
-        if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
-        return publicationName.matches("^[A-Za-z'-]+$");
+    public boolean verifyName(String name) {
+        if (name == null || name.trim().isEmpty()) { return false; }
+        return name.matches("^[A-Za-z'-]+$");
     }
     
-    public boolean verifyPublicationStock(int publicationStock) {
-		if (publicationStock <= 1) { return false; }
-		else { return true; }
-    }
+    public boolean verifyStock(int stock) { return stock > 0; }
     
-    public boolean createPublication(String publicationName, int publicationStock) {
-        if (!setPublicationName(publicationName)) return false;
-        if (!setPublicationStock(publicationStock)) return false;
+    public boolean verifyPrice(double price) { return String.format("%.2f", price).matches("^\\d+\\.\\d{2}$") && price > 0; }
+    
+    public boolean createPublication(String name, int stock, double price) {
+        if (!setName(name)) return false;
+        if (!setStock(stock)) return false;
+        if (!setPrice(price)) return false;
         return true;
     }
 }

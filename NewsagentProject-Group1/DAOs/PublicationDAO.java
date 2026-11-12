@@ -16,8 +16,8 @@ public class PublicationDAO {
 	public boolean addPublication(Publication publication) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(INSERT_PUBLICATION)) {
-			stmt.setString(1, publication.getPublicationName());
-			stmt.setInt(2, publication.getPublicationStock());
+			stmt.setString(1, publication.getName());
+			stmt.setInt(2, publication.getStock());
 			int rowsInserted = stmt.executeUpdate();
 			return rowsInserted > 0;
 		} catch (SQLException e) { e.printStackTrace(); return false; }
@@ -33,8 +33,8 @@ public class PublicationDAO {
 			if (rs.next()) {
 				publication = new Publication();
 				publication.setPublicationId(rs.getInt("publicationId"));
-				publication.setPublicationName(rs.getString("publicationName"));
-				publication.setPublicationStock(rs.getInt("publicationStock"));
+				publication.setName(rs.getString("publicationName"));
+				publication.setStock(rs.getInt("publicationStock"));
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
 		return publication;
@@ -49,8 +49,8 @@ public class PublicationDAO {
 			while (rs.next()) {
 				Publication publication = new Publication();
 				publication.setPublicationId(rs.getInt("publicationId"));
-				publication.setPublicationName(rs.getString("publicationName"));
-				publication.setPublicationStock(rs.getInt("publicationStock"));
+				publication.setName(rs.getString("publicationName"));
+				publication.setStock(rs.getInt("publicationStock"));
 				publications.add(publication);
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -61,8 +61,8 @@ public class PublicationDAO {
 	public boolean updatePublication(Publication publication) {
 		try (Connection conn = DatabaseConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(UPDATE_PUBLICATION)) {
-			stmt.setString(1, publication.getPublicationName());
-			stmt.setInt(2, publication.getPublicationStock());
+			stmt.setString(1, publication.getName());
+			stmt.setInt(2, publication.getStock());
 			stmt.setInt(3, publication.getPublicationId());
 			int rowsUpdated = stmt.executeUpdate();
 			return rowsUpdated > 0;

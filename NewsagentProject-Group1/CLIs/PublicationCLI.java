@@ -33,14 +33,18 @@ public class PublicationCLI {
 	
 	private static void createPublication(Scanner scanner) {
 		System.out.println("=== Create New Publication ===");
-		System.out.print("Publication name: ");
+		System.out.print("Name: ");
 		String publicationName = scanner.nextLine();
-		System.out.print("Publication stock: ");
-		int publicationStock;
-		try { publicationStock = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Publication stock must be a whole number."); return; }
+		System.out.print("Current stock: ");
+		int stock;
+		try { stock = Integer.parseInt(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Stock must be a whole number."); return; }
+		System.out.print("Price: ");
+		double price;
+		try { price = Double.parseDouble(scanner.nextLine()); }
+		catch (NumberFormatException e) { System.out.println("Price must be a whole number."); return; }
 		Publication publication = new Publication();
-		if (!publication.createPublication(publicationName, publicationStock)) { System.out.println("Invalid publication details."); return; }
+		if (!publication.createPublication(publicationName, stock, price)) { System.out.println("Invalid publication details."); return; }
 		if (publicationDAO.addPublication(publication)) {
 			System.out.println("Publication saved successfully.");
 		} else {
@@ -56,8 +60,9 @@ public class PublicationCLI {
 		catch (NumberFormatException e) { System.out.println("Publication Id must be a whole number."); return; }
 		Publication publication = publicationDAO.findPublicationById(publicationId); 
 		if (publication == null) { System.out.println("Publication with Id " + publicationId + " could not be found."); return; }
-		System.out.println("Publication name: " + publication.getPublicationName() + 
-						   "\nPublication stock: " + publication.getPublicationStock());
+		System.out.println("Name: " + publication.getName() + 
+						   "\nStock: " + publication.getStock() +
+						   "\nPrice: €" + publication.getPrice());
 	}
 	
 	private static void updatePublication(Scanner scanner) {
@@ -71,26 +76,33 @@ public class PublicationCLI {
 		System.out.println("=== Update Publication ===");
 		boolean updating = true;
 		while (updating) {
-			System.out.print("What would you like to update:\n" + "1 Publication name\n" + "2 Publication stock\n" + "3 Complete\n" + "Enter 1-3: ");
+			System.out.print("What would you like to update:\n" + "1 Name\n" + "2 Stock\n" + "3 Price\n" + "4 Complete\n" + "Enter 1-4: ");
 			String choice = scanner.nextLine();
 			boolean validEntry = true;
 			switch (choice) {
 			case "1":
-				System.out.print("Publication name: ");
-				validEntry = publication.setPublicationName(scanner.nextLine());
+				System.out.print("Name: ");
+				validEntry = publication.setName(scanner.nextLine());
 				break;
 			case "2":
-				System.out.print("Publication stock: ");
-				int publicationStock;
-			    try { publicationStock = Integer.parseInt(scanner.nextLine()); }
+				System.out.print("Stock: ");
+				int stock;
+			    try { stock = Integer.parseInt(scanner.nextLine()); }
 			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = publication.setPublicationStock(publicationStock);
+			    validEntry = publication.setStock(stock);
 				break;
 			case "3":
+				System.out.print("Price: ");
+				double price;
+			    try { price = Double.parseDouble(scanner.nextLine()); }
+			    catch (NumberFormatException e) { validEntry = false; break; }
+			    validEntry = publication.setPrice(price);
+				break;
+			case "4":
 				updating = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-3.");
+				System.out.println("Entry Invalid. Please enter 1-4.");
 			}
 			if (!validEntry) { System.out.println("Invalid value entered."); }
 		}
