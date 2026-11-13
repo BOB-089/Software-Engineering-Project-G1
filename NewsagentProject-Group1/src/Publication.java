@@ -19,12 +19,12 @@ public class Publication {
     
     public boolean verifyName(String name) {
         if (name == null || name.trim().isEmpty()) { return false; }
-        return name.matches("^[A-Za-z'-]+$");
+        return name.matches("^[A-Za-z0-9' -]+$");
     }
     
     public boolean verifyStock(int stock) { return stock > 0; }
     
-    public boolean verifyPrice(double price) { return String.format("%.2f", price).matches("^\\d+\\.\\d{2}$") && price > 0; }
+    public boolean verifyPrice(double price) { return price > 0 && Math.round(price * 100) == price * 100; }
     
     public boolean createPublication(String name, int stock, double price) {
         if (!setName(name)) return false;

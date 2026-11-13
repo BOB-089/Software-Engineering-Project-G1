@@ -13,7 +13,7 @@ public class Order {
 
     public Order() {}
     
-    public String publicationNameQuery = "SELECT COUNT(*) FROM PublicationTable WHERE publicationName = ?";
+    public String publicationNameQuery = "SELECT COUNT(*) FROM PublicationTable WHERE name = ?";
     public String customerIdQuery = "SELECT COUNT(*) FROM CustomerTable WHERE customerId = ?";
 
     public String getPublicationName() { return publicationName; }

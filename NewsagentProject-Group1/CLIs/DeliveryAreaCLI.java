@@ -101,7 +101,7 @@ public class DeliveryAreaCLI {
         		System.out.println("Failed to delete delivery area.");
         	}
         } else {
-        	System.out.println("Deletion cancelled. Returning to system home page.");
+        	System.out.println("Deletion cancelled.");
         }
     }
 }

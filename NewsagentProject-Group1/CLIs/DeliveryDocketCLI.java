@@ -161,7 +161,7 @@ public class DeliveryDocketCLI {
         		System.out.println("Failed to delete docket.");
         	}
         } else {
-        	System.out.println("Deletion cancelled. Returning to system home page.");
+        	System.out.println("Deletion cancelled.");
         }
 	}
 }

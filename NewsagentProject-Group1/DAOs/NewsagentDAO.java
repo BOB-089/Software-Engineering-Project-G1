@@ -8,9 +8,9 @@ public class NewsagentDAO {
 	
 	private static final String SELECT_ALL = "SELECT * FROM NewsagentTable";
 	
-	private static final String UPDATE_NEWSAGENT = "UPDATE NewsagentTable " + "SET firstName=?, surname=?, phoneNumber=? " + "WHERE newsagentID=?";
+	private static final String UPDATE_NEWSAGENT = "UPDATE NewsagentTable " + "SET firstName=?, surname=?, phoneNumber=? " + "WHERE newsagentId=?";
 	
-	private static final String DELETE_NEWSAGENT = "DELETE FROM NewsagentTable WHERE newsagentID=?";
+	private static final String DELETE_NEWSAGENT = "DELETE FROM NewsagentTable WHERE newsagentId=?";
 	
 //		CREATE NEWSAGENT
 	public boolean addNewsagent(Newsagent newsagent) {
@@ -50,7 +50,7 @@ public class NewsagentDAO {
 		ResultSet rs = stmt.executeQuery()) {
 			while (rs.next()) {
 				Newsagent newsagent = new Newsagent();
-				newsagent.setId(rs.getInt("newsagentID"));
+				newsagent.setId(rs.getInt("newsagentId"));
 				newsagent.setFirstName(rs.getString("firstName"));
 				newsagent.setSurname(rs.getString("surname"));
 				newsagent.setPhoneNumber(rs.getString("phoneNumber"));

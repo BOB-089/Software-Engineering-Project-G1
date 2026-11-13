@@ -121,7 +121,7 @@ public class NewsagentCLI {
 				System.out.println("Failed to delete newsagent.");
 			}
 		} else {
-			System.out.println("Deletion cancelled. Returning to system home page.");
+			System.out.println("Deletion cancelled.");
 		}
 	}
 }

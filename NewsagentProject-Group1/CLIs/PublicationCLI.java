@@ -42,7 +42,7 @@ public class PublicationCLI {
 		System.out.print("Price: ");
 		double price;
 		try { price = Double.parseDouble(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Price must be a whole number."); return; }
+		catch (NumberFormatException e) { System.out.println("Invalid price."); return; }
 		Publication publication = new Publication();
 		if (!publication.createPublication(publicationName, stock, price)) { System.out.println("Invalid publication details."); return; }
 		if (publicationDAO.addPublication(publication)) {
@@ -130,7 +130,7 @@ public class PublicationCLI {
 				System.out.println("Failed to delete publication.");
 			}
 		} else {
-			System.out.println("Deletion cancelled. Returning to system home page.");
+			System.out.println("Deletion cancelled.");
 		}
 	}
 }

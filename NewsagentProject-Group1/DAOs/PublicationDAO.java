@@ -2,13 +2,13 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class PublicationDAO {
-	private static final String INSERT_PUBLICATION = "INSERT INTO PublicationTable " + "(publicationName, publicationStock) " + "VALUES (?, ?)";
+	private static final String INSERT_PUBLICATION = "INSERT INTO PublicationTable " + "(name, stock, price) " + "VALUES (?, ?, ?)";
 
 	private static final String SELECT_BY_ID = "SELECT * FROM PublicationTable WHERE publicationId = ?";
 
 	private static final String SELECT_ALL = "SELECT * FROM PublicationTable";
 
-	private static final String UPDATE_PUBLICATION = "UPDATE PublicationTable " + "SET publicationName=?, publicationStock=? " + "WHERE publicationId=?";
+	private static final String UPDATE_PUBLICATION = "UPDATE PublicationTable " + "SET name=?, stock=?, price=? " + "WHERE publicationId=?";
 
 	private static final String DELETE_PUBLICATION = "DELETE FROM PublicationTable WHERE publicationId=?";
 
@@ -18,6 +18,7 @@ public class PublicationDAO {
 		PreparedStatement stmt = conn.prepareStatement(INSERT_PUBLICATION)) {
 			stmt.setString(1, publication.getName());
 			stmt.setInt(2, publication.getStock());
+			stmt.setDouble(3, publication.getPrice());
 			int rowsInserted = stmt.executeUpdate();
 			return rowsInserted > 0;
 		} catch (SQLException e) { e.printStackTrace(); return false; }
@@ -33,8 +34,9 @@ public class PublicationDAO {
 			if (rs.next()) {
 				publication = new Publication();
 				publication.setPublicationId(rs.getInt("publicationId"));
-				publication.setName(rs.getString("publicationName"));
-				publication.setStock(rs.getInt("publicationStock"));
+				publication.setName(rs.getString("name"));
+				publication.setStock(rs.getInt("stock"));
+				publication.setPrice(rs.getDouble("price"));
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
 		return publication;
@@ -49,8 +51,9 @@ public class PublicationDAO {
 			while (rs.next()) {
 				Publication publication = new Publication();
 				publication.setPublicationId(rs.getInt("publicationId"));
-				publication.setName(rs.getString("publicationName"));
-				publication.setStock(rs.getInt("publicationStock"));
+				publication.setName(rs.getString("name"));
+				publication.setStock(rs.getInt("stock"));
+				publication.setPrice(rs.getDouble("price"));
 				publications.add(publication);
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -63,10 +66,10 @@ public class PublicationDAO {
 		PreparedStatement stmt = conn.prepareStatement(UPDATE_PUBLICATION)) {
 			stmt.setString(1, publication.getName());
 			stmt.setInt(2, publication.getStock());
-			stmt.setInt(3, publication.getPublicationId());
+			stmt.setDouble(3, publication.getPrice());
+			stmt.setInt(4, publication.getPublicationId());
 			int rowsUpdated = stmt.executeUpdate();
 			return rowsUpdated > 0;
-
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 

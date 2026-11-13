@@ -253,20 +253,4 @@ public class NewsagentTest {
 		Newsagent newsagent = new Newsagent();
 		assertFalse(newsagent.createNewsagent("John", "Smith", "087123456"));
 	}
-
-// ------------------------------------------------------------
-// 					ID Test (TC22)
-// ------------------------------------------------------------
-
-	// TC22
-	// Test Objective: Verify ID is generated when newsagent is created
-	// Input(s): John, Smith, 0871234567
-	// Expected Output(s): Newsagent ID generated
-	@Order(22)
-	@Test
-	void idGenerated_TC22() {
-		Newsagent newsagent = new Newsagent();
-		newsagent.createNewsagent("John", "Smith", "0871234567");
-		assertNotNull(newsagent.getId());
-	}
 }

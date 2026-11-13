@@ -8,13 +8,12 @@ import org.junit.jupiter.api.MethodOrderer;
 public class OrderTest {
 
 // ------------------------------------------------------------
-//		PublicationName Tests (TC01–TC03)
-//------------------------------------------------------------
+// 					PublicationName Tests (TC01–TC03)
+// ------------------------------------------------------------
 	
 
 	// TC01
 	// Test Objective: Verify publication name is rejected when the publication is not on the SQL database
-	// long
 	// Input(s): Publication Name = "A"
 	// Expected Output(s): Invalid Publication Name
 	@org.junit.jupiter.api.Order(1)
@@ -47,8 +46,8 @@ public class OrderTest {
 	}
 	
 // ------------------------------------------------------------
-//	CustomerId Tests (TC04–TC05)
-//------------------------------------------------------------
+// 					CustomerId Tests (TC04–TC05)
+// ------------------------------------------------------------
 
 	// TC04
 	// Test Objective: Verify customer ID is accepted when on the Customer
@@ -74,8 +73,8 @@ public class OrderTest {
 	}
 	
 // ------------------------------------------------------------
-//	Day month and year tests (TC06–TC15)
-//------------------------------------------------------------
+// 					Day month and year tests (TC06–TC15)
+// ------------------------------------------------------------
 
 	// TC06
 	// Test Objective: Verify day is accepted at the minimum boundary
@@ -188,8 +187,8 @@ public class OrderTest {
 	}
 
 // ------------------------------------------------------------
-//	Creation Tests (TC16–TC21)
-//------------------------------------------------------------
+// 					Creation Tests (TC16–TC21)
+// ------------------------------------------------------------
 	
 	// TC16
 	// Test Objective: Verify order is created when all details are valid
@@ -258,8 +257,8 @@ public class OrderTest {
 	}
 
 // ------------------------------------------------------------
-//	Date Tests (TC22–TC23)
-//------------------------------------------------------------
+// 					Date Tests (TC22–TC23)
+// ------------------------------------------------------------
 	
 	// TC22
 	// Test Objective: Verify date is accepted when valid

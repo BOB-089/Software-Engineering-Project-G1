@@ -78,7 +78,7 @@ public class DeliveryPersonTest {
     }
 
 // ------------------------------------------------------------
-// 					SURNAME Tests (TC07–TC12)
+// 					Surname Tests (TC07–TC12)
 // ------------------------------------------------------------
 
     // TC07
@@ -286,7 +286,7 @@ public class DeliveryPersonTest {
     // Expected Output(s): Delivery person not created
 	@Order(24)
     @Test
-    void createAccountInvalidFirstName_TC24() {
+    void createInvalidFirstName_TC24() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertFalse(deliveryPerson.createDeliveryPerson("", "Smith", "0871234567", 12));
     }
@@ -297,7 +297,7 @@ public class DeliveryPersonTest {
     // Expected Output(s): Delivery person not created
 	@Order(25)
     @Test
-    void createAccountInvalidSurname_TC25() {
+    void createInvalidSurname_TC25() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertFalse(deliveryPerson.createDeliveryPerson("John", "", "0871234567", 12));
     }
@@ -308,7 +308,7 @@ public class DeliveryPersonTest {
     // Expected Output(s): Delivery person not created
 	@Order(26)
     @Test
-    void createAccountInvalidPhoneNumber_TC26() {
+    void createInvalidPhoneNumber_TC26() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertFalse(deliveryPerson.createDeliveryPerson("John", "Smith", "087123456", 12));
     }
@@ -319,7 +319,7 @@ public class DeliveryPersonTest {
     // Expected Output(s): Delivery person not created
 	@Order(27)
     @Test
-    void createAccountInvalidAreaCode_TC27() {
+    void createInvalidAreaCode_TC27() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertFalse(deliveryPerson.createDeliveryPerson("John", "Smith", "0871234567", 0));
     }

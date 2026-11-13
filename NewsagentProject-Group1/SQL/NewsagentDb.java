@@ -7,7 +7,7 @@ public class NewsagentDb {
         	Connection conn = DatabaseConnection.getConnection();
             String sql = """
                 CREATE TABLE IF NOT EXISTS NewsagentTable (
-                    newsagentID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    newsagentId INTEGER PRIMARY KEY AUTOINCREMENT,
                     firstName TEXT NOT NULL,
                     surname TEXT NOT NULL,
                     phoneNumber TEXT NOT NULL
