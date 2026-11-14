@@ -12,7 +12,7 @@ public class DeliveryDocketDAO {
 
 	private static final String DELETE_DELIVERYDOCKET = "DELETE FROM DeliveryDocketTable WHERE deliveryDocketId=?";
 	
-//		GET ORDER
+//		GET ORDERS
 	public ArrayList<Order> getOrdersForDocket(DeliveryDocket docket) {
 	    ArrayList<Order> orders = new ArrayList<>();
 	    String sql = """

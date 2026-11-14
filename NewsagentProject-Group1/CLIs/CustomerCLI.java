@@ -66,7 +66,9 @@ public class CustomerCLI {
 						   "\nSurname: " + customer.getSurname() +
 						   "\nAddress: " + customer.getAddress() + 
 						   "\nPhone number: " + customer.getPhoneNumber() + 
-						   "\nArea code: " + customer.getAreaCode());
+						   "\nArea code: " + customer.getAreaCode() +
+						   "\nOn holiday: " + (customer.isOnHoliday() ? "Yes" : "No") +
+						   "\nPublications available: " + (customer.isPublicationsAvailable() ? "Yes" : "No"));
 	}
 
 	private static void updateCustomer(Scanner scanner) {
@@ -81,7 +83,7 @@ public class CustomerCLI {
 		boolean updating = true;
 		while (updating) {
 			System.out.print("What would you like to update:\n" + "1 First name\n" + "2 Surname\n"
-					+ "3 Address\n" + "4 Phone number\n" + "5 Area code\n" + "6 Complete\n" + "Enter 1-6: ");
+					+ "3 Address\n" + "4 Phone number\n" + "5 Area code\n" + "6 On holiday\n"  + "7 Complete\n" + "Enter 1-7: ");
 			String choice = scanner.nextLine();
 			boolean validEntry = true;
 			switch (choice) {
@@ -109,10 +111,21 @@ public class CustomerCLI {
 			    validEntry = customer.setAreaCode(areaCode);
 			    break;
 			case "6":
+				System.out.print("On holiday (yes/no): ");
+				String holidayInput = scanner.nextLine().trim();
+			    if (holidayInput.equalsIgnoreCase("yes")) {
+			        customer.setOnHoliday(true);
+			    } else if (holidayInput.equalsIgnoreCase("no")) {
+			        customer.setOnHoliday(false);
+			    } else {
+			        validEntry = false;
+			    }
+				break;
+			case "7":
 				updating = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-6.");
+				System.out.println("Entry Invalid. Please enter 1-7.");
 			}
 			if (!validEntry) { System.out.println("Invalid value entered."); }
 		}

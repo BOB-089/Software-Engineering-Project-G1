@@ -52,15 +52,13 @@ public class Customer {
     public boolean verifyAreaCode(int areaCode) { return areaCode >= 1 && areaCode <= 24; }
 
     public boolean createCustomer(String firstName, String surname, String address, String phoneNumber, int areaCode) {
-        try {
-        	if (!setFirstName(firstName)) return false;
-            if (!setSurname(surname)) return false;
-            if (!setAddress(address)) return false;
-            if (!setPhoneNumber(phoneNumber)) return false;
-            if (!setAreaCode(areaCode)) return false;
-            setOnHoliday(false);
-            setPublicationsAvailable(true);
-        } catch(Exception e) { System.out.println("Failed to create customer:"); e.printStackTrace(); }
+    	if (!setFirstName(firstName)) return false;
+        if (!setSurname(surname)) return false;
+        if (!setAddress(address)) return false;
+        if (!setPhoneNumber(phoneNumber)) return false;
+        if (!setAreaCode(areaCode)) return false;
+        setOnHoliday(false);
+        setPublicationsAvailable(true);
         return true;
     }
 }
