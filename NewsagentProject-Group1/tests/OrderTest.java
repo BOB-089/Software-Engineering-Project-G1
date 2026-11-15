@@ -12,65 +12,64 @@ public class OrderTest {
 // ------------------------------------------------------------
 	
 
-	// TC01
-	// Test Objective: Verify publication name is rejected when the publication is not on the SQL database
-	// Input(s): Publication Name = "A"
-	// Expected Output(s): Invalid Publication Name
+	 // TC01
+    // Test Objective: Verify publication name is accepted when exactly 1 character long
+    // Input(s): Publication Name = "A"
+    // Expected Output(s): Publication name accepted
 	@org.junit.jupiter.api.Order(1)
-	@Test
-	void validPublicationNameNotOnTable_TC01() {
-		Order order = new Order();
-		assertFalse(order.verifyPublicationName("A"));
-	}
+    @Test
+    void validPublicationNameMinBoundary_TC01() {
+        Order order = new Order();
+        assertTrue(order.verifyPublicationName("A"));
+    }
 
-	// TC02
-	// Test Objective: Verify publication name is accepted when the publication is on the SQL database
-	// Input(s): Publication Name = "Daily-News"
-	// Expected Output(s): Publication name accepted
+    // TC02
+    // Test Objective: Verify publication name is accepted when 49 characters long
+    // Input(s): Publication Name = 49 characters
+    // Expected Output(s): Publication name accepted
 	@org.junit.jupiter.api.Order(2)
-	@Test
-	void validPublicationNameOnTable_TC02() {
-		Order order = new Order();
-		assertTrue(order.verifyPublicationName("Daily-News"));
-	}
+    @Test
+    void validPublicationNameMaxBoundary_TC02() {
+        Order order = new Order();
+        assertTrue(order.verifyPublicationName("A".repeat(49)));
+    }
 
-	// TC03
-	// Test Objective: Verify publication name is rejected when blank
-	// Input(s): Publication Name = ""
-	// Expected Output(s): Invalid Publication Name
+    // TC03
+    // Test Objective: Verify publication name is rejected when blank
+    // Input(s): Publication Name = ""
+    // Expected Output(s): Invalid Publication Name
 	@org.junit.jupiter.api.Order(3)
-	@Test
-	void invalidPublicationNameBlank_TC03() {
-		Order order = new Order();
-		assertFalse(order.verifyPublicationName(""));
-	}
+    @Test
+    void invalidPublicationNameBlank_TC03() {
+        Order order = new Order();
+        assertFalse(order.verifyPublicationName(""));
+    }
 	
 // ------------------------------------------------------------
 // 					CustomerId Tests (TC04–TC05)
 // ------------------------------------------------------------
 
-	// TC04
-	// Test Objective: Verify customer ID is accepted when on the Customer
-	// table SQL database
-	// Input(s): Customer ID = 1
-	// Expected Output(s): Customer ID accepted
-	@org.junit.jupiter.api.Order(4)
-	@Test
-	void validCustomerID_TC04() {
-		Order order = new Order();
-		assertTrue(order.verifyCustomerId(1));
-	}
-
 	// TC05
-	// Test Objective: Verify customer ID is rejected when on the Customer table
-	// Input(s): Customer ID = 0
-	// Expected Output(s): Invalid Customer ID
+    // Test Objective: Verify customer ID is accepted when 1 or more characters
+    // Input(s): Customer ID = 1
+    // Expected Output(s): Customer ID accepted
+	@org.junit.jupiter.api.Order(4)
+    @Test
+    void validCustomerID_TC04() {
+        Order order = new Order();
+        assertTrue(order.verifyCustomerId(1));
+    }
+
+    // TC06
+    // Test Objective: Verify customer ID is less than 1
+    // Input(s): Customer ID = 0
+    // Expected Output(s): Invalid Customer ID
 	@org.junit.jupiter.api.Order(5)
-	@Test
-	void invalidCustomerIDBlank_TC05() {
-		Order order = new Order();
-		assertFalse(order.verifyCustomerId(0));
-	}
+    @Test
+    void invalidCustomerIDBlank_TC05() {
+        Order order = new Order();
+        assertFalse(order.verifyCustomerId(0));
+    }
 	
 // ------------------------------------------------------------
 // 					Day month and year tests (TC06–TC15)
@@ -198,7 +197,7 @@ public class OrderTest {
 	@Test
 	void createValidOrder_TC16() {
 		Order order = new Order();
-		assertTrue(order.createOrder("Daily-News", 1, 12, 10, 2026));
+		assertTrue(order.createOrder("DailyNews", 1, 12, 10, 2026));
 	}
 
 	// TC17
