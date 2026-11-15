@@ -12,9 +12,6 @@ public class Order {
     private int orderId;
 
     public Order() {}
-    
-    public String publicationNameQuery = "SELECT COUNT(*) FROM PublicationTable WHERE name = ?";
-    public String customerIdQuery = "SELECT COUNT(*) FROM CustomerTable WHERE customerId = ?";
 
     public String getPublicationName() { return publicationName; }
     public int getCustomerId() { return customerId; }
@@ -35,45 +32,11 @@ public class Order {
 
     public boolean verifyPublicationName(String publicationName) {
         if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
-        else {
-			try (Connection conn = DatabaseConnection.getConnection();
-		            PreparedStatement stmt = conn.prepareStatement(publicationNameQuery)) {
-		            stmt.setString(1, publicationName);
-		            ResultSet rs = stmt.executeQuery();
-		            if (rs.next()) {
-		                int count = rs.getInt(1);
-		                if (count > 0) {
-		                    return true;
-		                } else {
-		                    return false;
-		                }
-		            }
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        } 
-			}
         return publicationName.matches("^[A-Za-z'-]+$");
     }
 
     public boolean verifyCustomerId(int customerId) {
-		if (customerId < 1) { return false; }
-		else {
-			try (Connection conn = DatabaseConnection.getConnection();
-		             PreparedStatement stmt = conn.prepareStatement(customerIdQuery)) {
-		            stmt.setInt(1, customerId);
-		            ResultSet rs = stmt.executeQuery();
-		            if (rs.next()) {
-		                int count = rs.getInt(1);
-		                if (count > 0) {
-		                    return true;
-		                } else {
-		                    return false;
-		                }
-		            }
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        } 
-			}
+		if (customerId < 1) { return false; } 
 		return publicationsAvailable;
     }
 

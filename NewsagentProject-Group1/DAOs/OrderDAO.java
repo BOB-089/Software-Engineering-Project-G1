@@ -11,6 +11,10 @@ public class OrderDAO {
 	private static final String UPDATE_ORDER = "UPDATE OrderTable " +  "SET publicationName=?, customerId=?, day=?, month=?, year=?, publicationsAvailable=? " + "WHERE orderId=?";
 	
 	private static final String DELETE_ORDER = "DELETE FROM OrderTable WHERE orderId=?";
+	
+	private static final String CHECK_CUSTOMER_EXISTS = "SELECT COUNT(*) FROM CustomerTable WHERE customerId = ?";
+	
+	private static final String CHECK_PUBLICATION_EXISTS = "SELECT COUNT(*) FROM PublicationTable WHERE name = ?";
 		
 //		CREATE ORDER
 	public boolean addOrder(Order order) {
@@ -95,5 +99,26 @@ public class OrderDAO {
 			int rowsDeleted = stmt.executeUpdate();
 			return rowsDeleted > 0;
 		} catch (SQLException e) { e.printStackTrace(); return false; }
+	}
+	
+//	CHECK CUSTOMER EXISTS
+	public boolean customerExists(int customerId) {
+		try (Connection conn = DatabaseConnection.getConnection();
+		     PreparedStatement stmt = conn.prepareStatement(CHECK_CUSTOMER_EXISTS)) {
+		     	stmt.setInt(1, customerId);
+		        ResultSet rs = stmt.executeQuery();
+		        if (rs.next()) { return rs.getInt(1) > 0; }
+		} catch (Exception e) { e.printStackTrace(); }
+		return false;
+	}
+//	CHECK PUBLICATION EXISTS
+	public boolean publicationExists(String name) {
+		try (Connection conn = DatabaseConnection.getConnection();
+		     PreparedStatement stmt = conn.prepareStatement(CHECK_PUBLICATION_EXISTS)) {
+		     	stmt.setString(1, name);
+		        ResultSet rs = stmt.executeQuery();
+		        if (rs.next()) { return rs.getInt(1) > 0; }
+		} catch (Exception e) { e.printStackTrace(); }
+		return false;
 	}
 }
