@@ -57,7 +57,7 @@ public class OrderTest {
     @Test
     void validCustomerID_TC04() {
         Order order = new Order();
-        assertTrue(order.verifyCustomerId(1));
+        assertTrue(order.verifyCustomerId(2));
     }
 
     // TC06
@@ -197,7 +197,7 @@ public class OrderTest {
 	@Test
 	void createValidOrder_TC16() {
 		Order order = new Order();
-		assertTrue(order.createOrder("DailyNews", 1, 12, 10, 2026));
+		assertTrue(order.createOrder("DailyNews", 2, 12, 10, 2026));
 	}
 
 	// TC17

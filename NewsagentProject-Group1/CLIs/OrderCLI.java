@@ -35,10 +35,12 @@ public class OrderCLI {
 		System.out.println("=== Create New Order ===");
 		System.out.print("Publication name: ");
 		String publicationName = scanner.nextLine();
+		if (!orderDAO.publicationExists(publicationName)) { System.out.println("Publication with name " + publicationName + " could not be found."); return; }
 		System.out.print("Customer Id: ");
 		int customerId;
 		try { customerId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
+		if (!orderDAO.customerExists(customerId)) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
 		System.out.print("Day: ");
 		int day;
 		try { day = Integer.parseInt(scanner.nextLine()); }
@@ -95,13 +97,15 @@ public class OrderCLI {
 			switch (choice) {
 			case "1":
 				System.out.print("Publication name: ");
-				validEntry = order.setPublicationName(scanner.nextLine());
+				String publicationName = scanner.nextLine();
+				if (!orderDAO.publicationExists(publicationName)) { System.out.println("Publication with name " + publicationName + " could not be found."); return; }
 				break;
 			case "2":
 				System.out.print("Customer Id: ");
 				int customerId;
-			    try { customerId = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
+				try { customerId = Integer.parseInt(scanner.nextLine()); }
+				catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
+				if (!orderDAO.customerExists(customerId)) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
 			    validEntry = order.setCustomerId(customerId);
 				break;
 			case "3":
