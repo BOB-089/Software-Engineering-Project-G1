@@ -37,7 +37,7 @@ public class Order {
 
     public boolean verifyCustomerId(int customerId) {
 		if (customerId < 1) { return false; } 
-		return publicationsAvailable;
+		return customerId > 0;
     }
 
     public boolean verifyDay(int day) { return day >= 1 && day <= 31; }

@@ -57,7 +57,7 @@ public class OrderTest {
     @Test
     void validCustomerID_TC04() {
         Order order = new Order();
-        assertTrue(order.verifyCustomerId(2));
+        assertTrue(order.verifyCustomerId(1));
     }
 
     // TC06
