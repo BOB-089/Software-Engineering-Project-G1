@@ -6,8 +6,14 @@ public class OrderCLI {
 	public static void run(Scanner scanner) {
 		boolean running = true;
 		while (running) {
-			System.out.print("What would you like to do:\n" + "1 Create order\n" + "2 Read order\n"
-					+ "3 Update order\n" + "4 Delete order\n" + "5 Return\n" + "Enter 1-5: ");
+			System.out.println("\n=== Order Menu ===");
+			System.out.print("What would you like to do:\n" + 
+							 "1 Create order\n" + 
+							 "2 Read order\n" + 
+							 "3 Update order\n" + 
+							 "4 Delete order\n" + 
+							 "5 Return\n" + 
+							 "Enter 1-5: ");
 			String choice = scanner.nextLine();
 			switch (choice) {
 			case "1":
@@ -26,13 +32,13 @@ public class OrderCLI {
 				running = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-5.");
+				System.out.println("Invalid entry. Please enter 1-5.");
 			}
 		}
 	}
 
 	private static void createOrder(Scanner scanner) {
-		System.out.println("=== Create New Order ===");
+		System.out.println("\n=== Create New Order ===");
 		System.out.print("Publication name: ");
 		String publicationName = scanner.nextLine();
 		if (!orderDAO.publicationExists(publicationName)) { System.out.println("Publication with name " + publicationName + " could not be found."); return; }
@@ -56,16 +62,14 @@ public class OrderCLI {
 		Order order = new Order();
 		if (!order.createOrder(publicationName, customerId, day, month, year)) { System.out.println("Invalid order details."); return; }
 		if (orderDAO.addOrder(order)) {
-			System.out.println(
-			"Order saved successfully.");
+			System.out.println("Order saved successfully.");
 		} else {
-			System.out.println(
-			"Failed to save order.");
+			System.out.println("Failed to save order.");
 		}
 	}
 
 	private static void readOrder(Scanner scanner) {
-		System.out.println("=== Find Order ===");
+		System.out.println("\n=== Read Order ===");
 		System.out.print("Order Id: ");
 		int orderId;
 		try { orderId = Integer.parseInt(scanner.nextLine()); }
@@ -80,62 +84,66 @@ public class OrderCLI {
 	}
 
 	private static void updateOrder(Scanner scanner) {
-		System.out.println("=== Find Order ===");
+		System.out.println("\n=== Update Order ===");
 		System.out.print("Order Id: ");
 		int orderId;
 		try { orderId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Order Id must be a whole number."); return; }
 		Order order = orderDAO.findOrderById(orderId);
 		if (order == null) { System.out.println("Order with Id " + orderId + " could not be found."); return; }
-		System.out.println("=== Update Order ===");
 		boolean updating = true;
 		while (updating) {
-			System.out.print("What would you like to update:\n" + "1 Publication name\n" + "2 Customer Id\n"
-					+ "3 Day\n" + "4 Month\n" + "5 Year\n" + "6 Complete\n" + "Enter 1-6: ");
+			System.out.print("What would you like to update:\n" + 
+							 "1 Publication name\n" + 
+							 "2 Customer Id\n" + 
+							 "3 Day\n" + 
+							 "4 Month\n" + 
+							 "5 Year\n" + 
+							 "6 Complete\n" + 
+							 "Enter 1-6: ");
 			String choice = scanner.nextLine();
-			boolean validEntry = true;
 			switch (choice) {
 			case "1":
 				System.out.print("Publication name: ");
 				String publicationName = scanner.nextLine();
-				if (!orderDAO.publicationExists(publicationName)) { System.out.println("Publication with name " + publicationName + " could not be found."); return; }
+				if (!orderDAO.publicationExists(publicationName)) { System.out.println("Publication with name " + publicationName + " could not be found."); break; }
+				order.setPublicationName(publicationName);
 				break;
 			case "2":
 				System.out.print("Customer Id: ");
 				int customerId;
 				try { customerId = Integer.parseInt(scanner.nextLine()); }
-				catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
-				if (!orderDAO.customerExists(customerId)) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
-			    validEntry = order.setCustomerId(customerId);
+			    catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); break; }
+			    if (!orderDAO.customerExists(customerId)) { System.out.println("Customer with Id " + customerId + " could not be found."); break; }
+			    order.setCustomerId(customerId);
 				break;
 			case "3":
 				System.out.print("Day: ");
-				int day;
+			    int day;
 			    try { day = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = order.setDay(day);
-				break;
+			    catch (NumberFormatException e) { System.out.println("Day must be a whole number."); break; }
+			    if (!order.setDay(day)) { System.out.println("Day must be between 1 and 31."); }
+			    break;
 			case "4":
 				System.out.print("Month: ");
-				int month;
+			    int month;
 			    try { month = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = order.setMonth(month);
-				break;
+			    catch (NumberFormatException e) { System.out.println("Month must be a whole number."); break; }
+			    if (!order.setMonth(month)) { System.out.println("Month must be between 1 and 12."); }
+			    break;
 			case "5":
 				System.out.print("Year: ");
-				int year;
+			    int year;
 			    try { year = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = order.setYear(year);
-				break;
+			    catch (NumberFormatException e) { System.out.println("Year must be a whole number."); break; }
+			    if (!order.setYear(year)) { System.out.println("Year must be 1900 or greater."); }
+			    break;
 			case "6":
 				updating = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-6.");
+				System.out.println("Invalid entry. Please enter 1-6.");
 			}
-			if (!validEntry) { System.out.println("Invalid value entered."); }
 		}
 		if (orderDAO.updateOrder(order)) {
 			System.out.println("Order updated.");
@@ -145,7 +153,7 @@ public class OrderCLI {
 	}
 
 	private static void deleteOrder(Scanner scanner) {
-		System.out.println("=== Delete Order ===");
+		System.out.println("\n=== Delete Order ===");
 		System.out.print("Order Id: ");
 		int orderId;
 		try { orderId = Integer.parseInt(scanner.nextLine()); }

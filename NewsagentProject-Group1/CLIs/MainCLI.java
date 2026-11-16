@@ -5,11 +5,12 @@ public class MainCLI {
 		Scanner scanner = new Scanner(System.in);
 		boolean running = true;
 		while (running) {
-			System.out.print("What do you want to run\n" + 
+			System.out.println("\n=== Main Menu ===");
+			System.out.print("What do you want to run:\n" + 
 							 "1 - NewsagentCLI\n" + 
 							 "2 - CustomerCLI\n" + 
 							 "3 - OrderCLI\n" + 
-							 "4 - PublicationsCLI\n" +
+							 "4 - PublicationCLI\n" +
 							 "5 - DeliveryAreaCLI\n" +
 							 "6 - DeliveryDocketCLI\n" +
 							 "7 - DeliveryPersonCLI\n" +
@@ -40,14 +41,13 @@ public class MainCLI {
 				DeliveryPersonCLI.run(scanner);
 				break;
 			case "8": 
-				System.out.println("Incomplete");
-				//BillCLI.run(scanner);
+				BillCLI.run(scanner);
 				break;
 			case "9": 
 				running = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-9");
+				System.out.println("Invalid entry. Please enter 1-9.");
 			}
 		}
 		scanner.close();

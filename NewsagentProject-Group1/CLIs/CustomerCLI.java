@@ -6,8 +6,14 @@ public class CustomerCLI {
 	public static void run(Scanner scanner) {
 		boolean running = true;
 		while (running) {
-			System.out.print("What would you like to do:\n" + "1 Create customer\n" + "2 Read customer\n"
-					+ "3 Update customer\n" + "4 Delete customer\n" + "5 Return\n" + "Enter 1-5: ");
+			System.out.println("\n=== Customer Menu ===");
+			System.out.print("What would you like to do:\n" + 
+							 "1 Create customer\n" + 
+							 "2 Read customer\n" + 
+							 "3 Update customer\n" + 
+							 "4 Delete customer\n" + 
+							 "5 Return\n" + 
+							 "Enter 1-5: ");
 			String choice = scanner.nextLine();
 			switch (choice) {
 			case "1":
@@ -26,13 +32,13 @@ public class CustomerCLI {
 				running = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-5.");
+				System.out.println("Invalid entry. Please enter 1-5.");
 			}
 		}
 	}
 
 	private static void createCustomer(Scanner scanner) {
-		System.out.println("=== Create New Customer ===");
+		System.out.println("\n=== Create New Customer ===");
 		System.out.print("First name: ");
 		String firstName = scanner.nextLine();
 		System.out.print("Surname: ");
@@ -55,7 +61,7 @@ public class CustomerCLI {
 	}
 
 	private static void readCustomer(Scanner scanner) {
-		System.out.println("=== Find Customer ===");
+		System.out.println("\n=== Read Customer ===");
 		System.out.print("Customer Id: ");
 		int customerId;
         try { customerId = Integer.parseInt(scanner.nextLine()); }
@@ -72,58 +78,62 @@ public class CustomerCLI {
 	}
 
 	private static void updateCustomer(Scanner scanner) {
-		System.out.println("=== Find Customer ===");
+		System.out.println("\n=== Update Customer ===");
 		System.out.print("Customer Id: ");
 		int customerId;
         try { customerId = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
 		Customer customer = customerDAO.findCustomerById(customerId);
 		if (customer == null) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
-		System.out.println("=== Update Customer ===");
 		boolean updating = true;
 		while (updating) {
-			System.out.print("What would you like to update:\n" + "1 First name\n" + "2 Surname\n"
-					+ "3 Address\n" + "4 Phone number\n" + "5 Area code\n" + "6 On holiday\n"  + "7 Complete\n" + "Enter 1-7: ");
+			System.out.print("What would you like to update:\n" + 
+							 "1 First name\n" + 
+							 "2 Surname\n" + 
+							 "3 Address\n" + 
+							 "4 Phone number\n" + 
+							 "5 Area code\n" + 
+							 "6 On holiday\n"  + 
+							 "7 Complete\n" + 
+							 "Enter 1-7: ");
 			String choice = scanner.nextLine();
-			boolean validEntry = true;
 			switch (choice) {
 			case "1":
 				System.out.print("First name: ");
-				validEntry = customer.setFirstName(scanner.nextLine());
+				if (!customer.setFirstName(scanner.nextLine())) { System.out.println("Invalid first name."); }
 				break;
 			case "2":
 				System.out.print("Surname: ");
-				validEntry = customer.setSurname(scanner.nextLine());
+				if (!customer.setSurname(scanner.nextLine())) { System.out.println("Invalid surname."); }
 				break;
 			case "3":
 				System.out.print("Address: ");
-				validEntry = customer.setAddress(scanner.nextLine());
+				if (!customer.setAddress(scanner.nextLine())) { System.out.println("Invalid address."); }
 				break;
 			case "4":
 				System.out.print("Phone number: ");
-				validEntry = customer.setPhoneNumber(scanner.nextLine());
+				if (!customer.setPhoneNumber(scanner.nextLine())) { System.out.println("Invalid phone number."); }
 				break;
 			case "5":
 			    System.out.print("Area code: ");
 			    int areaCode;
 			    try { areaCode = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = customer.setAreaCode(areaCode);
+			    catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); break; }
+			    if (!customer.setAreaCode(areaCode)) { System.out.println("Area code must be between 1 and 24."); }
 			    break;
 			case "6":
 				System.out.print("On holiday (yes/no): ");
 				String holidayInput = scanner.nextLine().trim();
 			    if (holidayInput.equalsIgnoreCase("yes")) { customer.setOnHoliday(true); } 
 			    else if (holidayInput.equalsIgnoreCase("no")) { customer.setOnHoliday(false); } 
-			    else { validEntry = false; }
+			    else { System.out.println("Invalid entry. Please enter yes or no."); }
 				break;
 			case "7":
 				updating = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-7.");
+				System.out.println("Invalid entry. Please enter 1-7.");
 			}
-			if (!validEntry) { System.out.println("Invalid value entered."); }
 		}
 		if (customerDAO.updateCustomer(customer)) {
 		    System.out.println("Customer updated.");
@@ -133,7 +143,7 @@ public class CustomerCLI {
 	}
 
 	private static void deleteCustomer(Scanner scanner) {
-		System.out.println("=== Delete Customer ===");
+		System.out.println("\n=== Delete Customer ===");
 		System.out.print("Customer Id: ");
 		int customerId;
         try { customerId = Integer.parseInt(scanner.nextLine()); }

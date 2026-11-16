@@ -82,35 +82,35 @@ public class PublicationTest {
 
 	// TC07
 	// Test Objective: Verify stock is accepted at the minimum valid value 
-	// Input(s): Stock = 1
+	// Input(s): Stock = 0
 	// Expected Output(s): Stock accepted
 	@Order(7)
 	@Test
 	void validStockMinBoundary_TC07() {
 		Publication publication = new Publication();
-		assertTrue(publication.verifyStock(1));
+		assertTrue(publication.verifyStock(0));
 	}
 
 	// TC08
-	// Test Objective: Verify stock is rejected when equal to 0
-	// Input(s): Stock = 0
+	// Test Objective: Verify stock is rejected when below the minimum valid value
+	// Input(s): Stock = -1
 	// Expected Output(s): Invalid Stock
 	@Order(8)
 	@Test
-	void invalidStockZero_TC08() {
-		Publication publication = new Publication();
-		assertFalse(publication.verifyStock(0));
+	void invalidStockBelowMinBoundary_TC08() {
+	    Publication publication = new Publication();
+	    assertFalse(publication.verifyStock(-1));
 	}
 
 	// TC09
 	// Test Objective: Verify stock is rejected when negative
-	// Input(s): Stock = -1
+	// Input(s): Stock = -100
 	// Expected Output(s): Invalid Stock
 	@Order(9)
 	@Test
 	void invalidStockNegative_TC09() {
 		Publication publication = new Publication();
-		assertFalse(publication.verifyStock(-1));
+		assertFalse(publication.verifyStock(-100));
 	}
 	
 // -----------------------------------------------------------
@@ -211,13 +211,13 @@ public class PublicationTest {
 
 	// TC18
 	// Test Objective: Verify publication creation fails with invalid publication stock
-	// Input(s): "DailyNews", -1, 2
+	// Input(s): "DailyNews", -100, 2
 	// Expected Output(s): Publication not created
 	@Order(18)
 	@Test
 	void createPublicationInvalidStock_TC18() {
 		Publication publication = new Publication();
-		assertFalse(publication.createPublication("DailyNews", -1, 2));
+		assertFalse(publication.createPublication("DailyNews", -100, 2));
 	}
 	
 	// TC19

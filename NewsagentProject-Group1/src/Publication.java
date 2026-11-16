@@ -22,7 +22,7 @@ public class Publication {
         return name.matches("^[A-Za-z0-9' -]+$");
     }
     
-    public boolean verifyStock(int stock) { return stock > 0; }
+    public boolean verifyStock(int stock) { return stock >= 0; }
     
     public boolean verifyPrice(double price) { return price > 0 && Math.round(price * 100) == price * 100; }
     

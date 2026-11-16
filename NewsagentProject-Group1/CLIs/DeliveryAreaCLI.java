@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DeliveryAreaCLI {
@@ -6,8 +7,14 @@ public class DeliveryAreaCLI {
     public static void run(Scanner scanner) {
         boolean running = true;
         while (running) {
-            System.out.print("What would you like to do:\n" + "1 Create delivery area\n" + "2 Read delivery area\n" +
-                    "3 Update delivery area\n" + "4 Delete delivery area\n" + "5 Return\n" + "Enter 1-5: ");
+        	System.out.println("\n=== Delivery Area Menu ===");
+            System.out.print("What would you like to do:\n" + 
+            			 	 "1 Create delivery area\n" + 
+            			 	 "2 Read delivery area\n" + 
+            			 	 "3 Update delivery area\n" + 
+            			 	 "4 Delete delivery area\n" + 
+            			 	 "5 Return\n" + 
+            			 	 "Enter 1-5: ");
             String choice = scanner.nextLine();
             switch (choice) {
             case "1":
@@ -26,18 +33,18 @@ public class DeliveryAreaCLI {
                 running = false;
                 break;
             default:
-                System.out.println("Entry Invalid. Please enter 1-5.");
+                System.out.println("Invalid entry. Please enter 1-5.");
             }
         }
     }
 
     private static void createDeliveryArea(Scanner scanner) {
-        System.out.println("=== Create New Delivery Area ===");
+        System.out.println("\n=== Create New Delivery Area ===");
         System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
-        if (deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode) != null) { System.out.println("Area with code " + areaCode + " already exists."); return; }
+        if (deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode) != null) { System.out.println("Delivery area with area code " + areaCode + " already exists."); return; }
         System.out.print("Area name: ");
         String name = scanner.nextLine();
         DeliveryArea deliveryArea = new DeliveryArea();
@@ -50,16 +57,17 @@ public class DeliveryAreaCLI {
     }
 
     private static void readDeliveryArea(Scanner scanner) {
-        System.out.println("=== Find Delivery Area ===");
+        System.out.println("\n=== Read Delivery Area ===");
         System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
         DeliveryArea deliveryArea = deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode);
         if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found."); return; }
-        System.out.println("Name: " + deliveryArea.getName() + "\nCustomers: " + deliveryAreaDAO.getCustomersByAreaCode(areaCode).size());
-        for (Customer customer : deliveryAreaDAO.getCustomersByAreaCode(areaCode)) {
-        	System.out.println("First name: " + customer.getFirstName() + 
+        ArrayList<Customer> customers = deliveryAreaDAO.getCustomersByAreaCode(areaCode);
+        System.out.println("Name: " + deliveryArea.getName() + "\nCustomers: " + customers.size());
+        for (Customer customer : customers) {
+        	System.out.println("\nFirst name: " + customer.getFirstName() + 
 					   		   "\nSurname: " + customer.getSurname() +
 					   		   "\nAddress: " + customer.getAddress() + 
 					   		   "\nPhone number: " + customer.getPhoneNumber());
@@ -67,16 +75,15 @@ public class DeliveryAreaCLI {
     }
 
     private static void updateDeliveryArea(Scanner scanner) {
-        System.out.println("=== Find Delivery Area ===");
+    	System.out.println("\n=== Update Delivery Area ===");
         System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
         DeliveryArea deliveryArea = deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode);
         if (deliveryArea == null) { System.out.println("Delivery area with area code " + areaCode + " could not be found."); return; }
-        System.out.println("=== Update Delivery Area ===");
         System.out.print("New name: ");
-        if (!deliveryArea.setName(scanner.nextLine())) { System.out.println("Invalid value entered."); return; }
+        if (!deliveryArea.setName(scanner.nextLine())) { System.out.println("Invalid name."); return; }
         if (deliveryAreaDAO.updateDeliveryArea(deliveryArea)) {
             System.out.println("Delivery area updated.");
         } else {
@@ -85,7 +92,7 @@ public class DeliveryAreaCLI {
     }
 
     private static void deleteDeliveryArea(Scanner scanner) {
-        System.out.println("=== Delete Delivery Area ===");
+        System.out.println("\n=== Delete Delivery Area ===");
         System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }

@@ -6,8 +6,14 @@ public class BillCLI {
 	public static void run(Scanner scanner) {
 		boolean running = true;
 		while (running) {
-			System.out.print("What would you like to do:\n" + "1 Create bill\n" + "2 Read bill\n"
-					+ "3 Update bill\n" + "4 Delete bill\n" + "5 Return\n" + "Enter 1-5: ");
+			System.out.println("\n=== Bill Menu ===");
+			System.out.print("What would you like to do:\n" + 
+							 "1 Create bill\n" + 
+							 "2 Read bill\n" + 
+							 "3 Update bill\n" + 
+							 "4 Delete bill\n" + 
+							 "5 Return\n" + 
+							 "Enter 1-5: ");
 			String choice = scanner.nextLine();
 			switch (choice) {
 			case "1":
@@ -26,13 +32,13 @@ public class BillCLI {
 				running = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-5.");
+				System.out.println("Invalid entry. Please enter 1-5.");
 			}
 		}
 	}
 	
 	private static void createBill(Scanner scanner) {
-		System.out.println("=== Create New Bill ===");
+		System.out.println("\n=== Create New Bill ===");
 		System.out.print("Customer Id: ");
 		int customerId;
         try { customerId = Integer.parseInt(scanner.nextLine()); }
@@ -57,7 +63,7 @@ public class BillCLI {
 	}
 	
 	private static void readBill(Scanner scanner) {
-		System.out.println("=== Find Bill ===");
+		System.out.println("\n=== Read Bill ===");
 		System.out.print("Bill Id: ");
 		int billId;
         try { billId = Integer.parseInt(scanner.nextLine()); }
@@ -67,23 +73,27 @@ public class BillCLI {
 		System.out.println("Customer Id: " + bill.getCustomerId() + 
 						   "\nMonth: " + bill.getMonth() + 
 						   "\nYear: " + bill.getYear() +
-						   "\nTotal: €" + bill.getTotal() + 
+						   "\nTotal: €" + String.format("%.2f", bill.getTotal()) + 
 						   "\nPaid: " + (bill.isPaid() ? "Yes" : "No"));
 	}
 	
 	private static void updateBill(Scanner scanner) {
-		System.out.println("=== Find Bill ===");
+		System.out.println("\n=== Update Bill ===");
 		System.out.print("Bill Id: ");
 		int billId;
         try { billId = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Bill Id must be a whole number."); return; }
 		Bill bill = billDAO.findBillById(billId);
 		if (bill == null) { System.out.println("Bill with Id " + billId + " could not be found."); return; }
-		System.out.println("=== Update Bill ===");
 		boolean updating = true;
 		while (updating) {
-			System.out.print("What would you like to update:\n" + "1 Customer Id\n" + "2 Month\n"
-					+ "3 Year\n" + "4 Paid\n" + "5 Complete\n" + "Enter 1-5: ");
+			System.out.print("What would you like to update:\n" + 
+							 "1 Customer Id\n" + 
+							 "2 Month\n" + 
+							 "3 Year\n" + 
+							 "4 Paid\n" + 
+							 "5 Complete\n" + 
+							 "Enter 1-5: ");
 			String choice = scanner.nextLine();
 			switch (choice) {
 			case "1":
@@ -113,13 +123,13 @@ public class BillCLI {
 				String paidInput = scanner.nextLine().trim();
 			    if (paidInput.equalsIgnoreCase("yes")) { bill.setPaid(true); } 
 			    else if (paidInput.equalsIgnoreCase("no")) { bill.setPaid(false); } 
-			    else { System.out.println("Entry Invalid. Please enter yes or no."); }
+			    else { System.out.println("Invalid entry. Please enter yes or no."); }
 				break;
 			case "5":
 				updating = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-5.");
+				System.out.println("Invalid entry. Please enter 1-5.");
 			}
 		}
 	    bill.setTotal(billDAO.calculateBillTotal(bill.getCustomerId(), bill.getMonth(), bill.getYear()));
@@ -131,7 +141,7 @@ public class BillCLI {
 	}
 	
 	private static void deleteBill(Scanner scanner) {
-		System.out.println("=== Delete Bill ===");
+		System.out.println("\n=== Delete Bill ===");
 		System.out.print("Bill Id: ");
 		int billId;
         try { billId = Integer.parseInt(scanner.nextLine()); }

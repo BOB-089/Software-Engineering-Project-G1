@@ -7,8 +7,14 @@ public class DeliveryDocketCLI {
 	public static void run(Scanner scanner) {
 		boolean running = true;
 		while (running) {
-			System.out.print("What would you like to do:\n" + "1 Create docket\n" + "2 Read docket\n"
-					+ "3 Update docket\n" + "4 Delete docket\n" + "5 Return\n" + "Enter 1-5: ");
+			System.out.println("\n=== Delivery Docket Menu ===");
+			System.out.print("What would you like to do:\n" + 
+							 "1 Create delivery docket\n" + 
+							 "2 Read delivery docket\n" + 
+							 "3 Update delivery docket\n" + 
+							 "4 Delete delivery docket\n" + 
+							 "5 Return\n" + 
+							 "Enter 1-5: ");
 			String choice = scanner.nextLine();
 			switch (choice) {
 			case "1":
@@ -27,13 +33,13 @@ public class DeliveryDocketCLI {
 				running = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-5.");
+				System.out.println("Invalid entry. Please enter 1-5.");
 			}
 		}
 	}
 
 	private static void createDeliveryDocket(Scanner scanner) {
-		System.out.println("=== Create New Delivery Docket ===");
+		System.out.println("\n=== Create New Delivery Docket ===");
 		System.out.print("Area code: ");
 		int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
@@ -50,116 +56,122 @@ public class DeliveryDocketCLI {
 		int year;
         try { year = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Year must be a whole number."); return; }
-
-		DeliveryDocket docket = new DeliveryDocket();
-		if (!docket.createDeliveryDocket(areaCode, day, month, year)) { System.out.println("Invalid Delivery Docket details."); return; }
-		if (deliveryDocketDAO.addDeliveryDocket(docket)) {
-			System.out.println("Delivery Docket saved successfully.");
+		DeliveryDocket deliveryDocket = new DeliveryDocket();
+		if (!deliveryDocket.createDeliveryDocket(areaCode, day, month, year)) { System.out.println("Invalid delivery docket details."); return; }
+		if (deliveryDocketDAO.addDeliveryDocket(deliveryDocket)) {
+			System.out.println("Delivery docket saved successfully.");
 		} else {
-			System.out.println("Failed to save docket.");
+			System.out.println("Failed to save delivery docket.");
 		}
 	}
 	
 	private static void readDeliveryDocket(Scanner scanner) {
-		System.out.println("=== Find Delivery Docket ===");
-		System.out.print("Delivery Docket Id: ");
-		int docketId;
-        try { docketId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Docket Id must be a whole number."); return; }
-		DeliveryDocket docket = deliveryDocketDAO.findDeliveryDocketById(docketId); 
-		if (docket == null) { System.out.println("Delivery Docket with Id " + docketId + " could not be found."); return; }
-		System.out.println("Area Code: " + docket.getAreaCode() + 
-						   "\nDay: " + docket.getDay() +
-						   "\nMonth: " + docket.getMonth() + 
-						   "\nYear: " + docket.getYear());
-		ArrayList<Order> orders = deliveryDocketDAO.getOrdersForDocket(docket);
-		System.out.println("\n=== Orders for Delivery ===");
+		System.out.println("\n=== Read Delivery Docket ===");
+		System.out.print("Delivery docket Id: ");
+		int deliveryDocketId;
+        try { deliveryDocketId = Integer.parseInt(scanner.nextLine()); }
+        catch (NumberFormatException e) { System.out.println("Delivery docket Id must be a whole number."); return; }
+		DeliveryDocket deliveryDocket = deliveryDocketDAO.findDeliveryDocketById(deliveryDocketId); 
+		if (deliveryDocket == null) { System.out.println("Delivery docket with Id " + deliveryDocketId + " could not be found."); return; }
+		System.out.println("Area code: " + deliveryDocket.getAreaCode() + 
+						   "\nDay: " + deliveryDocket.getDay() +
+						   "\nMonth: " + deliveryDocket.getMonth() + 
+						   "\nYear: " + deliveryDocket.getYear());
+		ArrayList<Order> orders = deliveryDocketDAO.getOrdersForDocket(deliveryDocket);
+		System.out.println("\n=== Orders For Delivery ===");
 		if (orders.isEmpty()) {
-			System.out.println("No orders found for this docket.");
+			System.out.println("No orders found for this delivery docket.");
 		} else {
 			for (Order order : orders) {
 				System.out.println("Order Id: " + order.getOrderId() +
-			            "\nCustomer Id: " + order.getCustomerId() +
-			            "\nPublication: " + order.getPublicationName() +
-			            "\n---------------------------");
+			            		   "\nCustomer Id: " + order.getCustomerId() +
+			            		   "\nPublication: " + order.getPublicationName() +
+			            		   "\n---------------------------");
 			}
 		}
 	}
 	
 	private static void updateDeliveryDocket(Scanner scanner) {
-		System.out.println("=== Find Delivery Docket ===");
-		System.out.print("Delivery Docket Id: ");
-		int docketId;
-        try { docketId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Docket Id must be a whole number."); return; }
-		DeliveryDocket docket = deliveryDocketDAO.findDeliveryDocketById(docketId);
-		if (docket == null) { System.out.println("Delivery Docket with Id " + docketId + " could not be found."); return; }
-		System.out.println("=== Update Delivery Docket ===");
+		System.out.println("\n=== Update Delivery Docket ===");
+		System.out.print("Delivery docket Id: ");
+		int deliveryDocketId;
+        try { deliveryDocketId = Integer.parseInt(scanner.nextLine()); }
+        catch (NumberFormatException e) { System.out.println("Delivery docket Id must be a whole number."); return; }
+		DeliveryDocket deliveryDocket = deliveryDocketDAO.findDeliveryDocketById(deliveryDocketId);
+		if (deliveryDocket == null) { System.out.println("Delivery docket with Id " + deliveryDocketId + " could not be found."); return; }
 		boolean updating = true;
 		while (updating) {
-			System.out.print("What would you like to update:\n" + "1 Area Code\n" + "2 Day\n"
-					+ "3 Month\n" + "4 Year\n" + "5 Complete\n" + "Enter 1-5: ");
+			System.out.print("What would you like to update:\n" + 
+							 "1 Area code\n" + 
+							 "2 Day\n" + 
+							 "3 Month\n" + 
+							 "4 Year\n" + 
+							 "5 Complete\n" + 
+							 "Enter 1-5: ");
 			String choice = scanner.nextLine();
-			boolean validEntry = true;
 			switch (choice) {
 			case "1":
 				System.out.print("Area code: ");
 			    int areaCode;
 			    try { areaCode = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = docket.setAreaCode(areaCode);
+			    catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); break; }
+			    if (!deliveryDocket.setAreaCode(areaCode)) { System.out.println("Area code must be between 1 and 24."); }
 			    break;
 			case "2":
 				System.out.print("Day: ");
 				int day;
-			    try { day = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = docket.setDay(day);
+				try { day = Integer.parseInt(scanner.nextLine()); }
+			    catch (NumberFormatException e) { System.out.println("Day must be a whole number."); break; }
+			    if (!deliveryDocket.setDay(day)) { System.out.println("Day must be between 1 and 31."); }
 			    break;
 			case "3":
 				System.out.print("Month: ");
 				int month;
-			    try { month = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = docket.setMonth(month);
+				try { month = Integer.parseInt(scanner.nextLine()); }
+			    catch (NumberFormatException e) { System.out.println("Month must be a whole number."); break; }
+			    if (!deliveryDocket.setMonth(month)) { System.out.println("Month must be between 1 and 12."); }
 			    break;
 			case "4":
 				System.out.print("Year: ");
 				int year;
-			    try { year = Integer.parseInt(scanner.nextLine()); }
-			    catch (NumberFormatException e) { validEntry = false; break; }
-			    validEntry = docket.setYear(year);
+				try { year = Integer.parseInt(scanner.nextLine()); }
+			    catch (NumberFormatException e) { System.out.println("Year must be a whole number."); break; }
+			    if (!deliveryDocket.setYear(year)) { System.out.println("Year must be 1900 or greater."); }
 			    break;
 			case "5":
 				updating = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-5.");
+				System.out.println("Invalid entry. Please enter 1-5.");
 			}
-			if (!validEntry) { System.out.println("Invalid value entered."); }
 		}
-		if (deliveryDocketDAO.updateDeliveryDocket(docket)) {
-		    System.out.println("Delivery Docket updated.");
+		if (!deliveryDocket.verifyDate(deliveryDocket.getDay(), deliveryDocket.getMonth(), deliveryDocket.getYear())) 
+		{ 
+			System.out.println("Invalid date. \nFailed to update delivery docket."); 
+			return;
+		}
+		if (deliveryDocketDAO.updateDeliveryDocket(deliveryDocket)) {
+		    System.out.println("Delivery docket updated.");
 		} else {
-		    System.out.println("Failed to update docket.");
+		    System.out.println("Failed to update delivery docket.");
 		}
 	}
 	
 	private static void deleteDeliveryDocket(Scanner scanner) {
-		System.out.println("=== Delete Delivery Docket ===");
-		System.out.print("Delivery Docket Id: ");
-		int docketId;
-        try { docketId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Docket Id must be a whole number."); return; }
-        DeliveryDocket docket = deliveryDocketDAO.findDeliveryDocketById(docketId);
-		if (docket == null) { System.out.println("Delivery Docket with Id " + docketId + " could not be found."); return; }
-        System.out.print("Are you sure you want to delete this docket from the database? (yes/no): ");
+		System.out.println("\n=== Delete Delivery Docket ===");
+		System.out.print("Delivery docket Id: ");
+		int deliveryDocketId;
+        try { deliveryDocketId = Integer.parseInt(scanner.nextLine()); }
+        catch (NumberFormatException e) { System.out.println("Delivery docket Id must be a whole number."); return; }
+        DeliveryDocket deliveryDocket = deliveryDocketDAO.findDeliveryDocketById(deliveryDocketId);
+		if (deliveryDocket == null) { System.out.println("Delivery docket with Id " + deliveryDocketId + " could not be found."); return; }
+        System.out.print("Are you sure you want to delete this delivery docket from the database? (yes/no): ");
         String confirmation = scanner.nextLine().trim();
         if (confirmation.equalsIgnoreCase("yes")) { 
-        	if (deliveryDocketDAO.deleteDeliveryDocket(docketId)) {
-        		System.out.println("Delivery Docket deleted successfully.");
+        	if (deliveryDocketDAO.deleteDeliveryDocket(deliveryDocketId)) {
+        		System.out.println("Delivery docket deleted successfully.");
         	} else {
-        		System.out.println("Failed to delete docket.");
+        		System.out.println("Failed to delete delivery docket.");
         	}
         } else {
         	System.out.println("Deletion cancelled.");

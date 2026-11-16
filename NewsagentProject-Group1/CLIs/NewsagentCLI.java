@@ -6,8 +6,14 @@ public class NewsagentCLI {
 	public static void run(Scanner scanner) {
 		boolean running = true;
 		while (running) {
-			System.out.print("What would you like to do:\n" + "1 Create newsagent\n" + "2 Read newsagent\n"
-					+ "3 Update newsagent\n" + "4 Delete newsagent\n" + "5 Return\n" + "Enter 1-5: ");
+			System.out.println("\n=== Newsagent Menu ===");
+			System.out.print("What would you like to do:\n" + 
+							 "1 Create newsagent\n" + 
+							 "2 Read newsagent\n" + 
+							 "3 Update newsagent\n" + 
+							 "4 Delete newsagent\n" + 
+							 "5 Return\n" + 
+							 "Enter 1-5: ");
 			String choice = scanner.nextLine();
 			switch (choice) {
 			case "1":
@@ -26,13 +32,13 @@ public class NewsagentCLI {
 				running = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-5.");
+				System.out.println("Invalid entry. Please enter 1-5.");
 			}
 		}
 	}
 	
 	private static void createNewsagent(Scanner scanner) {
-		System.out.println("=== Create New Newsagent ===");
+		System.out.println("\n=== Create New Newsagent ===");
 		System.out.print("First name: ");
 		String firstName = scanner.nextLine();
 		System.out.print("Surname: ");
@@ -49,7 +55,7 @@ public class NewsagentCLI {
 	}
 	
 	private static void readNewsagent(Scanner scanner) {
-		System.out.println("=== Find Newsagent ===");
+		System.out.println("\n=== Read Newsagent ===");
 		System.out.print("Newsagent Id: ");
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }
@@ -62,40 +68,41 @@ public class NewsagentCLI {
 	}
 	
 	private static void updateNewsagent(Scanner scanner) {
-		System.out.println("=== Find Newsagent ===");
+		System.out.println("\n=== Update Newsagent ===");
 		System.out.print("Newsagent Id: ");
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }
 		catch (NumberFormatException e) { System.out.println("Newsagent Id must be a whole number."); return; }
 		Newsagent newsagent = newsagentDAO.findNewsagentById(newsagentId);
 		if (newsagent == null) { System.out.println("Newsagent with Id " + newsagentId + " could not be found."); return; }
-		System.out.println("=== Update Newsagent ===");
 		boolean updating = true;
 		while (updating) {
-			System.out.print("What would you like to update:\n" + "1 First name\n" + "2 Surname\n"
-				 + "3 Phone number\n" + "4 Complete\n" + "Enter 1-4: ");
+			System.out.print("What would you like to update:\n" + 
+							 "1 First name\n" + 
+							 "2 Surname\n" + 
+							 "3 Phone number\n" + 
+							 "4 Complete\n" + 
+							 "Enter 1-4: ");
 			String choice = scanner.nextLine();
-			boolean validEntry = true;
 			switch (choice) {
 			case "1":
 				System.out.print("First name: ");
-				validEntry = newsagent.setFirstName(scanner.nextLine());
+				if (!newsagent.setFirstName(scanner.nextLine())) { System.out.println("Invalid first name."); }
 				break;
 			case "2":
 				System.out.print("Surname: ");
-				validEntry = newsagent.setSurname(scanner.nextLine());
+			    if (!newsagent.setSurname(scanner.nextLine())) { System.out.println("Invalid surname."); }
 				break;
 			case "3":
 				System.out.print("Phone number: ");
-				validEntry = newsagent.setPhoneNumber(scanner.nextLine());
+				if (!newsagent.setPhoneNumber(scanner.nextLine())) { System.out.println("Invalid phone number."); }
 				break;
 			case "4":
 				updating = false;
 				break;
 			default:
-				System.out.println("Entry Invalid. Please enter 1-4.");
+				System.out.println("Invalid entry. Please enter 1-4.");
 			}
-			if (!validEntry) { System.out.println("Invalid value entered."); }
 		}
 		if (newsagentDAO.updateNewsagent(newsagent)) {
 		    System.out.println("Newsagent updated.");
@@ -105,7 +112,7 @@ public class NewsagentCLI {
 	}
 	
 	private static void deleteNewsagent(Scanner scanner) {
-		System.out.println("=== Delete Newsagent ===");
+		System.out.println("\n=== Delete Newsagent ===");
 		System.out.print("Newsagent Id: ");
 		int newsagentId;
 		try { newsagentId = Integer.parseInt(scanner.nextLine()); }

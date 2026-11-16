@@ -6,8 +6,14 @@ public class DeliveryPersonCLI {
     public static void run(Scanner scanner) {
         boolean running = true;
         while (running) {
-            System.out.print("What would you like to do:\n" + "1 Create delivery person\n" + "2 Read delivery person\n"
-                    + "3 Update delivery person\n" + "4 Delete delivery person\n" + "5 Return\n" + "Enter 1-5: ");
+        	System.out.println("\n=== Delivery Person Menu ===");
+            System.out.print("What would you like to do:\n" + 
+            				 "1 Create delivery person\n" + 
+            				 "2 Read delivery person\n" + 
+            				 "3 Update delivery person\n" + 
+            				 "4 Delete delivery person\n" + 
+            				 "5 Return\n" + 
+            				 "Enter 1-5: ");
             String choice = scanner.nextLine();
             switch (choice) {
             case "1":
@@ -26,13 +32,13 @@ public class DeliveryPersonCLI {
                 running = false;
                 break;
             default:
-                System.out.println("Entry Invalid. Please enter 1-5.");
+                System.out.println("Invalid entry. Please enter 1-5.");
             }
         }
     }
 
     private static void createDeliveryPerson(Scanner scanner) {
-        System.out.println("=== Create New Delivery Person ===");
+        System.out.println("\n=== Create New Delivery Person ===");
         System.out.print("First name: ");
         String firstName = scanner.nextLine();
         System.out.print("Surname: ");
@@ -53,7 +59,7 @@ public class DeliveryPersonCLI {
     }
 
     private static void readDeliveryPerson(Scanner scanner) {
-        System.out.println("=== Find Delivery Person ===");
+        System.out.println("\n=== Read Delivery Person ===");
         System.out.print("Delivery person Id: ");
         int deliveryPersonId;
         try { deliveryPersonId = Integer.parseInt(scanner.nextLine()); }
@@ -67,47 +73,49 @@ public class DeliveryPersonCLI {
     }
 
     private static void updateDeliveryPerson(Scanner scanner) {
-        System.out.println("=== Find Delivery Person ===");
+    	System.out.println("\n=== Update Delivery Person ===");
         System.out.print("Delivery person Id: ");
         int deliveryPersonId;
         try { deliveryPersonId = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Delivery person Id must be a whole number."); return; }
         DeliveryPerson deliveryPerson = deliveryPersonDAO.findDeliveryPersonById(deliveryPersonId);
         if (deliveryPerson == null) { System.out.println("Delivery person with Id " + deliveryPersonId + " could not be found."); return; }
-        System.out.println("=== Update Delivery Person ===");
         boolean updating = true;
         while (updating) {
-            System.out.print("What would you like to update:\n" + "1 First name\n" + "2 Surname\n"
-                    + "3 Phone number\n" + "4 Area code\n" + "5 Complete\n" + "Enter 1-5: ");
+            System.out.print("What would you like to update:\n" + 
+            				 "1 First name\n" + 
+            				 "2 Surname\n" + 
+            				 "3 Phone number\n" + 
+            				 "4 Area code\n" + 
+            				 "5 Complete\n" + 
+            				 "Enter 1-5: ");
             String choice = scanner.nextLine();
-            boolean validEntry = true;
             switch (choice) {
             case "1":
-                System.out.print("First name: ");
-                validEntry = deliveryPerson.setFirstName(scanner.nextLine());
+            	System.out.print("First name: ");
+                if (!deliveryPerson.setFirstName(scanner.nextLine())) { System.out.println("Invalid first name."); }
                 break;
             case "2":
-                System.out.print("Surname: ");
-                validEntry = deliveryPerson.setSurname(scanner.nextLine());
+            	System.out.print("Surname: ");
+                if (!deliveryPerson.setSurname(scanner.nextLine())) { System.out.println("Invalid surname."); }
                 break;
             case "3":
                 System.out.print("Phone number: ");
-                validEntry = deliveryPerson.setPhoneNumber(scanner.nextLine());
+                if (!deliveryPerson.setPhoneNumber(scanner.nextLine())) { System.out.println("Invalid phone number."); }
                 break;
             case "4":
                 System.out.print("Area code: ");
                 int areaCode;
                 try { areaCode = Integer.parseInt(scanner.nextLine()); }
-                catch (NumberFormatException e) { validEntry = false; break; }
-                validEntry = deliveryPerson.setAreaCode(areaCode);
+                catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); break; }
+                if (!deliveryPerson.setAreaCode(areaCode)) { System.out.println("Area code must be between 1 and 24."); }
                 break;
             case "5":
                 updating = false;
                 break;
             default:
-                System.out.println("Entry Invalid. Please enter 1-5.");
+                System.out.println("Invalid entry. Please enter 1-5.");
             }
-            if (!validEntry) { System.out.println("Invalid value entered."); }
         }
         if (deliveryPersonDAO.updateDeliveryPerson(deliveryPerson)) {
             System.out.println("Delivery person updated.");
@@ -117,7 +125,7 @@ public class DeliveryPersonCLI {
     }
 
     private static void deleteDeliveryPerson(Scanner scanner) {
-        System.out.println("=== Delete Delivery Person ===");
+        System.out.println("\n=== Delete Delivery Person ===");
         System.out.print("Delivery person Id: ");
         int deliveryPersonId;
         try { deliveryPersonId = Integer.parseInt(scanner.nextLine()); }
