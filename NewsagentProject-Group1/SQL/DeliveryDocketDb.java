@@ -27,8 +27,6 @@ public class DeliveryDocketDb {
                 );""";
             stmt.execute(orderSql);
             System.out.println("Database created successfully.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 }
