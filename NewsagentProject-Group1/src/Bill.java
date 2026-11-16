@@ -25,7 +25,7 @@ public class Bill {
 	public boolean verifyMonth(int month) { return month >= 1 && month <= 12; }
 	public boolean verifyYear(int year) { return year >= 1900; }
 
-    public boolean createBill(int customerId, int month, int year, double total, boolean paid) {
+    public boolean createBill(int customerId, int month, int year, double total) {
     	setCustomerId(customerId);
         if (!setMonth(month)) return false;
         if (!setYear(year)) return false;

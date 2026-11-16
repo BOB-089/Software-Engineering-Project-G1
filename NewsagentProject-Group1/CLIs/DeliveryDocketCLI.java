@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class DeliveryDocketCLI {
 	private static final DeliveryDocketDAO deliveryDocketDAO = new DeliveryDocketDAO();
 	
@@ -64,9 +65,9 @@ public class DeliveryDocketCLI {
 		System.out.print("Delivery Docket Id: ");
 		int docketId;
         try { docketId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Docket ID must be a whole number."); return; }
+        catch (NumberFormatException e) { System.out.println("Docket Id must be a whole number."); return; }
 		DeliveryDocket docket = deliveryDocketDAO.findDeliveryDocketById(docketId); 
-		if (docket == null) { System.out.println("Delivery Docket with ID " + docketId + " could not be found."); return; }
+		if (docket == null) { System.out.println("Delivery Docket with Id " + docketId + " could not be found."); return; }
 		System.out.println("Area Code: " + docket.getAreaCode() + 
 						   "\nDay: " + docket.getDay() +
 						   "\nMonth: " + docket.getMonth() + 
@@ -77,8 +78,8 @@ public class DeliveryDocketCLI {
 			System.out.println("No orders found for this docket.");
 		} else {
 			for (Order order : orders) {
-				System.out.println("Order ID: " + order.getOrderId() +
-			            "\nCustomer ID: " + order.getCustomerId() +
+				System.out.println("Order Id: " + order.getOrderId() +
+			            "\nCustomer Id: " + order.getCustomerId() +
 			            "\nPublication: " + order.getPublicationName() +
 			            "\n---------------------------");
 			}
@@ -90,9 +91,9 @@ public class DeliveryDocketCLI {
 		System.out.print("Delivery Docket Id: ");
 		int docketId;
         try { docketId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Docket ID must be a whole number."); return; }
+        catch (NumberFormatException e) { System.out.println("Docket Id must be a whole number."); return; }
 		DeliveryDocket docket = deliveryDocketDAO.findDeliveryDocketById(docketId);
-		if (docket == null) { System.out.println("Delivery Docket with ID " + docketId + " could not be found."); return; }
+		if (docket == null) { System.out.println("Delivery Docket with Id " + docketId + " could not be found."); return; }
 		System.out.println("=== Update Delivery Docket ===");
 		boolean updating = true;
 		while (updating) {
@@ -149,11 +150,11 @@ public class DeliveryDocketCLI {
 		System.out.print("Delivery Docket Id: ");
 		int docketId;
         try { docketId = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Docket ID must be a whole number."); return; }
+        catch (NumberFormatException e) { System.out.println("Docket Id must be a whole number."); return; }
         DeliveryDocket docket = deliveryDocketDAO.findDeliveryDocketById(docketId);
-		if (docket == null) { System.out.println("Delivery Docket with ID " + docketId + " could not be found."); return; }
+		if (docket == null) { System.out.println("Delivery Docket with Id " + docketId + " could not be found."); return; }
         System.out.print("Are you sure you want to delete this docket from the database? (yes/no): ");
-        String confirmation = scanner.nextLine().trim().toLowerCase();
+        String confirmation = scanner.nextLine().trim();
         if (confirmation.equalsIgnoreCase("yes")) { 
         	if (deliveryDocketDAO.deleteDeliveryDocket(docketId)) {
         		System.out.println("Delivery Docket deleted successfully.");

@@ -113,13 +113,9 @@ public class CustomerCLI {
 			case "6":
 				System.out.print("On holiday (yes/no): ");
 				String holidayInput = scanner.nextLine().trim();
-			    if (holidayInput.equalsIgnoreCase("yes")) {
-			        customer.setOnHoliday(true);
-			    } else if (holidayInput.equalsIgnoreCase("no")) {
-			        customer.setOnHoliday(false);
-			    } else {
-			        validEntry = false;
-			    }
+			    if (holidayInput.equalsIgnoreCase("yes")) { customer.setOnHoliday(true); } 
+			    else if (holidayInput.equalsIgnoreCase("no")) { customer.setOnHoliday(false); } 
+			    else { validEntry = false; }
 				break;
 			case "7":
 				updating = false;
@@ -145,7 +141,7 @@ public class CustomerCLI {
         Customer customer = customerDAO.findCustomerById(customerId);
         if (customer == null) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
         System.out.print("Are you sure you want to delete this customer from the database? (yes/no): ");
-        String confirmation = scanner.nextLine().trim().toLowerCase();
+        String confirmation = scanner.nextLine().trim();
         if (confirmation.equalsIgnoreCase("yes")) { 
         	if (customerDAO.deleteCustomer(customerId)) {
         		System.out.println("Customer deleted successfully.");
