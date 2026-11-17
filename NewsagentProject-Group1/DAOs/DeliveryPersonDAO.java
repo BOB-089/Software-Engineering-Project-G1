@@ -11,6 +11,8 @@ public class DeliveryPersonDAO {
 	private static final String UPDATE_DELIVERYPERSON = "UPDATE DeliveryPersonTable " + "SET firstName=?, surname=?, phoneNumber=?, areaCode=? " + "WHERE deliveryPersonId=?";
 
 	private static final String DELETE_DELIVERYPERSON = "DELETE FROM DeliveryPersonTable WHERE deliveryPersonId=?";
+	
+	private static final String GET_DELIVERYDOCKET = "SELECT * FROM DeliveryDocketTable WHERE areaCode = ?";
 
 //		CREATE DELIVERY PERSON
 	public boolean addDeliveryPerson(DeliveryPerson deliveryPerson) {
@@ -85,5 +87,25 @@ public class DeliveryPersonDAO {
 			int rowsDeleted = stmt.executeUpdate();
 			return rowsDeleted > 0;
 		} catch (SQLException e) { e.printStackTrace(); return false; }
+	}
+	
+	// GET DELIVERY DOCKET
+	public DeliveryDocket getDeliveryDocket(int areaCode) {
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(GET_DELIVERYDOCKET)) {
+	    	// TODO consider multiple delivery docket handling
+	        stmt.setInt(1, areaCode);
+	        ResultSet rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            DeliveryDocket deliveryDocket = new DeliveryDocket();
+	            deliveryDocket.setDeliveryDocketId(rs.getInt("deliveryDocketId"));
+	            deliveryDocket.setAreaCode(rs.getInt("areaCode"));
+	            deliveryDocket.setDay(rs.getInt("day"));
+	            deliveryDocket.setMonth(rs.getInt("month"));
+	            deliveryDocket.setYear(rs.getInt("year"));
+	            return deliveryDocket;
+	        }
+	    } catch (SQLException e) { e.printStackTrace(); }
+	    return null;
 	}
 }
