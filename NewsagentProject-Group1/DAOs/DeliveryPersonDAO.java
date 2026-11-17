@@ -13,6 +13,8 @@ public class DeliveryPersonDAO {
 	private static final String DELETE_DELIVERYPERSON = "DELETE FROM DeliveryPersonTable WHERE deliveryPersonId=?";
 	
 	private static final String GET_DELIVERYDOCKET = "SELECT * FROM DeliveryDocketTable WHERE areaCode = ?";
+	
+	private static final String CHECK_DELIVERYAREA_EXISTS = "SELECT COUNT(*) FROM DeliveryAreaTable WHERE areaCode = ?";
 
 //		CREATE DELIVERY PERSON
 	public boolean addDeliveryPerson(DeliveryPerson deliveryPerson) {
@@ -107,5 +109,16 @@ public class DeliveryPersonDAO {
 	        }
 	    } catch (SQLException e) { e.printStackTrace(); }
 	    return null;
+	}
+	
+	//CHECK DELIVERY AREA EXISTS
+	public boolean deliveryAreaExists(int areaCode) {
+		try (Connection conn = DatabaseConnection.getConnection();
+		     PreparedStatement stmt = conn.prepareStatement(CHECK_DELIVERYAREA_EXISTS)) {
+		     	stmt.setInt(1, areaCode);
+		        ResultSet rs = stmt.executeQuery();
+		        if (rs.next()) { return rs.getInt(1) > 0; }
+		} catch (Exception e) { e.printStackTrace(); }
+		return false;
 	}
 }

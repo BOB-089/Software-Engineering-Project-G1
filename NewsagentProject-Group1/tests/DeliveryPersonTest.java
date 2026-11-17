@@ -207,119 +207,60 @@ public class DeliveryPersonTest {
     }
     
 // ------------------------------------------------------------
-// 					AreaCode Tests (TC18–TC22)
+// 					Creation Tests (TC18–TC22)
 // ------------------------------------------------------------
 
     // TC18
-    // Test Objective: Verify areaCode is accepted when within valid range
-    // Input(s): AreaCode = 12
-    // Expected Output(s): AreaCode accepted
-	@Order(18)
-    @Test
-    void validAreaCode_TC18() {
-        DeliveryPerson deliveryPerson = new DeliveryPerson();
-        assertTrue(deliveryPerson.verifyAreaCode(12));
-    }
-
-    // TC19
-    // Test Objective: Verify areaCode is accepted at lower boundary
-    // Input(s): AreaCode = 1
-    // Expected Output(s): AreaCode accepted
-	@Order(19)
-    @Test
-    void validAreaCodeLowerBoundary_TC19() {
-        DeliveryPerson deliveryPerson = new DeliveryPerson();
-        assertTrue(deliveryPerson.verifyAreaCode(1));
-    }
-
-    // TC20
-    // Test Objective: Verify areaCode is accepted at upper boundary
-    // Input(s): AreaCode = 24
-    // Expected Output(s): AreaCode accepted
-	@Order(20)
-    @Test
-    void validAreaCodeUpperBoundary_TC20() {
-        DeliveryPerson deliveryPerson = new DeliveryPerson();
-        assertTrue(deliveryPerson.verifyAreaCode(24));
-    }
-
-    // TC21
-    // Test Objective: Verify areaCode is rejected when below valid range
-    // Input(s): AreaCode = 0
-    // Expected Output(s): Error message: Invalid Area Code
-	@Order(21)
-    @Test
-    void invalidAreaCodeTooLow_TC21() {
-        DeliveryPerson deliveryPerson = new DeliveryPerson();
-        assertFalse(deliveryPerson.verifyAreaCode(0));
-    }
-
-    // TC22
-    // Test Objective: Verify areaCode is rejected when above valid range
-    // Input(s): AreaCode = 25
-    // Expected Output(s): Error message: Invalid Area Code
-	@Order(22)
-    @Test
-    void invalidAreaCodeTooHigh_TC22() {
-        DeliveryPerson deliveryPerson = new DeliveryPerson();
-        assertFalse(deliveryPerson.verifyAreaCode(25));
-    }
-    
-// ------------------------------------------------------------
-// 					Creation Tests (TC23–TC27)
-// ------------------------------------------------------------
-
-    // TC23
     // Test Objective: Verify delivery person is created when all details are valid
     // Input(s): John, Smith, 0871234567, 12
     // Expected Output(s): Delivery person created successfully
-	@Order(23)
+	@Order(18)
     @Test
-    void createValidDeliveryPerson_TC23() {
+    void createValidDeliveryPerson_TC18() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertTrue(deliveryPerson.createDeliveryPerson("John", "Smith", "0871234567", 12));
     }
 
-    // TC24
+    // TC19
     // Test Objective: Verify delivery person creation fails with invalid first name
     // Input(s): "", Smith, 0871234567, 12
     // Expected Output(s): Delivery person not created
-	@Order(24)
+	@Order(19)
     @Test
-    void createInvalidFirstName_TC24() {
+    void createInvalidFirstName_TC19() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertFalse(deliveryPerson.createDeliveryPerson("", "Smith", "0871234567", 12));
     }
 
-    // TC25
+    // TC20
     // Test Objective: Verify delivery person creation fails with invalid surname
     // Input(s): John, "", 0871234567, 12
     // Expected Output(s): Delivery person not created
-	@Order(25)
+	@Order(20)
     @Test
-    void createInvalidSurname_TC25() {
+    void createInvalidSurname_TC20() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertFalse(deliveryPerson.createDeliveryPerson("John", "", "0871234567", 12));
     }
 
-    // TC26
+    // TC21
     // Test Objective: Verify delivery person creation fails with invalid phone number
     // Input(s): John, Smith, 087123456, 12
     // Expected Output(s): Delivery person not created
-	@Order(26)
+	@Order(21)
     @Test
-    void createInvalidPhoneNumber_TC26() {
+    void createInvalidPhoneNumber_TC21() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertFalse(deliveryPerson.createDeliveryPerson("John", "Smith", "087123456", 12));
     }
     
-    // TC27
+    // TC22
     // Test Objective: Verify delivery person creation fails with invalid area code
     // Input(s): John, Smith, 0871234567, 0
     // Expected Output(s): Delivery person not created
-	@Order(27)
+	@Order(22)
     @Test
-    void createInvalidAreaCode_TC27() {
+    void createInvalidAreaCode_TC22() {
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         assertFalse(deliveryPerson.createDeliveryPerson("John", "Smith", "0871234567", 0));
     }

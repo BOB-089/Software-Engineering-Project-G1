@@ -49,6 +49,7 @@ public class DeliveryPersonCLI {
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
+        if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); } 
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         if (!deliveryPerson.createDeliveryPerson(firstName, surname, phoneNumber, areaCode)) { System.out.println("Invalid delivery person details."); return; }
         if (deliveryPersonDAO.addDeliveryPerson(deliveryPerson)) {
@@ -109,6 +110,7 @@ public class DeliveryPersonCLI {
                 try { areaCode = Integer.parseInt(scanner.nextLine()); }
                 catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); break; }
                 if (!deliveryPerson.setAreaCode(areaCode)) { System.out.println("Area code must be between 1 and 24."); }
+                if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); } 
                 break;
             case "5":
                 updating = false;
