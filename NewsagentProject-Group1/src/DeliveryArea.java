@@ -18,10 +18,8 @@ public class DeliveryArea {
     }
 
     public boolean createDeliveryArea(int areaCode, String name) {
-        try {
-        	if (!setAreaCode(areaCode)) return false;
-        	if (!setName(name)) return false;
-        } catch(Exception e) { System.out.println("Failed to create delivery area:"); e.printStackTrace(); }
-        return true;
+    	if (!setAreaCode(areaCode)) return false;
+    	if (!setName(name)) return false;
+    	return true;
     }
 }

@@ -1,6 +1,3 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class DeliveryPerson {
     private String firstName;
@@ -11,8 +8,6 @@ public class DeliveryPerson {
 
     public DeliveryPerson() {}
     
-    public String deliveryAreaQuery = "SELECT COUNT(*) FROM DeliveryAreaTable WHERE areaCode = ?";
-
     public String getFirstName() { return firstName; }
     public String getSurname() { return surname; }
     public String getPhoneNumber() { return phoneNumber; }
@@ -41,25 +36,8 @@ public class DeliveryPerson {
     }
 
     public boolean verifyAreaCode(int areaCode) { 
-    	if (areaCode < 1) { return false; }
-		else {
-			try (Connection conn = DatabaseConnection.getConnection();
-		             PreparedStatement stmt = conn.prepareStatement(deliveryAreaQuery)) {
-		            stmt.setInt(1, areaCode);
-		            ResultSet rs = stmt.executeQuery();
-		            if (rs.next()) {
-		                int count = rs.getInt(1);
-		                if (count > 0) {
-		                    return true;
-		                } else {
-		                    return false;
-		                }
-		            }
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        } 
-			}
-    	return areaCode >= 1 && areaCode <= 24; }
+    	return areaCode >= 1 && areaCode <= 24;
+    }
 
     public boolean createDeliveryPerson(String firstName, String surname, String phoneNumber, int areaCode) {
     	if (!setFirstName(firstName)) return false;

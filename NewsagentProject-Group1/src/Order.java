@@ -29,11 +29,6 @@ public class Order {
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
     public void setOrderId(int orderId) { this.orderId = orderId; }
 
-    public boolean verifyPublicationName(String publicationName) {
-        if (publicationName == null || publicationName.trim().isEmpty()) { return false; }
-        return publicationName.matches("^[A-Za-z'-]+$");
-    }
-
     public boolean verifyDay(int day) { return day >= 1 && day <= 31; }
     
 	public boolean verifyMonth(int month) { return month >= 1 && month <= 12; }
