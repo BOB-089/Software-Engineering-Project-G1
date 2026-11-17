@@ -152,112 +152,123 @@ public class DeliveryDocketTest {
 	}
 
 // ------------------------------------------------------------
-// 					Year Tests (TC13–TC14)
+// 					Year Tests (TC13–TC15)
 // ------------------------------------------------------------
 
 	// TC13
-	// Test Objective: Verify year is accepted when greater than or equal to 1900
-	// Input(s): Year = 2026
+	// Test Objective: Verify year is accepted at lower boundary
+	// Input(s): Year = 1900
 	// Expected Output(s): Year accepted
 	@Order(13)
 	@Test
-	void validYear_TC13() {
+	void validYearLowerBoundary_TC13() {
+		DeliveryDocket deliveryDocket = new DeliveryDocket();
+		assertTrue(deliveryDocket.verifyYear(1900));
+	}
+
+	// TC14
+	// Test Objective: Verify year is accepted when above lower boundary
+	// Input(s): Year = 2026
+	// Expected Output(s): Year accepted
+	@Order(14)
+	@Test
+	void validYear_TC14() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertTrue(deliveryDocket.verifyYear(2026));
 	}
 
-	// TC14
+	// TC15
 	// Test Objective: Verify year is rejected when below valid range
 	// Input(s): Year = 1899
 	// Expected Output(s): Invalid Year
-	@Order(14)
+	@Order(15)
 	@Test
-	void invalidYearTooLow_TC14() {
+	void invalidYearTooLow_TC15() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertFalse(deliveryDocket.verifyYear(1899));
 	}
 
 // ------------------------------------------------------------
-// 					Date Tests (TC15–TC16)
+// 					Date Tests (TC16–TC17)
 // ------------------------------------------------------------
 
-	// TC15
+	// TC16
 	// Test Objective: Verify date is accepted when valid
 	// Input(s): 28, 2, 2026
 	// Expected Output(s): Date accepted
-	@Order(15)
+	@Order(16)
 	@Test
-	void validDate_TC15() {
+	void validDate_TC16() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertTrue(deliveryDocket.verifyDate(28, 2, 2026));
 	}
 
-	// TC16
+	// TC17
 	// Test Objective: Verify date is rejected when invalid
 	// Input(s): 31, 2, 2026
 	// Expected Output(s): Invalid Date
-	@Order(16)
+	@Order(17)
 	@Test
-	void invalidDate_TC16() {
+	void invalidDate_TC17() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertFalse(deliveryDocket.verifyDate(31, 2, 2026));
 	}
 
 // ------------------------------------------------------------
-// 					Creation Tests (TC17–TC21)
+// 					Creation Tests (TC18–TC22)
 // ------------------------------------------------------------
 
-	// TC17
+	// TC18
 	// Test Objective: Verify delivery docket is created when all details are valid
 	// Input(s): 12, 15, 10, 2026
 	// Expected Output(s): Delivery docket created successfully
-	@Order(17)
+	@Order(18)
 	@Test
-	void createValidDeliveryDocket_TC17() {
+	void createValidDeliveryDocket_TC18() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertTrue(deliveryDocket.createDeliveryDocket(12, 15, 10, 2026));
 	}
 
-	// TC18
+	// TC19
 	// Test Objective: Verify delivery docket creation fails with invalid area code
 	// Input(s): 25, 15, 10, 2026
 	// Expected Output(s): Delivery docket not created
-	@Order(18)
+	@Order(19)
 	@Test
-	void createDeliveryDocketInvalidAreaCode_TC18() {
+	void createDeliveryDocketInvalidAreaCode_TC19() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertFalse(deliveryDocket.createDeliveryDocket(25, 15, 10, 2026));
 	}
 
-	// TC19
+	// TC20
 	// Test Objective: Verify delivery docket creation fails with invalid day
 	// Input(s): 12, 32, 10, 2026
 	// Expected Output(s): Delivery docket not created
-	@Order(19)
+	@Order(20)
 	@Test
-	void createDeliveryDocketInvalidDay_TC19() {
+	void createDeliveryDocketInvalidDay_TC20() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertFalse(deliveryDocket.createDeliveryDocket(12, 32, 10, 2026));
 	}
 
-	// TC20
+	// TC21
 	// Test Objective: Verify delivery docket creation fails with invalid month
 	// Input(s): 12, 15, 13, 2026
 	// Expected Output(s): Delivery docket not created
-	@Order(20)
+	@Order(21)
 	@Test
-	void createDeliveryDocketInvalidMonth_TC20() {
+	void createDeliveryDocketInvalidMonth_TC21() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertFalse(deliveryDocket.createDeliveryDocket(12, 15, 13, 2026));
 	}
 
-	// TC21
+	// TC22
 	// Test Objective: Verify delivery docket creation fails with invalid date
 	// Input(s): 12, 31, 2, 2026
 	// Expected Output(s): Delivery docket not created
-	@Order(21)
+	@Order(22)
 	@Test
-	void createDeliveryDocketInvalidDate_TC21() {
+	void createDeliveryDocketInvalidDate_TC22() {
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		assertFalse(deliveryDocket.createDeliveryDocket(12, 31, 2, 2026));
 	}
