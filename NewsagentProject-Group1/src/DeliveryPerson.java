@@ -3,6 +3,7 @@ public class DeliveryPerson {
     private String firstName;
     private String surname;
     private String phoneNumber;
+    private int areaCode;
     private int deliveryPersonId;
 
     public DeliveryPerson() {}
@@ -10,11 +11,13 @@ public class DeliveryPerson {
     public String getFirstName() { return firstName; }
     public String getSurname() { return surname; }
     public String getPhoneNumber() { return phoneNumber; }
+    public int getAreaCode() { return areaCode; }
     public int getDeliveryPersonId() { return deliveryPersonId; }
 
     public boolean setFirstName(String firstName) { if (verifyFirstName(firstName)) { this.firstName = firstName; return true; } else return false; }
     public boolean setSurname(String surname) { if (verifySurname(surname)) { this.surname = surname; return true; } else return false; }
     public boolean setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) { this.phoneNumber = phoneNumber; return true; } else return false; }
+    public void setAreaCode(int areaCode) { this.areaCode = areaCode; }
     public void setDeliveryPersonId(int deliveryPersonId) { this.deliveryPersonId = deliveryPersonId; }
 
     public boolean verifyFirstName(String firstName) {
@@ -36,6 +39,7 @@ public class DeliveryPerson {
     	if (!setFirstName(firstName)) return false;
         if (!setSurname(surname)) return false;
         if (!setPhoneNumber(phoneNumber)) return false;
+        setAreaCode(areaCode);
         return true;
     }
 }

@@ -109,8 +109,8 @@ public class DeliveryPersonCLI {
                 int areaCode;
                 try { areaCode = Integer.parseInt(scanner.nextLine()); }
                 catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); break; }
-                if (!deliveryPerson.setAreaCode(areaCode)) { System.out.println("Area code must be between 1 and 24."); }
                 if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); } 
+                deliveryPerson.setAreaCode(areaCode);
                 break;
             case "5":
                 updating = false;
