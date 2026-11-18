@@ -58,6 +58,11 @@ public class DeliveryDocketCLI {
         catch (NumberFormatException e) { System.out.println("Year must be a whole number."); return; }
 		DeliveryDocket deliveryDocket = new DeliveryDocket();
 		if (!deliveryDocket.createDeliveryDocket(areaCode, day, month, year)) { System.out.println("Invalid delivery docket details."); return; }
+		if (deliveryDocketDAO.deliveryDocketExists(areaCode, day, month, year)) 
+		{ 
+			System.out.println("A delivery docket already exists for area code " + areaCode + " on " + deliveryDocket.getDate() +".");
+		    return;
+		}
 		if (deliveryDocketDAO.addDeliveryDocket(deliveryDocket)) {
 			System.out.println("Delivery docket saved successfully.");
 		} else {
@@ -149,6 +154,11 @@ public class DeliveryDocketCLI {
 		{ 
 			System.out.println("Invalid date. \nFailed to update delivery docket."); 
 			return;
+		}
+		if (deliveryDocketDAO.deliveryDocketExists(deliveryDocket.getAreaCode(), deliveryDocket.getDay(), deliveryDocket.getMonth(), deliveryDocket.getYear())) 
+		{ 
+			System.out.println("A delivery docket already exists for area code " + deliveryDocket.getAreaCode() + " on " + deliveryDocket.getDate() +". \nFailed to update delivery docket.");
+		    return;
 		}
 		if (deliveryDocketDAO.updateDeliveryDocket(deliveryDocket)) {
 		    System.out.println("Delivery docket updated.");

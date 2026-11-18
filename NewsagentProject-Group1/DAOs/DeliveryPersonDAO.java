@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DeliveryPersonDAO {
@@ -12,7 +13,7 @@ public class DeliveryPersonDAO {
 
 	private static final String DELETE_DELIVERYPERSON = "DELETE FROM DeliveryPersonTable WHERE deliveryPersonId=?";
 	
-	private static final String GET_DELIVERYDOCKET = "SELECT * FROM DeliveryDocketTable WHERE areaCode = ?";
+	private static final String GET_DELIVERYDOCKET = "SELECT * FROM DeliveryDocketTable WHERE areaCode = ? AND day = ? AND month = ? AND year = ?";
 	
 	private static final String CHECK_DELIVERYAREA_EXISTS = "SELECT COUNT(*) FROM DeliveryAreaTable WHERE areaCode = ?";
 
@@ -91,12 +92,15 @@ public class DeliveryPersonDAO {
 		} catch (SQLException e) { e.printStackTrace(); return false; }
 	}
 	
-	// GET DELIVERY DOCKET
-	public DeliveryDocket getDeliveryDocket(int areaCode) {
+// 		GET DELIVERY DOCKET
+	public DeliveryDocket getTodaysDeliveryDocket(int areaCode) {
 	    try (Connection conn = DatabaseConnection.getConnection();
-	         PreparedStatement stmt = conn.prepareStatement(GET_DELIVERYDOCKET)) {
-	    	// TODO consider multiple delivery docket handling
+	    PreparedStatement stmt = conn.prepareStatement(GET_DELIVERYDOCKET)) {
+	    	LocalDate today = LocalDate.now();
 	        stmt.setInt(1, areaCode);
+	        stmt.setInt(2, today.getDayOfMonth());
+	        stmt.setInt(3, today.getMonthValue());
+	        stmt.setInt(4, today.getYear());
 	        ResultSet rs = stmt.executeQuery();
 	        if (rs.next()) {
 	            DeliveryDocket deliveryDocket = new DeliveryDocket();
@@ -111,14 +115,14 @@ public class DeliveryPersonDAO {
 	    return null;
 	}
 	
-	//CHECK DELIVERY AREA EXISTS
+//		CHECK DELIVERY AREA EXISTS
 	public boolean deliveryAreaExists(int areaCode) {
 		try (Connection conn = DatabaseConnection.getConnection();
-		     PreparedStatement stmt = conn.prepareStatement(CHECK_DELIVERYAREA_EXISTS)) {
-		     	stmt.setInt(1, areaCode);
-		        ResultSet rs = stmt.executeQuery();
-		        if (rs.next()) { return rs.getInt(1) > 0; }
-		} catch (Exception e) { e.printStackTrace(); }
+		PreparedStatement stmt = conn.prepareStatement(CHECK_DELIVERYAREA_EXISTS)) {
+		     stmt.setInt(1, areaCode);
+		     ResultSet rs = stmt.executeQuery();
+		     if (rs.next()) { return rs.getInt(1) > 0; }
+		} catch (SQLException e) { e.printStackTrace(); }
 		return false;
 	}
 }

@@ -12,6 +12,8 @@ public class DeliveryDocketDAO {
 
 	private static final String DELETE_DELIVERYDOCKET = "DELETE FROM DeliveryDocketTable WHERE deliveryDocketId=?";
 	
+	private static final String CHECK_DELIVERYDOCKET_EXISTS = "SELECT COUNT(*) FROM DeliveryDocketTable WHERE areaCode = ? AND day = ? AND month = ? AND year = ?";
+	
 //		GET ORDERS
 	public ArrayList<Order> getOrdersForDocket(DeliveryDocket docket) {
 	    ArrayList<Order> orders = new ArrayList<>();
@@ -143,5 +145,19 @@ public class DeliveryDocketDAO {
 			int rowsDeleted = stmt.executeUpdate();
 			return rowsDeleted > 0;
 		} catch (SQLException e) { e.printStackTrace(); return false; }
+	}
+	
+//  	CHECK DELIVERY DOCKET EXISTS
+	public boolean deliveryDocketExists(int areaCode, int day, int month, int year) {
+		try (Connection conn = DatabaseConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(CHECK_DELIVERYDOCKET_EXISTS)) {
+			stmt.setInt(1, areaCode);
+			stmt.setInt(2, day);
+			stmt.setInt(3, month);
+			stmt.setInt(4, year);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) { return rs.getInt(1) > 0; }
+		} catch (SQLException e) { e.printStackTrace(); }
+		return false;
 	}
 }

@@ -1,7 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DeliveryPersonCLI {
 	private static final DeliveryPersonDAO deliveryPersonDAO = new DeliveryPersonDAO();
+	
+	private static final DeliveryDocketDAO deliveryDocketDAO = new DeliveryDocketDAO();
 	
     public static void run(Scanner scanner) {
         boolean running = true;
@@ -49,7 +52,7 @@ public class DeliveryPersonCLI {
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
-        if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); } 
+        if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); return; } 
         DeliveryPerson deliveryPerson = new DeliveryPerson();
         if (!deliveryPerson.createDeliveryPerson(firstName, surname, phoneNumber, areaCode)) { System.out.println("Invalid delivery person details."); return; }
         if (deliveryPersonDAO.addDeliveryPerson(deliveryPerson)) {
@@ -71,6 +74,27 @@ public class DeliveryPersonCLI {
                            "\nSurname: " + deliveryPerson.getSurname() +
                            "\nPhone number: " + deliveryPerson.getPhoneNumber() + 
                            "\nArea code: " + deliveryPerson.getAreaCode());
+        DeliveryDocket todaysDeliveryDocket = deliveryPersonDAO.getTodaysDeliveryDocket(deliveryPerson.getAreaCode());
+        if (todaysDeliveryDocket != null) {
+            System.out.println("\n=== Today's Delivery Docket ===");
+            System.out.println("Docket Id: " + todaysDeliveryDocket.getDeliveryDocketId());
+            System.out.println("Date: " + todaysDeliveryDocket.getDate());
+			ArrayList<Order> orders = deliveryDocketDAO.getOrdersForDocket(todaysDeliveryDocket);
+            System.out.println("\n=== Orders For Today's Delivery ===");
+            if (orders.isEmpty()) {
+                System.out.println("No orders found.");
+            } else {
+                for (Order order : orders) {
+                    System.out.println("Order Id: " + order.getOrderId() +
+                    				   "\nCustomer Id: " + order.getCustomerId() +
+                    				   "\nPublication: " + order.getPublicationName() +
+                    				   "\n---------------------------");
+                }
+            }
+        }
+        else {
+            System.out.println("\nNo delivery docket found for today.");
+        }
     }
 
     private static void updateDeliveryPerson(Scanner scanner) {
@@ -109,7 +133,7 @@ public class DeliveryPersonCLI {
                 int areaCode;
                 try { areaCode = Integer.parseInt(scanner.nextLine()); }
                 catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); break; }
-                if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); } 
+                if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); break; } 
                 deliveryPerson.setAreaCode(areaCode);
                 break;
             case "5":
