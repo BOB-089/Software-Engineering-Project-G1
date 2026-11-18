@@ -17,13 +17,11 @@ public class DeliveryDocket {
     public int getYear() { return year; }
     public String getDate() { return day + "/" + month + "/" + year; }
 
-    public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
+    public void setAreaCode(int areaCode) { this.areaCode = areaCode; }
 	public void setDeliveryDocketId(int deliveryDocketId) { this.deliveryDocketId = deliveryDocketId; }
 	public boolean setDay(int day) { if (verifyDay(day)) { this.day = day; return true; } else return false; }
 	public boolean setMonth(int month) { if (verifyMonth(month)) { this.month = month; return true; } else return false; }
 	public boolean setYear(int year) { if (verifyYear(year)) { this.year = year; return true; } else return false; }
-
-	public boolean verifyAreaCode(int areaCode) { return areaCode >= 1 && areaCode <= 24; }
 	
 	public boolean verifyDay(int day) { return day >= 1 && day <= 31; }
 	
@@ -37,7 +35,7 @@ public class DeliveryDocket {
 	}
 	
 	public boolean createDeliveryDocket(int areaCode, int day, int month, int year) {
-		if (!setAreaCode(areaCode)) return false;
+		setAreaCode(areaCode);
 	    if (!setDay(day)) return false;
 	    if (!setMonth(month)) return false;
 	    if (!setYear(year)) return false;

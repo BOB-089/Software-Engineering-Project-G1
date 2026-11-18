@@ -51,6 +51,7 @@ public class CustomerCLI {
 		int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
+        if (!customerDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); return; } 
 		Customer customer = new Customer();
 		if (!customer.createCustomer(firstName, surname, address, phoneNumber, areaCode)) { System.out.println("Invalid customer details."); return; }
 		if (customerDAO.addCustomer(customer)) {
@@ -119,7 +120,8 @@ public class CustomerCLI {
 			    int areaCode;
 			    try { areaCode = Integer.parseInt(scanner.nextLine()); }
 			    catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); break; }
-			    if (!customer.setAreaCode(areaCode)) { System.out.println("Area code must be between 1 and 24."); }
+			    if (!customerDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); break; } 
+                customer.setAreaCode(areaCode);
 			    break;
 			case "6":
 				System.out.print("On holiday (yes/no): ");

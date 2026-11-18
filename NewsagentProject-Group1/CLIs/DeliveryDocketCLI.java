@@ -44,6 +44,7 @@ public class DeliveryDocketCLI {
 		int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
+        if (!deliveryDocketDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); return; } 
         System.out.print("Day: ");
 		int day;
         try { day = Integer.parseInt(scanner.nextLine()); }
@@ -120,7 +121,8 @@ public class DeliveryDocketCLI {
 			    int areaCode;
 			    try { areaCode = Integer.parseInt(scanner.nextLine()); }
 			    catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); break; }
-			    if (!deliveryDocket.setAreaCode(areaCode)) { System.out.println("Area code must be between 1 and 24."); }
+			    if (!deliveryDocketDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); break; } 
+                deliveryDocket.setAreaCode(areaCode);
 			    break;
 			case "2":
 				System.out.print("Day: ");

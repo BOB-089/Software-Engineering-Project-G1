@@ -24,7 +24,7 @@ public class Customer {
     public boolean setSurname(String surname) { if (verifySurname(surname)) { this.surname = surname; return true; } else return false; }
     public boolean setAddress(String address) { if (verifyAddress(address)) { this.address = address; return true; } else return false; }
     public boolean setPhoneNumber(String phoneNumber) { if (verifyPhoneNumber(phoneNumber)) { this.phoneNumber = phoneNumber; return true; } else return false; }
-    public boolean setAreaCode(int areaCode) { if (verifyAreaCode(areaCode)) { this.areaCode = areaCode; return true; } else return false; }
+    public void setAreaCode(int areaCode) { this.areaCode = areaCode; }
     public void setOnHoliday(boolean onHoliday) { this.onHoliday = onHoliday; }
     public void setPublicationsAvailable(boolean publicationsAvailable) { this.publicationsAvailable = publicationsAvailable; }
     public void setCustomerId(int customerId) { this.customerId = customerId; }
@@ -49,14 +49,12 @@ public class Customer {
         return phoneNumber.matches("^[0-9]{10}$");
     }
 
-    public boolean verifyAreaCode(int areaCode) { return areaCode >= 1 && areaCode <= 24; }
-
     public boolean createCustomer(String firstName, String surname, String address, String phoneNumber, int areaCode) {
     	if (!setFirstName(firstName)) return false;
         if (!setSurname(surname)) return false;
         if (!setAddress(address)) return false;
         if (!setPhoneNumber(phoneNumber)) return false;
-        if (!setAreaCode(areaCode)) return false;
+        setAreaCode(areaCode);
         setOnHoliday(false);
         setPublicationsAvailable(true);
         return true;

@@ -266,133 +266,63 @@ public class CustomerTest {
 	}
 
 // ------------------------------------------------------------
-// 					AreaCode Tests (TC23–TC27)
+// 					Creation Tests (TC23–TC)
 // ------------------------------------------------------------
 
 	// TC23
-	// Test Objective: Verify areaCode is accepted when within valid range
-	// Input(s): AreaCode = 12
-	// Expected Output(s): AreaCode accepted
-	@Order(23)
-	@Test
-	void validAreaCode_TC23() {
-		Customer customer = new Customer();
-		assertTrue(customer.verifyAreaCode(12));
-	}
-
-	// TC24
-	// Test Objective: Verify areaCode is accepted at lower boundary
-	// Input(s): AreaCode = 1
-	// Expected Output(s): AreaCode accepted
-	@Order(24)
-	@Test
-	void validAreaCodeLowerBoundary_TC24() {
-		Customer customer = new Customer();
-		assertTrue(customer.verifyAreaCode(1));
-	}
-
-	// TC25
-	// Test Objective: Verify areaCode is accepted at upper boundary
-	// Input(s): AreaCode = 24
-	// Expected Output(s): AreaCode accepted
-	@Order(25)
-	@Test
-	void validAreaCodeUpperBoundary_TC25() {
-		Customer customer = new Customer();
-		assertTrue(customer.verifyAreaCode(24));
-	}
-
-	// TC26
-	// Test Objective: Verify areaCode is rejected when below valid range
-	// Input(s): AreaCode = 0
-	// Expected Output(s): Error message: Invalid AreaCode
-	@Order(26)
-	@Test
-	void invalidAreaCodeTooLow_TC26() {
-		Customer customer = new Customer();
-		assertFalse(customer.verifyAreaCode(0));
-	}
-
-	// TC27
-	// Test Objective: Verify areaCode is rejected when above valid range
-	// Input(s): AreaCode = 25
-	// Expected Output(s): Error message: Invalid AreaCode
-	@Order(27)
-	@Test
-	void invalidAreaCodeTooHigh_TC27() {
-		Customer customer = new Customer();
-		assertFalse(customer.verifyAreaCode(25));
-	}
-
-// ------------------------------------------------------------
-// 					Creation Tests (TC28–TC33)
-// ------------------------------------------------------------
-
-	// TC28
 	// Test Objective: Verify customer account is created when all details are valid
 	// Input(s): John, Smith, Main Street, 0871234567, 12
 	// Expected Output(s): Customer account created successfully
-	@Order(28)
+	@Order(23)
 	@Test
-	void createValidCustomerAccount_TC28() {
+	void createValidCustomerAccount_TC23() {
 		Customer customer = new Customer();
 		assertTrue(customer.createCustomer("John", "Smith", "Main Street", "0871234567", 12));
 	}
 
-	// TC29
+	// TC24
 	// Test Objective: Verify customer account creation fails with invalid first
 	// name
 	// Input(s): "", Smith, Main Street, 0871234567, 12
 	// Expected Output(s): Customer account not created
-	@Order(29)
+	@Order(24)
 	@Test
-	void createAccountInvalidFirstName_TC29() {
+	void createAccountInvalidFirstName_TC24() {
 		Customer customer = new Customer();
 		assertFalse(customer.createCustomer("", "Smith", "Main Street", "0871234567", 12));
 	}
 
-	// TC30
+	// TC25
 	// Test Objective: Verify customer account creation fails with invalid surname
 	// Input(s): John, "", Main Street, 0871234567, 12
 	// Expected Output(s): Customer account not created
-	@Order(30)
+	@Order(25)
 	@Test
-	void createAccountInvalidSurname_TC30() {
+	void createAccountInvalidSurname_TC25() {
 		Customer customer = new Customer();
 		assertFalse(customer.createCustomer("John", "", "Main Street", "0871234567", 12));
 	}
 
-	// TC31
-	// Test Objective: Verify customer account creation fails with invalid address
-	// Input(s): John, Smith, "", 0871234567, 12
-	// Expected Output(s): Customer account not created
-	@Order(31)
-	@Test
-	void createAccountInvalidAddress_TC31() {
-		Customer customer = new Customer();
-		assertFalse(customer.createCustomer("John", "Smith", "", "0871234567", 12));
-	}
-
-	// TC32
+	// TC26
 	// Test Objective: Verify customer account creation fails with invalid phone
 	// number
 	// Input(s): John, Smith, Main Street, 087123456, 12
 	// Expected Output(s): Customer account not created
-	@Order(32)
+	@Order(26)
 	@Test
-	void createAccountInvalidPhoneNumber_TC32() {
+	void createAccountInvalidPhoneNumber_TC26() {
 		Customer customer = new Customer();
 		assertFalse(customer.createCustomer("John", "Smith", "Main Street", "087123456", 12));
 	}
 
-	// TC33
-	// Test Objective: Verify customer account creation fails with invalid AreaCode
-	// Input(s): John, Smith, Main Street, 0871234567, 0
+	// TC27
+	// Test Objective: Verify customer account creation fails with invalid address
+	// Input(s): John, Smith, "", 0871234567, 12
 	// Expected Output(s): Customer account not created
-	@Order(33)
+	@Order(27)
 	@Test
-	void createAccountInvalidAreaCode_TC33() {
+	void createAccountInvalidAddress_TC27() {
 		Customer customer = new Customer();
-		assertFalse(customer.createCustomer("John", "Smith", "Main Street", "0871234567", 0));
+		assertFalse(customer.createCustomer("John", "Smith", "", "0871234567", 12));
 	}
 }

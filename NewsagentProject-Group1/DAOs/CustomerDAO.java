@@ -13,6 +13,8 @@ public class CustomerDAO {
 			"SET firstName=?, surname=?, address=?, phoneNumber=?, onHoliday=?, publicationsAvailable=?, areaCode=? " + "WHERE customerId=?";
 
 	private static final String DELETE_CUSTOMER = "DELETE FROM CustomerTable WHERE customerId=?";
+	
+	private static final String CHECK_DELIVERYAREA_EXISTS = "SELECT COUNT(*) FROM DeliveryAreaTable WHERE areaCode = ?";
 
 //		CREATE CUSTOMER
 	public boolean addCustomer(Customer customer) {
@@ -100,5 +102,16 @@ public class CustomerDAO {
 			int rowsDeleted = stmt.executeUpdate();
 			return rowsDeleted > 0;
 		} catch (SQLException e) { e.printStackTrace(); return false; }
+	}
+	
+//		CHECK DELIVERY AREA EXISTS
+	public boolean deliveryAreaExists(int areaCode) {
+		try (Connection conn = DatabaseConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(CHECK_DELIVERYAREA_EXISTS)) {
+			stmt.setInt(1, areaCode);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) { return rs.getInt(1) > 0; }
+		} catch (SQLException e) { e.printStackTrace(); }
+		return false;
 	}
 }
