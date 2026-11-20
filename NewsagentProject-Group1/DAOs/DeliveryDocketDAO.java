@@ -53,20 +53,6 @@ public class DeliveryDocketDAO {
 	    } catch (SQLException e) { e.printStackTrace(); }
 	    return orders;
 	}
-	
-//		ADD ORDER TO DOCKET	
-	public boolean addOrderToDocket(int docketId, int orderId) {
-	    String sql = """
-	        INSERT INTO DeliveryDocketOrderTable
-	        (deliveryDocketId, orderId)
-	        VALUES (?, ?)
-	        """;
-	    try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-	        stmt.setInt(1, docketId);
-	        stmt.setInt(2, orderId);
-	        return stmt.executeUpdate() > 0;
-	    } catch (SQLException e) { e.printStackTrace(); return false; }
-	}
 
 //		CREATE DELIVERY DOCKET
 	public boolean addDeliveryDocket(DeliveryDocket deliveryDocket) {
