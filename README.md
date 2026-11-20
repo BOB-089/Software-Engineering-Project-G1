@@ -12,8 +12,8 @@ Group - James Michael Joseph Luke
 - Received Brief of Newsagent Project and base requirements from customer
 - Choose and implement an appropriate Software Development Lifecycle to plan and manage the specification, design, development, and testing of the newspaper delivery system. Development requires the proper use of a Version Control System.
 - Report/discuss progress (including problems and issues) with the lecturer. Agree on next week's workload; focus on justifying the chosen SDLC, creating the group repository, and preparing questions for the Newsagent.
--   (2) Create questions for Newsagents – Joseph
--   (2) Create project plan – James
+- (2) Create questions for Newsagents – Joseph
+- (2) Create project plan – James
 -	(2) Work on software cycle justification – James
 -	(2) Setup repository files – Luke
 -	(2) Begin Excel Sheet for User Stories – Michael, Luke
@@ -73,15 +73,12 @@ Group - James Michael Joseph Luke
 -	(11) Implement the calculated bill for a certain customer for that month and make sure the bill is included for the delivery person to deliver along side their publications – Joseph, James
 -	(11) Implement where the customer will not be charged for the time they are away or put any publications on their deliver list if they are on holiday/away – Luke, Michael
 -	(11) Implement a warning and reminder system for a scenario where the customer hasn’t paid their monthly bill and is sent the message along side their bill – James
--   (11) Make sure if a delivery is failed, it is added to the next day delivery docket – Luke
+- (11) Make sure if a delivery is failed, it is added to the next day delivery docket – Luke
 -	(11) Perform an entire review and testing (for bugs etc) of the Project and reflect on how it meets the speciation’s of the project – ALL
 
 # Week 12:
 - Submission of Project, Each Person writes an individual reflection of the project on how they performed, what they would of done differently, how they worked as a team, what they learned, etc
 - Also demo the Project in action.
 
-## Linked orders, delivery outcomes, and bills
 
-Orders can contain multiple publications. `OrderPublicationTable` links each order to publication IDs and stores the unit price at order time. A delivery marked successful reduces each linked publication's stock and makes its saved item prices count toward the customer's bill for that month. A failed delivery is rescheduled for the following day and is not billed. Customer, delivery area, delivery person, docket, order, publication, and bill relationships are enforced with foreign keys on new databases; setup triggers also protect existing customer/order/bill tables.
-
-For an existing database, keep a backup, then run the SQL setup classes from the `NewsagentProject-Group1` project in this order: `DeliveryAreaDb`, `CustomerDb`, `PublicationDb`, `OrderDb`, `BillDb`, `DeliveryPersonDb`, and `DeliveryDocketDb`. Running `OrderDb` adds the delivery status, creates the order/publication link table, and migrates old single-publication orders by matching their publication names to `PublicationTable`.
+*Note that some of plan objectives did not get completed due to time constraints.
