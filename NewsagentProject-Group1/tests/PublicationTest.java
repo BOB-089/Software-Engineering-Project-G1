@@ -66,18 +66,18 @@ public class PublicationTest {
 	}
 	
 // -----------------------------------------------------------
-// 					Stock Tests (TC06–TC09)
+// 					Stock Tests (TC06–TC08)
 // -----------------------------------------------------------
 	
 	// TC06
-	// Test Objective: Verify stock is accepted when greater than 1
-	// Input(s): Stock = 100
+	// Test Objective: Verify stock is accepted when above minimum boundary
+	// Input(s): Stock = 1
 	// Expected Output(s): Stock accepted
 	@Order(6)
 	@Test
 	void validStock_TC06() {
 		Publication publication = new Publication();
-		assertTrue(publication.verifyStock(100));
+		assertTrue(publication.verifyStock(1));
 	}
 
 	// TC07
@@ -101,132 +101,121 @@ public class PublicationTest {
 	    Publication publication = new Publication();
 	    assertFalse(publication.verifyStock(-1));
 	}
-
-	// TC09
-	// Test Objective: Verify stock is rejected when negative
-	// Input(s): Stock = -100
-	// Expected Output(s): Invalid Stock
-	@Order(9)
-	@Test
-	void invalidStockNegative_TC09() {
-		Publication publication = new Publication();
-		assertFalse(publication.verifyStock(-100));
-	}
 	
 // -----------------------------------------------------------
-// 					Price Tests (TC10–TC15)
+// 					Price Tests (TC09–TC14)
 // -----------------------------------------------------------
 
-	// TC10
+	// TC09
 	// Test Objective: Verify price is accepted at the minimum valid value 
 	// Input(s): Price = 0.01
 	// Expected Output(s): Price accepted
-	@Order(10)
+	@Order(9)
 	@Test
-	void validPriceMinBoundary_TC10() {
+	void validPriceMinBoundary_TC09() {
 		Publication publication = new Publication();
 		assertTrue(publication.verifyPrice(0.01));
 	}
 
-	// TC11
+	// TC10
 	// Test Objective: Verify price is rejected when equal to 0
 	// Input(s): Price = 0
 	// Expected Output(s): Invalid Price
-	@Order(11)
+	@Order(10)
 	@Test
-	void invalidPriceZero_TC11() {
+	void invalidPriceZero_TC10() {
 		Publication publication = new Publication();
 		assertFalse(publication.verifyPrice(0));
 	}
 
-	// TC12
+	// TC11
 	// Test Objective: Verify price is rejected when negative
 	// Input(s): Price = -1
 	// Expected Output(s): Invalid Price
-	@Order(12)
+	@Order(11)
 	@Test
-	void invalidPriceNegative_TC12() {
+	void invalidPriceNegative_TC11() {
 		Publication publication = new Publication();
 		assertFalse(publication.verifyPrice(-1));
 	}
 	
-	// TC13
+	// TC12
 	// Test Objective: Verify price is accepted when entered with one decimal place
 	// Input(s): Price = 2.5
 	// Expected Output(s): Price accepted
-	@Order(13)
+	@Order(12)
 	@Test
-	void validPriceOneDecimalPlace_TC13() {
+	void validPriceOneDecimalPlace_TC12() {
 	    Publication publication = new Publication();
 	    assertTrue(publication.verifyPrice(2.5));
 	}
 
-	// TC14
+	// TC13
 	// Test Objective: Verify price is accepted when entered with two decimal places
 	// Input(s): Price = 2.99
 	// Expected Output(s): Price accepted
-	@Order(14)
+	@Order(13)
 	@Test
-	void validPriceTwoDecimalPlaces_TC14() {
+	void validPriceTwoDecimalPlaces_TC13() {
 	    Publication publication = new Publication();
 	    assertTrue(publication.verifyPrice(2.99));
 	}
 
-	// TC15
+	// TC14
 	// Test Objective: Verify price is rejected when entered with more than two decimal places
 	// Input(s): Price = 2.999
 	// Expected Output(s): Invalid Price
-	@Order(15)
+	@Order(14)
 	@Test
-	void invalidPriceTooManyDecimalPlaces_TC15() {
+	void invalidPriceTooManyDecimalPlaces_TC14() {
 	    Publication publication = new Publication();
 	    assertFalse(publication.verifyPrice(2.999));
 	}
 	
 // ------------------------------------------------------------
-// 					Creation Tests (TC16–TC19)
+// 					Creation Tests (TC15–TC18)
 // ------------------------------------------------------------
 
-	// TC16
+	// TC15
 	// Test Objective: Verify publication is created when all details are valid
 	// Input(s): "DailyNews", 100, 2
 	// Expected Output(s): Publication created successfully
-	@Order(16)
+	@Order(15)
 	@Test
-	void createValidPublication_TC16() {
+	void createValidPublication_TC15() {
 		Publication publication = new Publication();
 		assertTrue(publication.createPublication("DailyNews", 100, 2));
 	}
 
-	// TC17
+	// TC16
 	// Test Objective: Verify publication creation fails with invalid publication name
 	// Input(s): "", 100, 2
 	// Expected Output(s): Publication not created
-	@Order(17)
+	@Order(16)
 	@Test
-	void createPublicationInvalidName_TC17() {
+	void createPublicationInvalidName_TC16() {
 		Publication publication = new Publication();
 		assertFalse(publication.createPublication("", 100, 2));
 	}
 
-	// TC18
+	// TC17
 	// Test Objective: Verify publication creation fails with invalid publication stock
 	// Input(s): "DailyNews", -100, 2
 	// Expected Output(s): Publication not created
-	@Order(18)
+	@Order(17)
 	@Test
-	void createPublicationInvalidStock_TC18() {
+	void createPublicationInvalidStock_TC17() {
 		Publication publication = new Publication();
 		assertFalse(publication.createPublication("DailyNews", -100, 2));
 	}
 	
-	// TC19
+	// TC18
 	// Test Objective: Verify publication creation fails with invalid publication price
 	// Input(s): "DailyNews", 100, 2.999
 	// Expected Output(s): Publication not created
-	@Order(19)
+	@Order(18)
 	@Test
-	void createPublicationInvalidPrice_TC19() {
+	void createPublicationInvalidPrice_TC18() {
 		Publication publication = new Publication();
 		assertFalse(publication.createPublication("DailyNews", 100, 2.999));
 	}
