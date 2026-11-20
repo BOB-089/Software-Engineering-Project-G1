@@ -26,7 +26,7 @@ Group - James Michael Joseph Luke
 
 ## Week 4:
 - Completed User Stories/Acceptance Criteria for Newsagent Project. 2. Team Project Plan.
--	(4) Implement Customer class – James 
+-	(4) Implement Customer class – James
 -	(4) Implement Newsagent class – Joseph
 -	(4) Implement Order class – Luke
 -	(4) Setting up database, start with linking customer – Michael
@@ -79,3 +79,9 @@ Group - James Michael Joseph Luke
 # Week 12:
 - Submission of Project, Each Person writes an individual reflection of the project on how they performed, what they would of done differently, how they worked as a team, what they learned, etc
 - Also demo the Project in action.
+
+## Linked orders, delivery outcomes, and bills
+
+Orders can contain multiple publications. `OrderPublicationTable` links each order to publication IDs and stores the unit price at order time. A delivery marked successful reduces each linked publication's stock and makes its saved item prices count toward the customer's bill for that month. A failed delivery is rescheduled for the following day and is not billed. Customer, delivery area, delivery person, docket, order, publication, and bill relationships are enforced with foreign keys on new databases; setup triggers also protect existing customer/order/bill tables.
+
+For an existing database, keep a backup, then run the SQL setup classes from the `NewsagentProject-Group1` project in this order: `DeliveryAreaDb`, `CustomerDb`, `PublicationDb`, `OrderDb`, `BillDb`, `DeliveryPersonDb`, and `DeliveryDocketDb`. Running `OrderDb` adds the delivery status, creates the order/publication link table, and migrates old single-publication orders by matching their publication names to `PublicationTable`.
