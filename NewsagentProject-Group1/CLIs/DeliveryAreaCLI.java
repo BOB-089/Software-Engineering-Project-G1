@@ -37,18 +37,19 @@ public class DeliveryAreaCLI {
             }
         }
     }
-
+    
     private static void createDeliveryArea(Scanner scanner) {
         System.out.println("\n=== Create New Delivery Area ===");
+        DeliveryArea deliveryArea = new DeliveryArea();
         System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
         if (deliveryAreaDAO.findDeliveryAreaByAreaCode(areaCode) != null) { System.out.println("Delivery area with area code " + areaCode + " already exists."); return; }
+        if (!deliveryArea.setAreaCode(areaCode)) { System.out.println("Area code must be between 1 and 24."); return; }
         System.out.print("Area name: ");
         String name = scanner.nextLine();
-        DeliveryArea deliveryArea = new DeliveryArea();
-        if (!deliveryArea.createDeliveryArea(areaCode, name)) { System.out.println("Invalid delivery area details."); return; }
+        if (!deliveryArea.setName(name)) { System.out.println("Invalid name."); return; }
         if (deliveryAreaDAO.addDeliveryArea(deliveryArea)) {
             System.out.println("Delivery area saved successfully.");
         } else {

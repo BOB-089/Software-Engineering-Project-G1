@@ -17,6 +17,7 @@ public class DeliveryArea {
         return name.matches("^[A-Za-z'-]+$");
     }
 
+    // Convenience creation method used by tests
     public boolean createDeliveryArea(int areaCode, String name) {
     	if (!setAreaCode(areaCode)) return false;
     	if (!setName(name)) return false;

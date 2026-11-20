@@ -36,29 +36,35 @@ public class CustomerCLI {
 			}
 		}
 	}
-
+	
 	private static void createCustomer(Scanner scanner) {
-		System.out.println("\n=== Create New Customer ===");
-		System.out.print("First name: ");
-		String firstName = scanner.nextLine();
-		System.out.print("Surname: ");
-		String surname = scanner.nextLine();
-		System.out.print("Address: ");
-		String address = scanner.nextLine();
-		System.out.print("Phone number: ");
-		String phoneNumber = scanner.nextLine();
-		System.out.print("Area code: ");
-		int areaCode;
-        try { areaCode = Integer.parseInt(scanner.nextLine()); }
-        catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
-        if (!customerDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); return; } 
-		Customer customer = new Customer();
-		if (!customer.createCustomer(firstName, surname, address, phoneNumber, areaCode)) { System.out.println("Invalid customer details."); return; }
-		if (customerDAO.addCustomer(customer)) {
-			System.out.println("Customer saved successfully.");
-		} else {
-			System.out.println("Failed to save customer.");
-		}
+	    System.out.println("\n=== Create New Customer ===");
+	    Customer customer = new Customer();
+	    System.out.print("First name: ");
+	    String firstName = scanner.nextLine();
+	    if (!customer.setFirstName(firstName)) { System.out.println("Invalid first name."); return; }
+	    System.out.print("Surname: ");
+	    String surname = scanner.nextLine();
+	    if (!customer.setSurname(surname)) { System.out.println("Invalid surname."); return; }
+	    System.out.print("Address: ");
+	    String address = scanner.nextLine();
+	    if (!customer.setAddress(address)) { System.out.println("Invalid address."); return; }
+	    System.out.print("Phone number: ");
+	    String phoneNumber = scanner.nextLine();
+	    if (!customer.setPhoneNumber(phoneNumber)) { System.out.println("Invalid phone number."); return; }
+	    System.out.print("Area code: ");
+	    int areaCode;
+	    try { areaCode = Integer.parseInt(scanner.nextLine()); }
+	    catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
+	    if (!customerDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); return; }
+	    customer.setAreaCode(areaCode);
+	    customer.setOnHoliday(false);
+	    customer.setPublicationsAvailable(true);
+	    if (customerDAO.addCustomer(customer)) {
+	        System.out.println("Customer saved successfully.");
+	    } else {
+	        System.out.println("Failed to save customer.");
+	    }
 	}
 
 	private static void readCustomer(Scanner scanner) {

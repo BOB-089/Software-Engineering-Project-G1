@@ -36,36 +36,42 @@ public class OrderCLI {
 			}
 		}
 	}
-
+	
 	private static void createOrder(Scanner scanner) {
-		System.out.println("\n=== Create New Order ===");
-		System.out.print("Publication name: ");
-		String publicationName = scanner.nextLine();
-		if (!orderDAO.publicationExists(publicationName)) { System.out.println("Publication with name " + publicationName + " could not be found."); return; }
-		System.out.print("Customer Id: ");
-		int customerId;
-		try { customerId = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
-		if (!orderDAO.customerExists(customerId)) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
-		System.out.print("Day: ");
-		int day;
-		try { day = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Day must be a whole number."); return; }
-		System.out.print("Month: ");
-		int month;
-		try { month = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Month must be a whole number."); return; }
-		System.out.print("Year: ");
-		int year;
-		try { year = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Year must be a whole number."); return; }
-		Order order = new Order();
-		if (!order.createOrder(publicationName, customerId, day, month, year)) { System.out.println("Invalid order details."); return; }
-		if (orderDAO.addOrder(order)) {
-			System.out.println("Order saved successfully.");
-		} else {
-			System.out.println("Failed to save order.");
-		}
+	    System.out.println("\n=== Create New Order ===");
+	    Order order = new Order();
+	    System.out.print("Publication name: ");
+	    String publicationName = scanner.nextLine();
+	    if (!orderDAO.publicationExists(publicationName)) { System.out.println("Publication with name " + publicationName + " could not be found."); return; }
+	    order.setPublicationName(publicationName);
+	    System.out.print("Customer Id: ");
+	    int customerId;
+	    try { customerId = Integer.parseInt(scanner.nextLine()); }
+	    catch (NumberFormatException e) { System.out.println("Customer Id must be a whole number."); return; }
+	    if (!orderDAO.customerExists(customerId)) { System.out.println("Customer with Id " + customerId + " could not be found."); return; }
+	    order.setCustomerId(customerId);
+	    System.out.print("Day: ");
+	    int day;
+	    try { day = Integer.parseInt(scanner.nextLine()); }
+	    catch (NumberFormatException e) { System.out.println("Day must be a whole number."); return; }
+	    if (!order.setDay(day)) { System.out.println("Day must be between 1 and 31."); return; }
+	    System.out.print("Month: ");
+	    int month;
+	    try { month = Integer.parseInt(scanner.nextLine()); }
+	    catch (NumberFormatException e) { System.out.println("Month must be a whole number."); return; }
+	    if (!order.setMonth(month)) { System.out.println("Month must be between 1 and 12."); return; }
+	    System.out.print("Year: ");
+	    int year;
+	    try { year = Integer.parseInt(scanner.nextLine()); }
+	    catch (NumberFormatException e) { System.out.println("Year must be a whole number."); return; }
+	    if (!order.setYear(year)) { System.out.println("Year must be 1900 or greater."); return; }
+	    if (!order.verifyDate(order.getDay(), order.getMonth(), order.getYear())) { System.out.println("Invalid date."); return; }
+	    order.setPublicationsAvailable(true);
+	    if (orderDAO.addOrder(order)) {
+	        System.out.println("Order saved successfully.");
+	    } else {
+	        System.out.println("Failed to save order.");
+	    }
 	}
 
 	private static void readOrder(Scanner scanner) {
@@ -144,6 +150,11 @@ public class OrderCLI {
 			default:
 				System.out.println("Invalid entry. Please enter 1-6.");
 			}
+		}
+		if (!order.verifyDate(order.getDay(), order.getMonth(), order.getYear())) 
+		{ 
+			System.out.println("Invalid date. \nFailed to update order."); 
+			return;
 		}
 		if (orderDAO.updateOrder(order)) {
 			System.out.println("Order updated.");

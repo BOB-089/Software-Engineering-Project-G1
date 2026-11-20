@@ -40,6 +40,7 @@ public class Order {
 	    catch (DateTimeException e) { return false; }
 	}
 
+	// Convenience creation method used by tests
     public boolean createOrder(String publicationName, int customerId, int day, int month, int year) {
     	setPublicationName(publicationName);
     	setCustomerId(customerId);

@@ -32,6 +32,7 @@ public class Newsagent {
         return phoneNumber.matches("^[0-9]{10}$");
     }
 	
+	// Convenience creation method used by tests
 	public boolean createNewsagent(String firstName, String surname, String phoneNumber) {
         if (!setFirstName(firstName)) return false;
         if (!setSurname(surname)) return false;

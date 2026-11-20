@@ -26,6 +26,7 @@ public class Publication {
     
     public boolean verifyPrice(double price) { return price > 0 && Math.round(price * 100) == price * 100; }
     
+    // Convenience creation method used by tests
     public boolean createPublication(String name, int stock, double price) {
         if (!setName(name)) return false;
         if (!setStock(stock)) return false;

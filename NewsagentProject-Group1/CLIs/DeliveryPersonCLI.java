@@ -39,22 +39,25 @@ public class DeliveryPersonCLI {
             }
         }
     }
-
+    
     private static void createDeliveryPerson(Scanner scanner) {
         System.out.println("\n=== Create New Delivery Person ===");
+        DeliveryPerson deliveryPerson = new DeliveryPerson();
         System.out.print("First name: ");
         String firstName = scanner.nextLine();
+        if (!deliveryPerson.setFirstName(firstName)) { System.out.println("Invalid first name."); return; }
         System.out.print("Surname: ");
         String surname = scanner.nextLine();
+        if (!deliveryPerson.setSurname(surname)) { System.out.println("Invalid surname."); return; }
         System.out.print("Phone number: ");
         String phoneNumber = scanner.nextLine();
+        if (!deliveryPerson.setPhoneNumber(phoneNumber)) { System.out.println("Invalid phone number."); return; }
         System.out.print("Area code: ");
         int areaCode;
         try { areaCode = Integer.parseInt(scanner.nextLine()); }
         catch (NumberFormatException e) { System.out.println("Area code must be a whole number."); return; }
-        if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); return; } 
-        DeliveryPerson deliveryPerson = new DeliveryPerson();
-        if (!deliveryPerson.createDeliveryPerson(firstName, surname, phoneNumber, areaCode)) { System.out.println("Invalid delivery person details."); return; }
+        if (!deliveryPersonDAO.deliveryAreaExists(areaCode)) { System.out.println("Area with code " + areaCode + " could not be found."); return; }
+        deliveryPerson.setAreaCode(areaCode);
         if (deliveryPersonDAO.addDeliveryPerson(deliveryPerson)) {
             System.out.println("Delivery person saved successfully.");
         } else {

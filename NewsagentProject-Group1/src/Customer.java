@@ -49,6 +49,7 @@ public class Customer {
         return phoneNumber.matches("^[0-9]{10}$");
     }
 
+    // Convenience creation method used by tests
     public boolean createCustomer(String firstName, String surname, String address, String phoneNumber, int areaCode) {
     	if (!setFirstName(firstName)) return false;
         if (!setSurname(surname)) return false;

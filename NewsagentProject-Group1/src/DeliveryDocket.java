@@ -34,6 +34,7 @@ public class DeliveryDocket {
 	    catch (DateTimeException e) { return false; }
 	}
 	
+	// Convenience creation method used by tests
 	public boolean createDeliveryDocket(int areaCode, int day, int month, int year) {
 		setAreaCode(areaCode);
 	    if (!setDay(day)) return false;

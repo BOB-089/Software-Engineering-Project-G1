@@ -35,6 +35,7 @@ public class DeliveryPerson {
         return phoneNumber.matches("^[0-9]{10}$");
     }
 
+    // Convenience creation method used by tests
     public boolean createDeliveryPerson(String firstName, String surname, String phoneNumber, int areaCode) {
     	if (!setFirstName(firstName)) return false;
         if (!setSurname(surname)) return false;

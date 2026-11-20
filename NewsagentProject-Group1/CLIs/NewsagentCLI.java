@@ -38,20 +38,22 @@ public class NewsagentCLI {
 	}
 	
 	private static void createNewsagent(Scanner scanner) {
-		System.out.println("\n=== Create New Newsagent ===");
-		System.out.print("First name: ");
-		String firstName = scanner.nextLine();
-		System.out.print("Surname: ");
-		String surname = scanner.nextLine();
-		System.out.print("Phone number: ");
-		String phoneNumber = scanner.nextLine();
-		Newsagent newsagent = new Newsagent();
-		if (!newsagent.createNewsagent(firstName, surname, phoneNumber)) { System.out.println("Invalid newsagent details."); return; }
-		if (newsagentDAO.addNewsagent(newsagent)) {
-			System.out.println("Newsagent saved successfully.");
-		} else {
-			System.out.println("Failed to save newsagent.");
-		}
+	    System.out.println("\n=== Create New Newsagent ===");
+	    Newsagent newsagent = new Newsagent();
+	    System.out.print("First name: ");
+	    String firstName = scanner.nextLine();
+	    if (!newsagent.setFirstName(firstName)) { System.out.println("Invalid first name."); return; }
+	    System.out.print("Surname: ");
+	    String surname = scanner.nextLine();
+	    if (!newsagent.setSurname(surname)) { System.out.println("Invalid surname."); return; }
+	    System.out.print("Phone number: ");
+	    String phoneNumber = scanner.nextLine();
+	    if (!newsagent.setPhoneNumber(phoneNumber)) { System.out.println("Invalid phone number."); return; }
+	    if (newsagentDAO.addNewsagent(newsagent)) {
+	        System.out.println("Newsagent saved successfully.");
+	    } else {
+	        System.out.println("Failed to save newsagent.");
+	    }
 	}
 	
 	private static void readNewsagent(Scanner scanner) {

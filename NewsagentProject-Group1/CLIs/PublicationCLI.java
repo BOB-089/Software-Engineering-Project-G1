@@ -38,24 +38,26 @@ public class PublicationCLI {
 	}
 	
 	private static void createPublication(Scanner scanner) {
-		System.out.println("\n=== Create New Publication ===");
-		System.out.print("Name: ");
-		String publicationName = scanner.nextLine();
-		System.out.print("Stock: ");
-		int stock;
-		try { stock = Integer.parseInt(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Stock must be a whole number."); return; }
-		System.out.print("Price: ");
-		double price;
-		try { price = Double.parseDouble(scanner.nextLine()); }
-		catch (NumberFormatException e) { System.out.println("Invalid price."); return; }
-		Publication publication = new Publication();
-		if (!publication.createPublication(publicationName, stock, price)) { System.out.println("Invalid publication details."); return; }
-		if (publicationDAO.addPublication(publication)) {
-			System.out.println("Publication saved successfully.");
-		} else {
-			System.out.println("Failed to save publication.");
-		}
+	    System.out.println("\n=== Create New Publication ===");
+	    Publication publication = new Publication();
+	    System.out.print("Name: ");
+	    String publicationName = scanner.nextLine();
+	    if (!publication.setName(publicationName)) { System.out.println("Invalid name."); return; }
+	    System.out.print("Stock: ");
+	    int stock;
+	    try { stock = Integer.parseInt(scanner.nextLine()); }
+	    catch (NumberFormatException e) { System.out.println("Stock must be a whole number."); return; }
+	    if (!publication.setStock(stock)) { System.out.println("Stock must be 0 or greater."); return; }
+	    System.out.print("Price: ");
+	    double price;
+	    try { price = Double.parseDouble(scanner.nextLine()); }
+	    catch (NumberFormatException e) { System.out.println("Price must be a valid number."); return; }
+	    if (!publication.setPrice(price)) { System.out.println("Price must be greater than 0."); return; }
+	    if (publicationDAO.addPublication(publication)) {
+	        System.out.println("Publication saved successfully.");
+	    } else {
+	        System.out.println("Failed to save publication.");
+	    }
 	}
 	
 	private static void readPublication(Scanner scanner) {
